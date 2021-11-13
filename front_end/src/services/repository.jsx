@@ -2,7 +2,7 @@ import axios from "./base.service";
 
 const getToken = () => {
   try {
-    return localStorage.getItem("token");
+    return JSON.parse(localStorage.getItem("user")).accessToken;
   } catch (error) {
     return "";
   }

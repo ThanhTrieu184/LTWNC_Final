@@ -28,20 +28,25 @@ db.once("open", () => {
   console.log("MongoDB connection established");
   initRole();
   initDepartment();
-  initAdmin();
 });
 
 const initRole = () => {
-  Role.find((err, roles) => {
-    if (err) return console.error(err);
-    if (roles.length) return;
-    const newRoles = [
-      { role_name: "Admin" },
-      { role_name: "Department" },
-      { role_name: "Student" },
-    ];
-    Role.insertMany(newRoles);
-  });
+  Role.find()
+    .then(async (roles) => {
+      if (roles.length) return;
+      const newRoles = [
+        { role_name: "Admin" },
+        { role_name: "Department" },
+        { role_name: "Student" },
+      ];
+      await Role.insertMany(newRoles);
+      Role.findOne({ role_name: "Admin" }, (err, role) => {
+        initAdmin(role._id);
+      });
+    })
+    .catch((err) => {
+      return console.log(err);
+    });
 };
 
 const initDepartment = () => {
@@ -79,23 +84,29 @@ const initDepartment = () => {
   });
 };
 
-const initAdmin = async () => {
-  const role = await Role.findOne({ role_name: "Admin" });
-  User.find(async (err, users) => {
-    if (err) return console.error(err);
-    if (users.length) return;
-    const newAdmins = [
-      {
-        username: "Admin1",
-        password: bcrypt.hashSync("123456", 10),
-        role_id: role._id,
-      },
-      {
-        username: "Admin2",
-        password: bcrypt.hashSync("123456", 10),
-        role_id: role._id,
-      },
-    ];
-    User.insertMany(newAdmins);
-  });
+const initAdmin = (role_id) => {
+  User.find()
+    .then((users) => {
+      if (users.length) return;
+      const newAdmins = [
+        {
+          username: "Admin1",
+          password: bcrypt.hashSync("123456", 10),
+          role_id: role_id,
+          google_id: "",
+          image_url: "",
+        },
+        {
+          username: "Admin2",
+          password: bcrypt.hashSync("123456", 10),
+          role_id: role_id,
+          google_id: "",
+          image_url: "",
+        },
+      ];
+      User.insertMany(newAdmins);
+    })
+    .catch((err) => {
+      return console.error(err);
+    });
 };

@@ -13,5 +13,6 @@ module.exports = (app) => {
   });
 
   app.post("/api/auth/login", AuthController.login);
+  app.post("/api/auth/login-google", AuthController.loginGoogle);
   app.delete("/api/auth/logout", authJWT.verifyToken, AuthController.logout);
 };

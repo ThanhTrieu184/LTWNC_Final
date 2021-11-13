@@ -2,7 +2,7 @@ const models = require("../../models");
 const config = require("../../config");
 const User = models.user;
 const Token = models.token;
-
+const Role = models.role;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -18,7 +18,7 @@ exports.login = (req, res) => {
       if (!user) {
         return res
           .status(404)
-          .send({ message: { username: "Username is incorrect!" } });
+          .send({ message: { username: "Tên đăng nhập không đúng!" } });
       }
       const validPassword = bcrypt.compareSync(
         req.body.password,
@@ -28,11 +28,11 @@ exports.login = (req, res) => {
       if (!validPassword) {
         return res.status(401).send({
           accessToken: null,
-          message: { password: "Invalid Password!" },
+          message: { password: "Mật khẩu không hợp lệ!" },
         });
       }
 
-      const token = generateToken({ id: user._id, username: user.username });
+      const token = generateToken(user._id);
       const tk = new Token({
         user_id: user._id,
         token: token,
@@ -48,6 +48,56 @@ exports.login = (req, res) => {
         email: user.email,
         role: user.role_id.role_name,
         accessToken: token,
+        imageUrl: user.image_url,
+      });
+    });
+};
+
+exports.loginGoogle = async (req, res) => {
+  const { googleId, imageUrl, email } = req.body.result;
+  const role = await Role.findOne({ role_name: "Student" });
+  User.findOne({
+    google_id: googleId,
+  })
+    .populate("role_id")
+    .exec(async (err, user) => {
+      if (err) {
+        return res.status(500).send({ message: err });
+      }
+      if (user) {
+        const token = generateToken(user._id);
+        new Token({ user_id: user._id, token: token }).save();
+        return res.status(200).send({
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          role: user.role_id.role_name,
+          accessToken: token,
+          imageUrl: user.image_url,
+        });
+      }
+      const username = email.split("@")[0];
+      new User({
+        username: username,
+        google_id: googleId,
+        image_url: imageUrl,
+        role_id: role._id,
+        email: email,
+        password: bcrypt.hashSync(username, 10),
+      }).save((err, data) => {
+        if (err) {
+          return res.status(500).send({ message: err });
+        }
+        const token = generateToken(data._id);
+        new Token({ user_id: data._id, token: token }).save();
+        return res.status(200).send({
+          id: data._id,
+          username: data.username,
+          email: data.email,
+          role: data.role_id.role_name,
+          accessToken: token,
+          imageUrl: data.image_url,
+        });
       });
     });
 };
@@ -65,18 +115,14 @@ exports.logout = (req, res) => {
       return res.status(500).send({ message: err });
     }
     if (tk.deletedCount === 0) {
-      return res.status(400).send({ message: "Logout fail" });
+      return res.status(400).send({ message: "Đăng xuất thất bại!" });
     }
-    res.status(200).send({ message: "Logout success." });
+    res.status(200).send({ message: "Đăng xuất thành công." });
   });
 };
 
-const generateToken = (credentials) => {
-  return jwt.sign(
-    { id: credentials.id, username: credentials.username },
-    config.JWT_SECRET,
-    {
-      expiresIn: config.tokenLife,
-    }
-  );
+const generateToken = (id) => {
+  return jwt.sign({ id: id }, config.JWT_SECRET, {
+    expiresIn: config.tokenLife,
+  });
 };

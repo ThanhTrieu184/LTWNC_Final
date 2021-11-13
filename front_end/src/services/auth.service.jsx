@@ -7,9 +7,15 @@ class AuthService {
     return response;
   }
 
-  async logout(token) {
+  async loginGoogle(credentials) {
+    const endpoint = "/auth/login-google";
+    const response = await Repository.post(endpoint, credentials);
+    return response;
+  }
+
+  async logout() {
     const endpoint = "/auth/logout";
-    const response = await Repository.delete(endpoint, token);
+    const response = await Repository.delete(endpoint);
     return response;
   }
 }

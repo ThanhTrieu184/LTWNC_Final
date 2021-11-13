@@ -19,13 +19,32 @@ if (user) {
   initialState["isLoggedIn"] = true;
 }
 
-export const logOut = createAsyncThunk(
-  "auth/logOut",
-  async ({ token }, thunkAPI) => {
+export const logOut = createAsyncThunk("auth/logOut", async (_, thunkAPI) => {
+  try {
+    const response = await AuthService.logout();
+
+    if (response.code === SUCCESS) {
+      localStorage.removeItem("user");
+      return response;
+    } else {
+      return thunkAPI.rejectWithValue(response);
+    }
+  } catch (e) {
+    return thunkAPI.rejectWithValue({
+      code: SERVER_ERROR,
+      message: "Lỗi server!",
+      data: null,
+    });
+  }
+});
+
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async ({ username, password }, thunkAPI) => {
     try {
-      const response = await AuthService.logout({ token });
+      const response = await AuthService.login({ username, password });
       if (response.code === SUCCESS) {
-        localStorage.removeItem("user");
+        localStorage.setItem("user", JSON.stringify(response.data));
         return response;
       } else {
         return thunkAPI.rejectWithValue(response);
@@ -39,11 +58,12 @@ export const logOut = createAsyncThunk(
     }
   }
 );
-export const loginUser = createAsyncThunk(
-  "auth/loginUser",
-  async ({ username, password }, thunkAPI) => {
+
+export const loginGoogle = createAsyncThunk(
+  "auth/loginGoogle",
+  async ({ result, token }, thunkAPI) => {
     try {
-      const response = await AuthService.login({ username, password });
+      const response = await AuthService.loginGoogle({ result, token });
       if (response.code === SUCCESS) {
         localStorage.setItem("user", JSON.stringify(response.data));
         return response;
@@ -72,13 +92,13 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [loginUser.fulfilled]: (state, { payload }) => {
-      state.user = payload.data;
-      state.isFetching = false;
-      state.isSuccess = true;
-      return state;
-    },
+    [loginUser.fulfilled]: (state, { payload }) =>
+      loginFullfilled(state, payload),
     [loginUser.rejected]: (state, { payload }) => rejected(state, payload),
+    [loginGoogle.pending]: (state) => pending(state),
+    [loginGoogle.fulfilled]: (state, { payload }) =>
+      loginFullfilled(state, payload),
+    [loginGoogle.rejected]: (state, { payload }) => rejected(state, payload),
     [loginUser.pending]: (state) => pending(state),
     [logOut.fulfilled]: (state) => {
       state.isFetching = false;
@@ -102,4 +122,11 @@ const rejected = (state, payload) => {
 
 const pending = (state) => {
   state.isFetching = true;
+};
+
+const loginFullfilled = (state, payload) => {
+  state.user = payload.data;
+  state.isFetching = false;
+  state.isSuccess = true;
+  return state;
 };
