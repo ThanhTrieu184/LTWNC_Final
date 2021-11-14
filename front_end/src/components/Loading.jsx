@@ -1,19 +1,17 @@
 import React from "react";
-import Lottie from "react-lottie";
-import * as loadAnimation from "../assets/loading.json";
+import loadAnimation from "../assets/loading.json";
+import { Lottie } from "@crello/react-lottie";
 
 const Loading = (props) => {
   const { height, width } = props;
-
-  const defaultLoading = {
-    loop: true,
-    autoplay: true,
-    animationData: loadAnimation.default,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-  return <Lottie options={defaultLoading} height={height} width={width} />;
+  return (
+    <Lottie
+      config={{ animationData: loadAnimation, autoplay: true, loop: true }}
+      height={height}
+      width={width}
+      style={{ margin: "auto" }}
+    ></Lottie>
+  );
 };
 
 export default Loading;

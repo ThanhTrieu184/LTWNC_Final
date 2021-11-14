@@ -4,10 +4,15 @@ const User = mongoose.model(
   "User",
   new mongoose.Schema({
     username: String,
-    email: String,
+    email: { type: String, default: null },
     password: String,
-    google_id: String,
-    image_url: String,
+    google_id: { type: String, default: null },
+    image_url: { type: String, default: null },
+    class_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Class",
+      default: null,
+    },
     role_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role",
@@ -16,6 +21,7 @@ const User = mongoose.model(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Department",
+        default: null,
       },
     ],
   })

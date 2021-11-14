@@ -93,15 +93,11 @@ const initAdmin = (role_id) => {
           username: "Admin1",
           password: bcrypt.hashSync("123456", 10),
           role_id: role_id,
-          google_id: "",
-          image_url: "",
         },
         {
           username: "Admin2",
           password: bcrypt.hashSync("123456", 10),
           role_id: role_id,
-          google_id: "",
-          image_url: "",
         },
       ];
       User.insertMany(newAdmins);

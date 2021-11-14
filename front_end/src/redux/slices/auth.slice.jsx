@@ -61,9 +61,9 @@ export const loginUser = createAsyncThunk(
 
 export const loginGoogle = createAsyncThunk(
   "auth/loginGoogle",
-  async ({ result, token }, thunkAPI) => {
+  async ({ uid, email, photoURL }, thunkAPI) => {
     try {
-      const response = await AuthService.loginGoogle({ result, token });
+      const response = await AuthService.loginGoogle({ uid, email, photoURL });
       if (response.code === SUCCESS) {
         localStorage.setItem("user", JSON.stringify(response.data));
         return response;

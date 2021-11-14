@@ -54,10 +54,10 @@ exports.login = (req, res) => {
 };
 
 exports.loginGoogle = async (req, res) => {
-  const { googleId, imageUrl, email } = req.body.result;
+  const { uid, photoURL, email } = req.body;
   const role = await Role.findOne({ role_name: "Student" });
   User.findOne({
-    google_id: googleId,
+    google_id: uid,
   })
     .populate("role_id")
     .exec(async (err, user) => {
@@ -79,8 +79,8 @@ exports.loginGoogle = async (req, res) => {
       const username = email.split("@")[0];
       new User({
         username: username,
-        google_id: googleId,
-        image_url: imageUrl,
+        google_id: uid,
+        image_url: photoURL,
         role_id: role._id,
         email: email,
         password: bcrypt.hashSync(username, 10),
