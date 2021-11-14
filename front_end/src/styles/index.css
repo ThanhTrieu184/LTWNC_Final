@@ -26,3 +26,16 @@
 .hide-scroll-bar::-webkit-scrollbar {
   display: none;
 }
+
+.animation-underline {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size .8s;
+}
+
+.animation-underline:hover {
+  background-size: 100% 1px;
+}

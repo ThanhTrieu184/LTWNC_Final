@@ -15,10 +15,10 @@ const Home = () => {
   }, [history, user]);
 
   return (
-    <div className="flex h-screen w-full bg-gray-800 ">
+    <div className="flex h-screen w-full">
       <SideBar></SideBar>
       <div className="flex flex-col flex-1 w-full overflow-y-auto">
-        <main className="relative z-0 flex-1 px-6 bg-white">
+        <main className="relative z-0 flex-1 px-6 bg-red-50 bg-opacity-10">
           <div className="grid mt-4">
             <div className="mb-2">
               <p className="text-lg font-semibold text-gray-400">Dashboard</p>
@@ -67,43 +67,41 @@ const Home = () => {
             <div className="mt-3 flex">
               <div className="w-2/3 hide-scroll-bar h-screen overflow-x-auto px-20">
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
+
                 <Post></Post>
-                <hr />
               </div>
               <div className="w-1/3 px-2 hide-scroll-bar h-screen overflow-x-auto">
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
+
                 <Announcement></Announcement>
-                <hr />
               </div>
             </div>
           </div>
