@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import SideBar from "../components/SideBar";
-import { Announcement, Post } from "../components";
+import { SideBar, InputPost } from "../components";
+import { Announcement, Post, NewAnnouncement } from "../components";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import logo from "../assets/img/logo.png";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
@@ -18,46 +19,16 @@ const Home = () => {
     <div className="flex justify-between h-screen w-full">
       <SideBar></SideBar>
       <div className="flex flex-col flex-1 overflow-y-auto hide-scroll-bar">
-        <div className="m-4">
-          <p className="text-lg font-semibold text-gray-400">Dashboard</p>
+        <div className="grid grid-cols-12 gap-6 p-4">
+          <p className="text-lg col-span-8 font-semibold text-gray-600 uppercase pl-4">
+            Dashboard
+          </p>
+          <img src={logo} alt="logo" className="h-16 w-full col-span-4" />
         </div>
-        <div className="grid grid-cols-12 gap-6 border-b shadow-sm">
-          <div className="col-span-12 sm:col-span-12 md:col-span-8 lg:col-span-8 xxl:col-span-8">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4 mt-3">
-              <div className="p-4">
-                <p className="text-xl font-bold">RM 45,941</p>
-                <p className="text-xs font-semibold text-gray-400">Overdue</p>
-              </div>
-              <div className="p-4">
-                <p className="text-xl font-bold">RM 37,500</p>
-                <p className="text-xs font-semibold text-gray-400">
-                  Total Outstanding
-                </p>
-              </div>
-              <div className="p-4">
-                <p className="text-xl font-bold">RM 9,200</p>
-                <p className="text-xs font-semibold text-gray-400">
-                  In Process
-                </p>
-              </div>
-              <div className=" p-4">
-                <p className="text-xl font-bold">RM 5,700</p>
-                <p className="text-xs font-semibold text-gray-400">
-                  Paid Today
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-12 gap-6 border-b py-4 ml-8 mr-4">
+          <InputPost />
           <div className="col-span-12 md:col-span-4">
-            <div className="p-4">
-              <p className="text-sm text-gray-400">Outstanding Revenue</p>
-              <div className="shadow w-full bg-gray-100 mt-2">
-                <div className="bg-red-600 text-xs leading-none py-1 text-center text-white w-1/2"></div>
-              </div>
-              <p className="text-xs font-semibold text-gray-400 mt-2">
-                RM 45,941 Overdue
-              </p>
-            </div>
+            <NewAnnouncement />
           </div>
         </div>
         <div className="flex justify-between space-x-4 mt-1">

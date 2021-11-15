@@ -47,7 +47,7 @@ export const Post = () => {
           <div className="mb-2 text-sm">
             <a href="/" className="font-medium mr-2">
               Mr.Afternoon
-            </a>{" "}
+            </a>
             Lord of the Rings is my favorite film-series. One day I'll make my
             way to New Zealand to visit the Hobbiton set!
           </div>
