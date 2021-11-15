@@ -8,31 +8,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../redux/slices/auth.slice";
-import { Loading } from "../components";
+import { Loading, SideBarItem } from "../components";
 
 // const { clearState } = authSlice.actions;
 
 const SideBar = () => {
   const { user, isFetching } = useSelector((state) => state.auth);
   const imageUrl = user ? user.imageUrl : "";
-  const [isShowSideBar, setIsShowSideBar] = useState("hidden");
-  const [isClicked, setIsClicked] = useState();
+  const [isClicked, setIsClicked] = useState(1);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logOut());
   };
-  const handleShowSideBar = (item) => {
-    if (isShowSideBar === "hidden") {
-      setIsClicked(item);
-      setIsShowSideBar("block");
-    } else {
-      setIsClicked(0);
-      setIsShowSideBar("hidden");
-    }
-  };
+
   return (
     <Fragment>
-      <aside className="w-20 relative z-20 flex-shrink-0  px-2 overflow-y-auto bg-red-800 sm:block">
+      <aside className="w-20 relative z-0 px-2 bg-gradient-to-br from-red-600 to-indigo-600">
         <div className="mb-6">
           <div className="flex justify-center">
             <div className="w-12 h-12 rounded-full bg-gray-300 border-2 border-white shadow-md mt-2">
@@ -46,7 +37,7 @@ const SideBar = () => {
                 className={`${
                   isClicked === 1 ? "animate-bounce" : ""
                 } mb-3 p-2 rounded-md flex items-center justify-center bg-blue-400 cursor-pointer `}
-                onClick={() => handleShowSideBar(1)}
+                onClick={() => setIsClicked(1)}
               >
                 <FontAwesomeIcon icon={faAlignLeft}></FontAwesomeIcon>
               </li>
@@ -54,7 +45,7 @@ const SideBar = () => {
                 className={`${
                   isClicked === 2 ? "animate-bounce" : ""
                 } mb-3 p-2 rounded-md flex items-center justify-center bg-pink-400 cursor-pointer`}
-                onClick={() => handleShowSideBar(2)}
+                onClick={() => setIsClicked(2)}
               >
                 <FontAwesomeIcon icon={faQuestionCircle}></FontAwesomeIcon>
               </li>
@@ -62,7 +53,7 @@ const SideBar = () => {
                 className={`${
                   isClicked === 3 ? "animate-bounce" : ""
                 } mb-3 p-2 rounded-md flex items-center justify-center bg-yellow-400 cursor-pointer`}
-                onClick={() => handleShowSideBar(3)}
+                onClick={() => setIsClicked(3)}
               >
                 <FontAwesomeIcon icon={faHeadphones}></FontAwesomeIcon>
               </li>
@@ -83,57 +74,28 @@ const SideBar = () => {
         </div>
       </aside>
       <aside
-        className={`${isShowSideBar} w-64 z-0 relative flex-shrink-0 px-4 overflow-y-auto bg-red-100`}
+        className={`w-64 z-20 relative px-4 border-r hidden lg:block bg-gradient-to-br from-red-50 to-indigo-50 overflow-y-auto hide-scroll-bar`}
       >
         <div className="mb-6">
-          <div className="grid gap-4 grid-cols-2 mt-6">
-            <div className="p-2 flex flex-col items-center bg-white rounded-md justify-center shadow-xl cursor-pointer">
-              <div className="rounded-full p-2 bg-indigo-200 flex flex-col items-center">
-                <i className="fas fa-chart-pie fa-sm text-indigo-600"></i>
-              </div>
-              <p className="text-xs mt-1 text-center font-semibold">
-                Dashboard
-              </p>
-            </div>
-
-            <div className="p-2 flex flex-col items-center bg-white rounded-md justify-center shadow-xl cursor-pointer">
-              <div className="rounded-full p-2 bg-indigo-200 flex flex-col items-center">
-                <i className="fas fa-calculator fa-sm text-indigo-600"></i>
-              </div>
-              <p className="text-xs mt-1 text-center font-semibold">
-                Calculator
-              </p>
-            </div>
-
-            <div className="p-2 flex flex-col items-center bg-white rounded-md justify-center shadow-xl cursor-pointer">
-              <div className="rounded-full p-2 bg-indigo-200 flex flex-col items-center">
-                <i className="fas fa-wallet fa-sm text-indigo-600"></i>
-              </div>
-              <p className="text-xs mt-1 text-center font-semibold">Wallet</p>
-            </div>
-
-            <div className="p-2 flex flex-col items-center bg-white rounded-md justify-center shadow-xl cursor-pointer">
-              <div className="rounded-full p-2 bg-indigo-200 flex flex-col items-center">
-                <i className="fas fa-archive fa-sm text-indigo-600"></i>
-              </div>
-              <p className="text-xs mt-1 text-center font-semibold">Saving</p>
-            </div>
-
-            <div className="p-2 flex flex-col items-center bg-white rounded-md justify-center shadow-xl cursor-pointer">
-              <div className="rounded-full p-2 bg-indigo-200 flex flex-col items-center">
-                <i className="fas fa-money-bill-wave-alt fa-sm text-indigo-600"></i>
-              </div>
-              <p className="text-xs mt-1 text-center font-semibold">
-                Currencies
-              </p>
-            </div>
-
-            <div className="p-2 flex flex-col items-center bg-white rounded-md justify-center shadow-xl cursor-pointer">
-              <div className="rounded-full p-2 bg-indigo-200 flex flex-col items-center">
-                <i className="fas fa-shopping-basket fa-sm text-indigo-600"></i>
-              </div>
-              <p className="text-xs mt-1 text-center font-semibold">Expenses</p>
-            </div>
+          <div className="flex flex-col gap-4 mt-6">
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
+            <SideBarItem />
           </div>
         </div>
       </aside>
