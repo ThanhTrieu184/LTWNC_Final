@@ -96,7 +96,7 @@ const Login = () => {
   return (
     <Fragment>
       <Toaster />
-      {isFetching ? (
+      {isFetching || isSuccess ? (
         <Loading height="500px" width="500px" />
       ) : (
         <section className="max-w-6xl mx-auto my-10 border shadow-lg rounded-xl flex hover:shadow-xl">

@@ -1,3 +1,3 @@
 import { authSlice } from "./auth.slice";
-
-export { authSlice };
+import { departmentSlice } from "./department.slice";
+export { authSlice, departmentSlice };
