@@ -23,9 +23,7 @@ const SideBar = () => {
     setIsOpenLogoutModal(false);
     dispatch(logOut());
   };
-  const handleChangePassword = () => {
-    setIsOpenChangePasswordModal(false);
-  };
+
   useEffect(() => {
     if (isError) {
       if (typeof errorMessages === "string") {
@@ -86,7 +84,6 @@ const SideBar = () => {
       <ChangePasswordModal
         isOpen={isOpenChangePasswordModal}
         handleCancel={() => setIsOpenChangePasswordModal(false)}
-        handleChangePassword={() => handleChangePassword()}
       />
     </Fragment>
   );

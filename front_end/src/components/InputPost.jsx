@@ -7,10 +7,10 @@ const InputPost = () => {
       <div className="flex items-center space-x-4">
         <input
           placeholder="Bạn đang nghĩ gì?"
-          className="px-4 flex-1 py-3 focus:outline-none text-gray-600 text-xl resize-none border rounded-full"
+          className="px-4 flex-1 py-3 focus:outline-none focus:border-indigo-300 text-gray-600 text-md border rounded-full focus:shadow-sm"
         />
-        <img src={imageIcon} alt="" className="h-14 w-14 border-red-500" />
-        <button className="border rounded-full px-4 py-3 bg-gradient-to-br from-red-600 to-indigo-600 text-white">
+        <img src={imageIcon} alt="" className="h-12 w-12 border-red-500" />
+        <button className="shadow rounded-full px-4 py-3 bg-gradient-to-br from-red-600 to-indigo-600 text-white">
           Đăng bài
         </button>
       </div>

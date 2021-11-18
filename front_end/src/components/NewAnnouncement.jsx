@@ -4,13 +4,14 @@ import { faBullhorn } from "@fortawesome/free-solid-svg-icons";
 
 const NewAnnouncement = () => {
   return (
-    <div className="flex relative items-center leading-4 text-gray-600 rounded-full p-2 shadow-sm text-sm border  animate-bounce">
-      <a href="/" className="pl-6 pr-2">
-        <span className="animation-underline">
-          Mr.Afternoon vừa đăng một thông báo mới. Nhấn vào đây để xem chi tiết.
-        </span>
+    <div className="flex relative items-center bg-white leading-4 rounded-xl py-4 px-2 shadow-md text-sm animate-bounce">
+      <a
+        href="/"
+        className="pl-6 pr-2 bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-indigo-700"
+      >
+        Mr.Afternoon vừa đăng một thông báo mới. Nhấn vào đây để xem chi tiết.
       </a>
-      <div className="absolute -top-3 -left-3 flex bg-gradient-to-br from-red-600  to-indigo-600 text-white rounded-full p-2 justify-center items-center">
+      <div className="absolute -top-3 -left-3 flex bg-gradient-to-br from-red-600  to-indigo-600 text-white rounded-md p-2 justify-center items-center">
         <FontAwesomeIcon icon={faBullhorn} />
       </div>
     </div>

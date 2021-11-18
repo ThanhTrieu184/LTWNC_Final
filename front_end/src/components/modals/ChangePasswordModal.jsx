@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
+import { userSlice, changePassword } from "../../redux/slices";
+import { useSelector, useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
+
+const { clearUserState } = userSlice.actions;
 
 const ChangePasswordModal = (props) => {
+  const dispatch = useDispatch();
+  const { isSuccess, isError, returnedMessage } = useSelector(
+    (state) => state.user
+  );
   const { isOpen, handleCancel } = props;
   const [isShowOldPass, setIsShowOldPass] = useState(false);
   const [isShowNewPass, setIsShowNewPass] = useState(false);
@@ -31,12 +40,25 @@ const ChangePasswordModal = (props) => {
         .oneOf([Yup.ref("newPass")], "Mật khẩu không khớp với mật khẩu mới!"),
     }),
     onSubmit: (values) => {
-      // dispatch(loginUser(values));
+      dispatch(changePassword(values));
     },
   });
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(returnedMessage);
+      dispatch(clearUserState());
+    } else if (isSuccess) {
+      formik.handleReset();
+      handleCancel();
+      toast.success(returnedMessage);
+      dispatch(clearUserState());
+    }
+  }, [dispatch, returnedMessage, isError, isSuccess, handleCancel, formik]);
+
   return (
     <Fragment>
+      <Toaster />
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"

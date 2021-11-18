@@ -13,12 +13,12 @@ exports.changePass = (req, res) => {
   )
     .then((user) => {
       return res.status(200).send({
-        message: { password: "Đổi mật khẩu thành công" },
+        message: "Đổi mật khẩu thành công",
       });
     })
     .catch((err) => {
       return res.status(400).send({
-        message: { password: "Đổi mật khẩu thất bại" },
+        message: "Đổi mật khẩu thất bại",
       });
     });
 };

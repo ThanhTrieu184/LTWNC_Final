@@ -6,7 +6,7 @@ import { PostMenu } from ".";
 
 const Post = () => {
   return (
-    <div className="rounded-lg border w-full m-4 bg-white mx-auto shadow-sm">
+    <div className="rounded-lg border border-opacity-70 w-full m-4 bg-white mx-auto shadow-sm">
       <div className="w-full flex justify-between p-3 border-b relative">
         <div className="flex items-center">
           <div className="rounded-full h-10 w-10 bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden">

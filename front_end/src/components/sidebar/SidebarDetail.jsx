@@ -38,6 +38,7 @@ const SidebarDetail = () => {
             color="bg-yellow-500"
           />
           <SideBarItem
+            link="/users/add"
             title="Thêm tài khoản mới"
             iconProp={<FontAwesomeIcon icon={Icon.faUserPlus} size="xs" />}
             color="bg-blue-500"

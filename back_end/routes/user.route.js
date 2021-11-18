@@ -1,6 +1,6 @@
 const { UserController } = require("../controllers/api");
 const { verifyToken } = require("../middlewares/authJWT");
-const { changePassword } = require("../middlewares/changePassword")
+const { changePassword } = require("../middlewares/changePassword");
 
 module.exports = (app) => {
   app.use((req, res, next) => {
@@ -13,6 +13,9 @@ module.exports = (app) => {
     next();
   });
 
-  app.post("/api/user/changePass", [verifyToken,changePassword],UserController.changePass);
-
+  app.post(
+    "/api/users/changePass",
+    [verifyToken, changePassword],
+    UserController.changePass
+  );
 };
