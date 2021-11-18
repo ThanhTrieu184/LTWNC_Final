@@ -16,6 +16,8 @@ app.use(
 );
 
 require("./routes/auth.route")(app);
+require("./routes/user.route")(app);
 server.listen(PORT, () =>
   console.log(`Server is running on  http://localhost:${PORT}`)
 );
+
