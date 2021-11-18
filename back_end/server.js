@@ -16,6 +16,7 @@ app.use(
 );
 
 require("./routes/auth.route")(app);
+require("./routes/user.route")(app);
 require("./routes/department.route")(app);
 
 server.listen(PORT, () =>
