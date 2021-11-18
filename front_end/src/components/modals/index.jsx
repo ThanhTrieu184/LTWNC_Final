@@ -1,3 +1,4 @@
+import ChangePasswordModal from "./ChangePasswordModal";
 import ConfirmLogoutModal from "./ConfirmLogoutModal";
 
-export { ConfirmLogoutModal };
+export { ConfirmLogoutModal, ChangePasswordModal };

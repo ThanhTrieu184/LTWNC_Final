@@ -1,12 +1,11 @@
 import Loading from "./Loading";
 import PrivateRoute from "./PrivateRoute";
-import SideBar from "./SideBar";
+import { SideBar } from "./sidebar";
 import Announcement from "./Announcement";
 import Post from "./Post";
-import SideBarItem from "./SideBarItem";
 import InputPost from "./InputPost";
 import NewAnnouncement from "./NewAnnouncement";
-import { ConfirmLogoutModal } from "./modals";
+import { ConfirmLogoutModal, ChangePasswordModal } from "./modals";
 import PostMenu from "./PostMenu";
 import Accordion from "./Accordion";
 
@@ -16,10 +15,10 @@ export {
   SideBar,
   Announcement,
   Post,
-  SideBarItem,
   InputPost,
   NewAnnouncement,
   ConfirmLogoutModal,
   PostMenu,
   Accordion,
+  ChangePasswordModal,
 };

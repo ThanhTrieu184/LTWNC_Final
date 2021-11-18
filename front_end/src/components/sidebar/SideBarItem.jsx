@@ -1,6 +1,4 @@
 import React from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import * as Icon from "@fortawesome/free-solid-svg-icons";
 
 const SideBarItem = (props) => {
   const { title, iconProp, color } = props;

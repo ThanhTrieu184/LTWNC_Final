@@ -148,7 +148,7 @@ const Login = () => {
                       formik.errors.username
                         ? "border-red-300 bg-pink-50 focus:border-red-500"
                         : "focus:border-indigo-300"
-                    } block w-full px-4 py-3 text-lg rounded-xl border shadow-sm focus:outline-none hover:shadow `}
+                    } text-lg input`}
                     value={formik.values.username}
                     onChange={formik.handleChange}
                   />
@@ -164,7 +164,7 @@ const Login = () => {
                       formik.errors.password
                         ? "border-red-300 bg-pink-50 focus:border-red-500"
                         : "focus:border-indigo-300"
-                    } block w-full px-4 py-3 text-lg rounded-xl border shadow-sm focus:outline-none hover:shadow `}
+                    }  text-lg input`}
                     type="password"
                     name="password"
                     id="password"

@@ -6,7 +6,7 @@ import {
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { Fragment } from "react";
-import { SideBarItem } from ".";
+import { SideBarItem } from "./sidebar";
 
 const Accordion = (props) => {
   const { title, content, iconProp } = props;
