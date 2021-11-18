@@ -1,16 +1,13 @@
-import {
-  faEllipsisH,
-  faThumbsUp,
-  faClock,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { faThumbsUp, faClock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ggIcon from "../assets/img/gg.png";
+import { PostMenu } from ".";
 
-export const Post = () => {
+const Post = () => {
   return (
     <div className="rounded-lg border w-full m-4 bg-white mx-auto shadow-sm">
-      <div className="w-full flex justify-between p-3 border-b">
+      <div className="w-full flex justify-between p-3 border-b relative">
         <div className="flex items-center">
           <div className="rounded-full h-10 w-10 bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden">
             <img src={ggIcon} alt="profilepic" />
@@ -25,9 +22,10 @@ export const Post = () => {
             </small>
           </a>
         </div>
-        <span className="px-2 my-auto cursor-pointer">
+        {/* <span className="px-2 my-auto cursor-pointer">
           <FontAwesomeIcon icon={faEllipsisH} />
-        </span>
+        </span> */}
+        <PostMenu />
       </div>
       <div className="bg-gradient-to-br from-red-50 to-indigo-50">
         <img
@@ -71,3 +69,5 @@ export const Post = () => {
     </div>
   );
 };
+
+export default Post;

@@ -20,8 +20,8 @@ const Home = () => {
       <SideBar></SideBar>
       <div className="flex flex-col flex-1 overflow-y-auto hide-scroll-bar">
         <div className="grid grid-cols-12 gap-6 p-4">
-          <p className="text-lg col-span-8 font-semibold text-gray-600 uppercase pl-4">
-            Dashboard
+          <p className="text-4xl col-span-8 font-semiBold uppercase pl-4 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-indigo-600">
+            Trang chủ
           </p>
           <img src={logo} alt="logo" className="h-16 w-full col-span-4" />
         </div>

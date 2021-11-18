@@ -9,7 +9,7 @@ const Loading = (props) => {
       config={{ animationData: loadAnimation, autoplay: true, loop: true }}
       height={height}
       width={width}
-      style={{ margin: "auto" }}
+      className="m-auto z-30"
     ></Lottie>
   );
 };
