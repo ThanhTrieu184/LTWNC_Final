@@ -3,6 +3,7 @@ import { faThumbsUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ggIcon from "../assets/img/gg.png";
 import { PostMenu } from ".";
+import { Link } from "react-router-dom";
 
 const Post = () => {
   return (
@@ -12,7 +13,7 @@ const Post = () => {
           <div className="rounded-full h-10 w-10 bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden">
             <img src={ggIcon} alt="profilepic" />
           </div>
-          <a href="/" className="pt-1 ml-2 font-bold text-sm flex flex-col">
+          <Link to="/" className="pt-1 ml-2 font-bold text-sm flex flex-col">
             Mr.Afternoon
             <small className="font-thin opacity-70 flex items-center space-x-1">
               <span>11/11/2021</span>
@@ -20,18 +21,15 @@ const Post = () => {
                 <FontAwesomeIcon icon={faClock} />
               </span>
             </small>
-          </a>
+          </Link>
         </div>
-        {/* <span className="px-2 my-auto cursor-pointer">
-          <FontAwesomeIcon icon={faEllipsisH} />
-        </span> */}
         <PostMenu />
       </div>
       <div className="bg-gradient-to-br from-red-50 to-indigo-50">
         <img
           alt="alt"
-          className="object-contain max-h-96 w-full"
-          src={ggIcon}
+          className="object-contain w-full"
+          src="https://fiveflower.vn/wp-content/uploads/2020/11/Five-Flower-Slider1.jpg"
         />
       </div>
       <div className="px-3 pb-2 border-t">
@@ -43,9 +41,9 @@ const Post = () => {
         </div>
         <div className="pt-1">
           <div className="mb-2 text-sm">
-            <a href="/" className="font-medium mr-2">
+            <Link to="/" className="font-medium mr-2">
               Mr.Afternoon
-            </a>
+            </Link>
             Lord of the Rings is my favorite film-series. One day I'll make my
             way to New Zealand to visit the Hobbiton set!
           </div>

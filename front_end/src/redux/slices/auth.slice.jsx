@@ -38,6 +38,27 @@ export const logOut = createAsyncThunk("auth/logOut", async (_, thunkAPI) => {
   }
 });
 
+export const verifyUser = createAsyncThunk(
+  "auth/verifyUser",
+  async (_, thunkAPI) => {
+    try {
+      const response = await AuthService.verifyUser();
+
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Lỗi server!",
+        data: null,
+      });
+    }
+  }
+);
+
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ username, password }, thunkAPI) => {
@@ -111,6 +132,10 @@ export const authSlice = createSlice({
     },
     [logOut.rejected]: (state, { payload }) => rejected(state, payload),
     [logOut.pending]: (state) => pending(state),
+    [verifyUser.rejected]: (state) => {
+      localStorage.removeItem("user");
+      state.user = null;
+    },
   },
 });
 

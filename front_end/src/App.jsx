@@ -11,11 +11,11 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path={["/", "/users/add"]} exact>
+        <Route path={["/", "/users/create"]} exact>
           <PrivateLayout>
             <Switch>
               <PrivateRoute path="/" exact component={Home} />
-              <PrivateRoute path="/users/add" exact component={CreateUser} />
+              <PrivateRoute path="/users/create" exact component={CreateUser} />
             </Switch>
           </PrivateLayout>
         </Route>

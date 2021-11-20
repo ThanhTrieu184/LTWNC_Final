@@ -8,6 +8,7 @@ import NewAnnouncement from "./NewAnnouncement";
 import { ConfirmLogoutModal, ChangePasswordModal } from "./modals";
 import PostMenu from "./PostMenu";
 import Accordion from "./Accordion";
+import MultiSelect from "./MultiSelect";
 
 export {
   Loading,
@@ -21,4 +22,5 @@ export {
   PostMenu,
   Accordion,
   ChangePasswordModal,
+  MultiSelect,
 };

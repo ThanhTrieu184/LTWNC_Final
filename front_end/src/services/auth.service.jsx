@@ -18,6 +18,11 @@ class AuthService {
     const response = await Repository.delete(endpoint);
     return response;
   }
+  async verifyUser() {
+    const endpoint = "/auth/verifyUser";
+    const response = await Repository.post(endpoint);
+    return response;
+  }
 }
 
 export default new AuthService();

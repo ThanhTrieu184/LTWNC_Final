@@ -6,6 +6,7 @@ const { SUCCESS, SERVER_ERROR } = exceptionConstants;
 
 const initialState = {
   departments: [],
+  choosedItems: [],
 };
 
 export const getAllDepartments = createAsyncThunk(
@@ -32,7 +33,19 @@ export const getAllDepartments = createAsyncThunk(
 export const departmentSlice = createSlice({
   name: "department",
   initialState,
-  reducers: {},
+  reducers: {
+    clearChoosedItem: (state) => {
+      state.choosedItems = [];
+    },
+    addItem: (state, { payload }) => {
+      state.choosedItems = [...state.choosedItems, payload];
+    },
+    removeItem: (state, { payload }) => {
+      state.choosedItems = state.choosedItems.filter(
+        (i) => i._id !== payload._id
+      );
+    },
+  },
   extraReducers: {
     [getAllDepartments.fulfilled]: (state, { payload }) => {
       state.departments = payload.data;

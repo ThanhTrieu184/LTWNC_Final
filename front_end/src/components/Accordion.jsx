@@ -1,10 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBullhorn,
-  faChevronDown,
-  faChevronLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { Fragment } from "react";
 import { SideBarItem } from "./sidebar";
 
@@ -14,15 +10,18 @@ const Accordion = (props) => {
     <Disclosure>
       {({ open }) => (
         <Fragment>
-          <Disclosure.Button className="flex justify-between space-x-2 items-center w-full p-3 text-md bg-white rounded-md focus:outline-none shadow-md transform hover:scale-110 duration-200">
+          <Disclosure.Button className="flex justify-between space-x-2 items-center w-full p-3 text-md bg-white rounded-md outline-none shadow-md transform hover:scale-110 duration-200">
             <div className="flex items-center space-x-2">
               <div className="p-2 w-7 rounded flex items-center justify-center bg-red-500 cursor-pointer text-white">
-                <FontAwesomeIcon icon={faBullhorn} size="xs"></FontAwesomeIcon>
+                <FontAwesomeIcon
+                  icon={Icon.faBullhorn}
+                  size="xs"
+                ></FontAwesomeIcon>
               </div>
               <span className="text-md font-normal">{title}</span>
             </div>
             <FontAwesomeIcon
-              icon={open ? faChevronDown : faChevronLeft}
+              icon={open ? Icon.faChevronDown : Icon.faChevronLeft}
               size="xs"
             />
           </Disclosure.Button>

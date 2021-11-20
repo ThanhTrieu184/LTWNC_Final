@@ -1,6 +1,12 @@
-import { authSlice, logOut, loginGoogle, loginUser } from "./auth.slice";
+import {
+  authSlice,
+  logOut,
+  loginGoogle,
+  loginUser,
+  verifyUser,
+} from "./auth.slice";
 import { departmentSlice, getAllDepartments } from "./department.slice";
-import { userSlice, changePassword } from "./user.slice";
+import { userSlice, changePassword, createNewUser } from "./user.slice";
 export {
   authSlice,
   logOut,
@@ -10,4 +16,6 @@ export {
   getAllDepartments,
   userSlice,
   changePassword,
+  verifyUser,
+  createNewUser,
 };

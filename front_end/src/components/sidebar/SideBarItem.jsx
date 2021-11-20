@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SideBarItem = (props) => {
   const { title, iconProp, color, link } = props;
@@ -9,12 +10,12 @@ const SideBarItem = (props) => {
       >
         {iconProp}
       </div>
-      <a
-        href={link ? link : "/"}
+      <Link
+        to={link ? link : "/"}
         className="text-md font-normal text-left mt-1 truncate"
       >
         {title}
-      </a>
+      </Link>
     </div>
   );
 };

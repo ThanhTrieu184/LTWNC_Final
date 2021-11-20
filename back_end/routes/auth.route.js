@@ -1,5 +1,5 @@
 const { AuthController } = require("../controllers/api");
-const authJWT = require("../middlewares/authJWT");
+const { verifyToken } = require("../middlewares/authJWT");
 
 module.exports = (app) => {
   app.use((req, res, next) => {
@@ -14,5 +14,6 @@ module.exports = (app) => {
 
   app.post("/api/auth/login", AuthController.login);
   app.post("/api/auth/login-google", AuthController.loginGoogle);
-  app.delete("/api/auth/logout", authJWT.verifyToken, AuthController.logout);
+  app.delete("/api/auth/logout", verifyToken, AuthController.logout);
+  app.post("/api/auth/verifyUser", verifyToken, AuthController.verifyUser);
 };

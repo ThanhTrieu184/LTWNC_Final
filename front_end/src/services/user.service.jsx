@@ -6,6 +6,11 @@ class UserService {
     const response = await Repository.post(endpoint, passwords);
     return response;
   }
+  async createNewUser(credentials) {
+    const endpoint = "/users/create";
+    const response = await Repository.post(endpoint, credentials);
+    return response;
+  }
 }
 
 export default new UserService();

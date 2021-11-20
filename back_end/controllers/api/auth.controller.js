@@ -121,6 +121,13 @@ exports.logout = (req, res) => {
   });
 };
 
+exports.verifyUser = (req, res) => {
+  if (req.userId) {
+    return res.status(200).send({ message: "Người dùng hợp lệ." });
+  }
+  return res.status(401).send({ message: "Người dùng không hợp lệ." });
+};
+
 const generateToken = (id) => {
   return jwt.sign({ id: id }, config.JWT_SECRET, {
     expiresIn: config.tokenLife,
