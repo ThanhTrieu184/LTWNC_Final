@@ -26,20 +26,18 @@ const PostMenu = () => {
               {({ active }) => (
                 <button
                   className={`${
-                    active
-                      ? "bg-indigo-300 bg-opacity-20 text-indigo-500"
-                      : "text-gray-900"
+                    active ? "bg-gray-50" : ""
                   } group flex rounded-md items-center w-full px-4 py-2 text-sm`}
                 >
                   {active ? (
                     <FontAwesomeIcon
                       icon={faPen}
-                      className="mr-2 text-indigo-500"
+                      className="mr-2 text-gray-800"
                     />
                   ) : (
                     <FontAwesomeIcon
                       icon={faPen}
-                      className="mr-2 text-indigo-400"
+                      className="mr-2 text-gray-600"
                     />
                   )}
                   Sửa bài viết
@@ -50,20 +48,18 @@ const PostMenu = () => {
               {({ active }) => (
                 <button
                   className={`${
-                    active
-                      ? "bg-indigo-300 bg-opacity-20 text-indigo-500"
-                      : "text-gray-900"
+                    active ? "bg-gray-50" : ""
                   } group flex rounded-md items-center w-full px-4 py-2 text-sm`}
                 >
                   {active ? (
                     <FontAwesomeIcon
                       icon={faUser}
-                      className="mr-2 text-indigo-500"
+                      className="mr-2 text-gray-800"
                     />
                   ) : (
                     <FontAwesomeIcon
                       icon={faUser}
-                      className="mr-2 text-indigo-400"
+                      className="mr-2 text-gray-600"
                     />
                   )}
                   Xem trang cá nhân

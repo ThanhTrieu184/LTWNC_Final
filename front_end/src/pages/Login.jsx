@@ -148,7 +148,7 @@ const Login = () => {
                       formik.errors.username
                         ? "border-red-300 bg-pink-50 focus:border-red-500"
                         : "focus:border-indigo-300"
-                    } text-lg input`}
+                    } text-lg my-input`}
                     value={formik.values.username}
                     onChange={formik.handleChange}
                   />
@@ -164,7 +164,7 @@ const Login = () => {
                       formik.errors.password
                         ? "border-red-300 bg-pink-50 focus:border-red-500"
                         : "focus:border-indigo-300"
-                    }  text-lg input`}
+                    }  text-lg my-input`}
                     type="password"
                     name="password"
                     id="password"
@@ -196,7 +196,7 @@ const Login = () => {
                     disabled={loading}
                     className={`${
                       loading ? "cursor-not-allowed" : ""
-                    } uppercase text-white block p-4 w-full text-lg rounded-full bg-gradient-to-br from-red-600 to-indigo-600 focus:outline-none shadow-sm hover:shadow-md`}
+                    } w-full my-btn-gradient`}
                   >
                     Đăng nhập
                   </button>

@@ -1,16 +1,17 @@
 import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 const Announcement = ({ postedBy }) => {
   return (
     <div className="rounded-lg bg-white text-gray-800 p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-200">
       <div className="flex flex-col">
-        <a href="/" className="text-md font-bold mb-2 uppercase leading-5">
+        <Link to="/" className="text-md font-bold mb-2 uppercase leading-5">
           <span className="animation-underline">
             You need more informations? You need more informations? You need
             more informations?
           </span>
-        </a>
+        </Link>
         <p className="opacity-70 pb-4 truncate font-thin">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -30,13 +31,9 @@ const Announcement = ({ postedBy }) => {
             icon={Icon.faStar}
           />
         </div>
-        <a
-          href="/"
-          className="px-4 py-2 text-center text-sm text-white shadow-sm rounded-full bg-gradient-to-br from-red-600  to-indigo-600"
-        >
-          <span>Xem chi tiết </span>
-          <FontAwesomeIcon icon={Icon.faArrowRight} />
-        </a>
+        <Link to="/announcements/123">
+          <button className="my-btn-gradient">Xem chi tiết</button>
+        </Link>
       </div>
     </div>
   );

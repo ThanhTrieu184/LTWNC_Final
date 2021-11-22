@@ -63,7 +63,7 @@ const CreateUser = () => {
                 id="username"
                 name="username"
                 type="text"
-                className="input"
+                className="my-input"
                 value={formik.values.username}
                 onChange={formik.handleChange}
               />
@@ -81,7 +81,7 @@ const CreateUser = () => {
                 id="email"
                 name="email"
                 type="email"
-                className="input"
+                className="my-input"
                 value={formik.values.email}
                 onChange={formik.handleChange}
               />
@@ -99,7 +99,7 @@ const CreateUser = () => {
                 id="password"
                 name="password"
                 type="password"
-                className="input"
+                className="my-input"
                 value={formik.values.password}
                 onChange={formik.handleChange}
               />
@@ -117,7 +117,7 @@ const CreateUser = () => {
               <input
                 id="confirmPassword"
                 type="password"
-                className="input"
+                className="my-input"
                 name="confirmPassword"
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
@@ -183,11 +183,8 @@ const CreateUser = () => {
           </div>
 
           <div className="flex justify-end mt-6">
-            <button
-              type="submit"
-              className="px-6 py-3 bg-gradient-to-br from-red-600 to-indigo-600 text-white leading-5 rounded-full focus:outline-none"
-            >
-              Save
+            <button type="submit" className="my-btn-gradient">
+              <span className="px-4">Tạo</span>
             </button>
           </div>
         </form>

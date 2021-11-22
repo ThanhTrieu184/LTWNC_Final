@@ -59,14 +59,14 @@ const ConfirmLogoutModal = (props) => {
                 <div className="mt-4 flex justify-center space-x-6">
                   <button
                     type="button"
-                    className="w-20 py-2 text-sm font-medium text-gray-600 border rounded-full hover:bg-gray-50 focus:outline-none shadow-sm"
+                    className="w-20 btn rounded-full"
                     onClick={handleCancel}
                   >
                     Hủy
                   </button>
                   <button
                     type="button"
-                    className=" w-20 py-2 text-sm font-medium text-white bg-gradient-to-br from-red-600 to-indigo-600 rounded-full focus:outline-none shadow-sm"
+                    className=" w-20 my-btn-gradient"
                     onClick={handleConfirm}
                   >
                     Có

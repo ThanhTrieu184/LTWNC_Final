@@ -44,7 +44,7 @@ const Select = () => {
               <input
                 name="departments"
                 disabled={true}
-                className="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800"
+                className="bg-transparent p-1 px-2 appearance-none outline-none text-gray-800"
               />
             </div>
           </div>
