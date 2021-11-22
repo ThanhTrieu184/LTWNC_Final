@@ -22,3 +22,20 @@ exports.changePass = (req, res) => {
       });
     });
 };
+
+exports.addAccount = (req, res) => {
+  const user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+  })
+  user.save().then((result) => {
+    return res.status(200).send({
+      message: "Tạo tài khoản thành công",
+    })
+  }).catch((err) => {
+    return res.status(400).send({
+      message: "Tạo tài khoản thất bại",
+    });
+  })
+}

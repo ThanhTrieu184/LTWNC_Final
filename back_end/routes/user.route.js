@@ -1,6 +1,8 @@
 const { UserController } = require("../controllers/api");
 const { verifyToken } = require("../middlewares/authJWT");
 const { changePassword } = require("../middlewares/changePassword");
+const { addAccount } = require("../middlewares/addAccount")
+const { isAdmin } = require("../middlewares/authJWT");
 
 module.exports = (app) => {
   app.use((req, res, next) => {
@@ -18,4 +20,6 @@ module.exports = (app) => {
     [verifyToken, changePassword],
     UserController.changePass
   );
+
+  app.post("/api/users/addAccount", [verifyToken, isAdmin, addAccount], UserController.addAccount)
 };
