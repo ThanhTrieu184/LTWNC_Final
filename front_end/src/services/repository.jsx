@@ -18,7 +18,7 @@ const getHeaders = () => {
 const returnSuccess = (res) => {
   return {
     code: res.status,
-    message: res.statusText,
+    message: res.data.message,
     data: res.data,
   };
 };

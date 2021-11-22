@@ -4,7 +4,7 @@ import * as Icon from "@fortawesome/free-solid-svg-icons";
 const AnnouncementDetail = () => {
   return (
     <main className="w-full mx-auto px-4">
-      <div className="h-60 w-fulll bg-gradient-to-br from-red-600 to-indigo-600 rounded-lg ml-4 my-2"></div>
+      <div className="h-60 w-fulll bg-gradient-to-br from-red-200 to-indigo-200 rounded-lg ml-4 my-2"></div>
 
       <div className="-mt-40 w-2/3 card mx-auto shadow-md bg-white h-72">
         <img

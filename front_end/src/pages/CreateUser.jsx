@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
-import * as Icon from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
-import { MultiSelect } from "../components";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { MultiSelect, Loading } from "../components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { createNewUser } from "../redux/slices";
+import { createNewUser, departmentSlice } from "../redux/slices";
+
+const { clearChoosedItem } = departmentSlice.actions;
 
 const CreateUser = () => {
   const { choosedItems } = useSelector((state) => state.department);
-  const [imgUrl, setImageUrl] = useState();
-  // const dispatch = useDispatch();
+  const { isFetching, isSuccess } = useSelector((state) => state.user);
+  // const [imgUrl, setImageUrl] = useState();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -18,7 +19,6 @@ const CreateUser = () => {
       password: "",
       confirmPassword: "",
       departments: [],
-      image: null,
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -38,8 +38,7 @@ const CreateUser = () => {
       departments: Yup.array().min(1, "Vui lòng chọn ít nhất 1 chuyên mục!"),
     }),
     onSubmit: (values) => {
-      console.log(values);
-      // dispatch(createNewUser(values))
+      dispatch(createNewUser(values));
     },
   });
 
@@ -47,90 +46,98 @@ const CreateUser = () => {
     if (formik.values.departments !== choosedItems) {
       formik.setFieldValue("departments", choosedItems);
     }
-  }, [choosedItems, formik]);
+    if (isSuccess) {
+      formik.handleReset();
+      dispatch(clearChoosedItem());
+    }
+  }, [choosedItems, dispatch, formik, isSuccess]);
 
-  return (
-    <section className="w-full min-h-full my-4 pl-8 pr-4">
-      <div className="p-6 bg-white rounded-md shadow-md text-gray-700 min-h-full">
+  return isFetching ? (
+    <Loading />
+  ) : (
+    <section className="w-full my-4 pl-8 pr-4">
+      <div className="p-6 bg-white rounded-md shadow-md text-gray-700">
         <h1 className="text-2xl font-bold capitalize">Tạo phòng ban mới</h1>
         <form onSubmit={formik.handleSubmit}>
-          <div className="grid grid-cols-1 gap-6 mt-4 md:grid-cols-2">
-            <div className="flex flex-col space-y-2 relative">
-              <label className="" htmlFor="username">
-                Tên đăng nhập
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                className="my-input"
-                value={formik.values.username}
-                onChange={formik.handleChange}
-              />
-              {formik.errors.username && formik.touched.username && (
-                <small className="text-red-500 p-1 -bottom-6 absolute">
-                  {formik.errors.username}
-                </small>
-              )}
-            </div>
-            <div className="flex flex-col space-y-2 relative">
-              <label className="" htmlFor="email">
-                Địa chỉ email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="my-input"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-              />
-              {formik.errors.email && formik.touched.email && (
-                <small className="text-red-500 p-1 -bottom-6 absolute">
-                  {formik.errors.email}
-                </small>
-              )}
-            </div>
-            <div className="flex flex-col space-y-2 relative">
-              <label className="" htmlFor="password">
-                Mật khẩu
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                className="my-input"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-              />
-              {formik.errors.password && formik.touched.password && (
-                <small className="text-red-500 p-1 -bottom-6 absolute">
-                  {formik.errors.password}
-                </small>
-              )}
-            </div>
-
-            <div className="flex flex-col space-y-2 relative">
-              <label className="" htmlFor="confirmPassword">
-                Xác nhận mật khẩu
-              </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                className="my-input"
-                name="confirmPassword"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-              />
-              {formik.errors.confirmPassword &&
-                formik.touched.confirmPassword && (
-                  <small className="text-red-500 p-1 -bottom-6 absolute">
-                    {formik.errors.confirmPassword}
+          <div className=" mt-4 flex space-x-6">
+            <div className="form-control space-y-8 flex-1 ">
+              <div className="form-control space-y-2 relative">
+                <label className="" htmlFor="username">
+                  Tên đăng nhập
+                </label>
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  className="my-input"
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.username && formik.touched.username && (
+                  <small className="text-red-500 p-1 -bottom-7 absolute">
+                    {formik.errors.username}
                   </small>
                 )}
+              </div>
+              <div className="form-control space-y-2 relative">
+                <label className="" htmlFor="email">
+                  Địa chỉ email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className="my-input"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.email && formik.touched.email && (
+                  <small className="text-red-500 p-1 -bottom-7 absolute">
+                    {formik.errors.email}
+                  </small>
+                )}
+              </div>
+              <div className="form-control space-y-2 relative">
+                <label className="" htmlFor="password">
+                  Mật khẩu
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  className="my-input"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.password && formik.touched.password && (
+                  <small className="text-red-500 p-1 -bottom-7 absolute">
+                    {formik.errors.password}
+                  </small>
+                )}
+              </div>
+
+              <div className="form-control space-y-2 relative">
+                <label className="" htmlFor="confirmPassword">
+                  Xác nhận mật khẩu
+                </label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  className="my-input"
+                  name="confirmPassword"
+                  value={formik.values.confirmPassword}
+                  onChange={formik.handleChange}
+                />
+                {formik.errors.confirmPassword &&
+                  formik.touched.confirmPassword && (
+                    <small className="text-red-500 p-1 -bottom-7 absolute">
+                      {formik.errors.confirmPassword}
+                    </small>
+                  )}
+              </div>
             </div>
 
-            <div className="flex flex-col space-y-2 ">
+            <div className="form-control space-y-2 flex-1">
               <label className="" htmlFor="departments ">
                 Các chuyên mục phụ trách
               </label>
@@ -142,10 +149,10 @@ const CreateUser = () => {
               )}
             </div>
 
-            <div className="flex flex-col space-y-2 relative h-72">
+            {/* <div className="form-control space-y-2 relative h-72">
               <label>Hình ảnh</label>
               <div className="mt-1 flex justify-center items-center bg-indigo-50 bg-opacity-10 p-6 border-2 border-gray-300 border-dashed rounded-md h-full">
-                <div className="flex flex-col items-center space-y-4 text-lg ">
+                <div className="form-control items-center space-y-4 text-lg ">
                   {imgUrl ? (
                     <img
                       src={imgUrl}
@@ -174,16 +181,15 @@ const CreateUser = () => {
                       }}
                     />
                   </label>
-                  <span className="absolute bottom-6">
+                  <span className="absolute bottom-7">
                     {formik.values.image ? formik.values.image.name : ""}
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
-
-          <div className="flex justify-end mt-6">
-            <button type="submit" className="my-btn-gradient">
+          <div className="mt-20">
+            <button type="submit" className="w-full my-btn-gradient">
               <span className="px-4">Tạo</span>
             </button>
           </div>

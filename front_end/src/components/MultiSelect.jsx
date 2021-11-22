@@ -64,7 +64,7 @@ const Select = () => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } shadow bg-white w-full rounded max-h-48 overflow-y-auto hide-scroll-bar`}
+        } shadow bg-white w-full rounded max-h-72 overflow-y-auto hide-scroll-bar`}
       >
         <div className="flex flex-col w-full">
           {departments.map((d) => (
