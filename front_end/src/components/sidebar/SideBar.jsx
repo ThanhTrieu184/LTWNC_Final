@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { SidebarDetail } from "./";
 import { Loading, ConfirmLogoutModal, ChangePasswordModal } from "../";
 import userIcon from "../../assets/img/user_icon.png";
+import { Link } from "react-router-dom";
 
 const { clearState } = authSlice.actions;
 
@@ -59,11 +60,13 @@ const SideBar = () => {
               >
                 <FontAwesomeIcon icon={Icon.faKey}></FontAwesomeIcon>
               </li>
-              <li
-                className={` mb-3 p-2 rounded-md flex items-center justify-center bg-purple-500 cursor-pointer`}
-              >
-                <FontAwesomeIcon icon={Icon.faCog}></FontAwesomeIcon>
-              </li>
+              <Link to="/">
+                <li
+                  className={` mb-3 p-2 rounded-md flex items-center justify-center bg-purple-500 cursor-pointer`}
+                >
+                  <FontAwesomeIcon icon={Icon.faHome}></FontAwesomeIcon>
+                </li>
+              </Link>
 
               <li
                 onClick={() => setIsOpenLogoutModal(true)}

@@ -9,7 +9,8 @@ import { ConfirmLogoutModal, ChangePasswordModal } from "./modals";
 import PostMenu from "./PostMenu";
 import Accordion from "./Accordion";
 import MultiSelect from "./MultiSelect";
-
+import Calendar from "./Calendar";
+import Paginator from "./Paginator";
 export {
   Loading,
   PrivateRoute,
@@ -23,4 +24,6 @@ export {
   Accordion,
   ChangePasswordModal,
   MultiSelect,
+  Calendar,
+  Paginator,
 };
