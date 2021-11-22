@@ -1,9 +1,9 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Announcement = () => {
+const Announcement = ({ postedBy }) => {
   return (
-    <div className="rounded-lg bg-gradient-to-br from-red-50 to-indigo-50 text-gray-800 p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-200">
+    <div className="rounded-lg bg-white text-gray-800 p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-200">
       <div className="flex flex-col">
         <a href="/" className="text-md font-bold mb-2 uppercase leading-5">
           <span className="animation-underline">
@@ -18,13 +18,24 @@ const Announcement = () => {
         </p>
       </div>
       <div className="pt-4 flex justify-between items-center z-10">
-        <small className="text-gray-600">11/11/2021</small>
+        <div className="flex space-x-2 items-center text-gray-600">
+          <small className="">11/11/2021</small>
+          <p className="text-sm">{postedBy}</p>
+          <FontAwesomeIcon
+            className="p-1 text-green-600 rounded-full bg-green-50 shadow-sm"
+            icon={Icon.faCheck}
+          />
+          <FontAwesomeIcon
+            className="p-1 text-yellow-600 rounded-full bg-yellow-50 shadow-sm"
+            icon={Icon.faStar}
+          />
+        </div>
         <a
           href="/"
           className="px-4 py-2 text-center text-sm text-white shadow-sm rounded-full bg-gradient-to-br from-red-600  to-indigo-600"
         >
           <span>Xem chi tiết </span>
-          <FontAwesomeIcon icon={faArrowRight} />
+          <FontAwesomeIcon icon={Icon.faArrowRight} />
         </a>
       </div>
     </div>

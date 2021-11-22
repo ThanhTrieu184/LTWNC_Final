@@ -32,6 +32,7 @@ const Accordion = (props) => {
                   title={c.department_name}
                   iconProp={iconProp}
                   color="bg-indigo-500"
+                  link="/announcements"
                 />
               </div>
             ))}

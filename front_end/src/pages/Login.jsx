@@ -181,11 +181,12 @@ const Login = () => {
                 <p className="separator py-8 text-gray-500">Hoặc</p>
 
                 <div className="space-x-2 flex justify-center items-center text-gray-600">
-                  <span className="flex w-full items-center justify-center space-x-4 border px-4 py-2 rounded-xl shadow-sm cursor-pointer hover:shadow">
+                  <span
+                    onClick={handleLoginGoogle}
+                    className="flex w-full items-center justify-center space-x-4 border px-4 py-2 rounded-xl shadow-sm cursor-pointer hover:shadow"
+                  >
                     <img src={ggIcon} alt="gg icon" className="h-8 w-8" />
-                    <button onClick={handleLoginGoogle} type="button">
-                      Đăng nhập bằng Gmail
-                    </button>
+                    <button type="button">Đăng nhập bằng Gmail</button>
                   </span>
                 </div>
 

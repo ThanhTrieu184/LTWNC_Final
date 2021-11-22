@@ -4,7 +4,7 @@ import logo from "../../assets/img/logo.png";
 
 const PrivateLayout = ({ children }) => {
   return (
-    <div className="flex justify-between h-screen w-full bg-red-50 bg-opacity-10">
+    <div className="flex justify-between h-screen w-full bg-gray-50 bg-opacity-30">
       <SideBar></SideBar>
       <div className="flex flex-col flex-1 overflow-y-auto hide-scroll-bar">
         <div className="grid grid-cols-12 gap-6 p-4">
