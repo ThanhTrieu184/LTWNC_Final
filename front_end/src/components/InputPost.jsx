@@ -10,9 +10,7 @@ const InputPost = () => {
           className="px-4 flex-1 py-3 focus:outline-none focus:border-indigo-300 text-gray-600 text-md border rounded-full focus:shadow-sm"
         />
         <img src={imageIcon} alt="" className="h-12 w-12 border-red-500" />
-        <button className="shadow rounded-full px-4 py-3 bg-gradient-to-br from-red-600 to-indigo-600 text-white">
-          Đăng bài
-        </button>
+        <button className="my-btn-gradient">Đăng bài</button>
       </div>
     </div>
   );

@@ -40,6 +40,20 @@
   background-size: 100% 1px;
 }
 
-.input {
+.my-input {
   @apply block py-3 px-4 border rounded-xl focus:outline-none w-full shadow-sm hover:shadow;
+}
+
+.my-btn-gradient {
+  @apply btn border-none rounded-full bg-gradient-to-br from-red-600 to-indigo-600
+}
+
+.pt-\[17\%\] {
+  padding-top: 17%;
+}
+.mt-\[-10\%\] {
+  margin-top: -10%;
+}
+.pt-\[56\.25\%\] {
+  padding-top: 56.25%;
 }

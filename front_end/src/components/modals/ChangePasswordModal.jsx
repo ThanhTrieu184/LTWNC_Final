@@ -8,6 +8,7 @@ import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { userSlice, changePassword } from "../../redux/slices";
 import { useSelector, useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const { clearUserState } = userSlice.actions;
 
@@ -110,7 +111,7 @@ const ChangePasswordModal = (props) => {
                           name="oldPass"
                           type={isShowOldPass ? "text" : "password"}
                           placeholder="Mật khẩu cũ"
-                          className="text-sm input focus:border-indigo-300"
+                          className="text-sm my-input focus:border-indigo-300"
                           value={formik.values.oldPass}
                           onChange={formik.handleChange}
                         />
@@ -133,7 +134,7 @@ const ChangePasswordModal = (props) => {
                           type={isShowNewPass ? "text" : "password"}
                           name="newPass"
                           placeholder="Mật khẩu mới"
-                          className="text-sm input focus:border-indigo-300"
+                          className="text-sm my-input focus:border-indigo-300"
                           value={formik.values.newPass}
                           onChange={formik.handleChange}
                         />
@@ -156,7 +157,7 @@ const ChangePasswordModal = (props) => {
                           type={isShowConfirmPass ? "text" : "password"}
                           name="confirmPass"
                           placeholder="Xác nhận mật khẩu mới"
-                          className="text-sm input focus:border-indigo-300"
+                          className="text-sm my-input focus:border-indigo-300"
                           value={formik.values.confirmPass}
                           onChange={formik.handleChange}
                         />
@@ -181,14 +182,11 @@ const ChangePasswordModal = (props) => {
                       </div>
                     </div>
                     <div className="text-center mt-8">
-                      <button
-                        type="submit"
-                        className="py-3 w-64 text-xl text-white bg-gradient-to-br from-red-600 to-indigo-600 rounded-full"
-                      >
+                      <button type="submit" className="w-64 my-btn-gradient">
                         Cập nhật
                       </button>
                       <p className="mt-4 text-sm">
-                        <a href="/">Quên mật khẩu?</a>
+                        <Link to="/">Quên mật khẩu?</Link>
                       </p>
                     </div>
                   </form>

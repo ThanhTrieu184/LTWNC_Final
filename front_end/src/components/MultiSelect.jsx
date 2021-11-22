@@ -44,7 +44,7 @@ const Select = () => {
               <input
                 name="departments"
                 disabled={true}
-                className="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800"
+                className="bg-transparent p-1 px-2 appearance-none outline-none text-gray-800"
               />
             </div>
           </div>
@@ -64,7 +64,7 @@ const Select = () => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } shadow bg-white w-full rounded max-h-48 overflow-y-auto hide-scroll-bar`}
+        } shadow bg-white w-full rounded max-h-72 overflow-y-auto hide-scroll-bar`}
       >
         <div className="flex flex-col w-full">
           {departments.map((d) => (

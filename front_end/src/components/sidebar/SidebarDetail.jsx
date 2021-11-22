@@ -18,7 +18,7 @@ const SidebarDetail = () => {
 
   return (
     <aside
-      className={`w-64 z-20 relative px-4 border-r hidden lg:block bg-gradient-to-br from-red-50 to-indigo-50 overflow-y-auto hide-scroll-bar`}
+      className={`w-64 relative px-4 border-r hidden lg:block bg-gradient-to-br from-red-50 to-indigo-50 overflow-y-auto hide-scroll-bar`}
     >
       <div className="mb-6">
         <div className="flex flex-col gap-4 mt-6">
