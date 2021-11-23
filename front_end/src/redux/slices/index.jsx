@@ -5,7 +5,11 @@ import {
   loginUser,
   verifyUser,
 } from "./auth.slice";
-import { departmentSlice, getAllDepartments } from "./department.slice";
+import {
+  departmentSlice,
+  getAllDepartments,
+  getDepartmentsByUser,
+} from "./department.slice";
 import { userSlice, changePassword, createNewUser } from "./user.slice";
 export {
   authSlice,
@@ -18,4 +22,5 @@ export {
   changePassword,
   verifyUser,
   createNewUser,
+  getDepartmentsByUser,
 };

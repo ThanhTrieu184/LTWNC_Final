@@ -9,12 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 const SidebarDetail = () => {
   const dispatch = useDispatch();
   const { departments } = useSelector((state) => state.department);
-
+  const { isLoggedIn } = useSelector((state) => state.auth);
   useEffect(() => {
-    if (departments.length === 0) {
+    if (departments.length === 0 && isLoggedIn) {
       dispatch(getAllDepartments());
     }
-  }, [departments, dispatch]);
+  }, [departments, dispatch, isLoggedIn]);
 
   return (
     <aside
@@ -28,6 +28,7 @@ const SidebarDetail = () => {
             iconProp={<FontAwesomeIcon icon={Icon.faBuilding} size="xs" />}
           />
           <SideBarItem
+            link="/announcements/create"
             title="Thêm thông báo mới"
             iconProp={<FontAwesomeIcon icon={Icon.faNewspaper} size="xs" />}
             color="bg-green-500"

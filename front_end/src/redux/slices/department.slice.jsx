@@ -7,6 +7,7 @@ const { SUCCESS, SERVER_ERROR } = exceptionConstants;
 const initialState = {
   departments: [],
   choosedItems: [],
+  departmentsOfUser: [],
 };
 
 export const getAllDepartments = createAsyncThunk(
@@ -30,10 +31,36 @@ export const getAllDepartments = createAsyncThunk(
   }
 );
 
+export const getDepartmentsByUser = createAsyncThunk(
+  "department/getDepartmentsByUser",
+  async (_, thunkAPI) => {
+    try {
+      const response = await DepartmentService.getDepartmentsByUser();
+
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Lỗi server!",
+        data: [],
+      });
+    }
+  }
+);
+
 export const departmentSlice = createSlice({
   name: "department",
   initialState,
   reducers: {
+    clearDepartmentState: (state) => {
+      state.choosedItems = [];
+      state.departmentsOfUser = [];
+      state.departments = [];
+    },
     clearChoosedItem: (state) => {
       state.choosedItems = [];
     },
@@ -49,6 +76,12 @@ export const departmentSlice = createSlice({
   extraReducers: {
     [getAllDepartments.fulfilled]: (state, { payload }) => {
       state.departments = payload.data;
+      return state;
+    },
+    [getDepartmentsByUser.fulfilled]: (state, { payload }) => {
+      state.departmentsOfUser = state.departments.filter((d) =>
+        payload.data.includes(d._id)
+      );
       return state;
     },
   },

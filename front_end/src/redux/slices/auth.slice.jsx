@@ -153,5 +153,6 @@ const loginFullfilled = (state, payload) => {
   state.user = payload.data;
   state.isFetching = false;
   state.isSuccess = true;
+  state.isLoggedIn = true;
   return state;
 };

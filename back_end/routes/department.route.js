@@ -17,4 +17,9 @@ module.exports = (app) => {
     verifyToken,
     DepartmentController.getAllDepartments
   );
+  app.get(
+    "/api/departments/mine",
+    verifyToken,
+    DepartmentController.getDepartmentsByUser
+  );
 };

@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { logOut, authSlice } from "../../redux/slices";
+import { logOut, authSlice, departmentSlice } from "../../redux/slices";
 import toast, { Toaster } from "react-hot-toast";
 import { SidebarDetail } from "./";
 import { Loading, ConfirmLogoutModal, ChangePasswordModal } from "../";
@@ -10,9 +10,9 @@ import userIcon from "../../assets/img/user_icon.png";
 import { Link } from "react-router-dom";
 
 const { clearState } = authSlice.actions;
-
+const { clearDepartmentState } = departmentSlice.actions;
 const SideBar = () => {
-  const { user, isFetching, isError, errorMessages } = useSelector(
+  const { user, isFetching, isError, isSuccess, errorMessages } = useSelector(
     (state) => state.auth
   );
   const imageUrl = user && user.imageUrl ? user.imageUrl : userIcon;
@@ -32,7 +32,10 @@ const SideBar = () => {
         dispatch(clearState());
       }
     }
-  }, [dispatch, isError, errorMessages]);
+    if (isSuccess) {
+      dispatch(clearDepartmentState());
+    }
+  }, [dispatch, isError, errorMessages, isSuccess]);
 
   return isFetching ? (
     <Loading />

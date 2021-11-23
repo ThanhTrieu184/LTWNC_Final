@@ -138,33 +138,25 @@ const Login = () => {
                 onSubmit={formik.handleSubmit}
                 className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto pt-8 text-left"
               >
-                <div className="py-4 relative">
+                <div className="form-control py-4 relative">
                   <input
                     type="text"
                     name="username"
                     id="username"
                     placeholder="Tên đăng nhập"
-                    className={`${
-                      formik.errors.username
-                        ? "border-red-300 bg-pink-50 focus:border-red-500"
-                        : "focus:border-indigo-300"
-                    } text-lg my-input`}
+                    className={`text-lg w-full input input-lg input-bordered`}
                     value={formik.values.username}
                     onChange={formik.handleChange}
                   />
                   {formik.errors.username && formik.touched.username && (
-                    <small className="text-red-500 p-1 absolute">
+                    <small className="text-red-500 p-1 -bottom-3 absolute">
                       {formik.errors.username}
                     </small>
                   )}
                 </div>
-                <div className="py-4 relative">
+                <div className="form-control py-4 relative">
                   <input
-                    className={`${
-                      formik.errors.password
-                        ? "border-red-300 bg-pink-50 focus:border-red-500"
-                        : "focus:border-indigo-300"
-                    }  text-lg my-input`}
+                    className={`text-lg w-full input input-lg input-bordered`}
                     type="password"
                     name="password"
                     id="password"
@@ -173,7 +165,7 @@ const Login = () => {
                     onChange={formik.handleChange}
                   />
                   {formik.errors.password && formik.touched.password && (
-                    <small className="text-red-500 p-1 absolute">
+                    <small className="text-red-500 p-1 -bottom-3 absolute">
                       {formik.errors.password}
                     </small>
                   )}

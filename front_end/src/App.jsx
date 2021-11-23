@@ -9,6 +9,7 @@ import {
   CreateUser,
   AnnouncementPage,
   AnnouncementDetail,
+  CreateAnnouncement,
 } from "./pages";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -19,7 +20,13 @@ const App = () => {
     <Router>
       <Switch>
         <Route
-          path={["/", "/users/create", "/announcements", "/announcements/:id"]}
+          path={[
+            "/",
+            "/users/create",
+            "/announcements",
+            "/announcements/:id",
+            "announcements/create",
+          ]}
           exact
         >
           <PrivateLayout>
@@ -30,6 +37,10 @@ const App = () => {
                 path="/announcements"
                 exact
                 component={AnnouncementPage}
+              />
+              <PrivateRoute
+                path="/announcements/create"
+                component={CreateAnnouncement}
               />
               <PrivateRoute
                 path="/announcements/:id"

@@ -69,7 +69,7 @@ const CreateUser = () => {
                   id="username"
                   name="username"
                   type="text"
-                  className="my-input"
+                  className="input input-bordered"
                   value={formik.values.username}
                   onChange={formik.handleChange}
                 />
@@ -87,7 +87,7 @@ const CreateUser = () => {
                   id="email"
                   name="email"
                   type="email"
-                  className="my-input"
+                  className="input input-bordered"
                   value={formik.values.email}
                   onChange={formik.handleChange}
                 />
@@ -105,7 +105,7 @@ const CreateUser = () => {
                   id="password"
                   name="password"
                   type="password"
-                  className="my-input"
+                  className="input input-bordered"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                 />
@@ -123,7 +123,7 @@ const CreateUser = () => {
                 <input
                   id="confirmPassword"
                   type="password"
-                  className="my-input"
+                  className="input input-bordered"
                   name="confirmPassword"
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}

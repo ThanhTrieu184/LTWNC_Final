@@ -6,6 +6,12 @@ class DepartmentService {
     const response = await Repository.get(endpoint);
     return response;
   }
+
+  async getDepartmentsByUser() {
+    const endpoint = "/departments/mine";
+    const response = await Repository.get(endpoint);
+    return response;
+  }
 }
 
 export default new DepartmentService();

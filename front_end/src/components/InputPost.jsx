@@ -7,7 +7,7 @@ const InputPost = () => {
       <div className="flex items-center space-x-4">
         <input
           placeholder="Bạn đang nghĩ gì?"
-          className="px-4 flex-1 py-3 focus:outline-none focus:border-indigo-300 text-gray-600 text-md border rounded-full focus:shadow-sm"
+          className="input input-bordered flex-1 text-md rounded-full"
         />
         <img src={imageIcon} alt="" className="h-12 w-12 border-red-500" />
         <button className="my-btn-gradient">Đăng bài</button>

@@ -106,12 +106,12 @@ const ChangePasswordModal = (props) => {
                   </div>
                   <form onSubmit={formik.handleSubmit}>
                     <div className="space-y-6 text-left">
-                      <div className="py-2 relative">
+                      <div className="form-control py-2 relative">
                         <input
                           name="oldPass"
                           type={isShowOldPass ? "text" : "password"}
                           placeholder="Mật khẩu cũ"
-                          className="text-sm my-input focus:border-indigo-300"
+                          className="text-sm input input-bordered w-full"
                           value={formik.values.oldPass}
                           onChange={formik.handleChange}
                         />
@@ -124,17 +124,17 @@ const ChangePasswordModal = (props) => {
                           />
                         </div>
                         {formik.errors.oldPass && formik.touched.oldPass && (
-                          <small className="text-red-500 p-1 absolute">
+                          <small className="text-red-500 p-1 -bottom-5 absolute">
                             {formik.errors.oldPass}
                           </small>
                         )}
                       </div>
-                      <div className="py-2 relative">
+                      <div className="form-control py-2 relative">
                         <input
                           type={isShowNewPass ? "text" : "password"}
                           name="newPass"
                           placeholder="Mật khẩu mới"
-                          className="text-sm my-input focus:border-indigo-300"
+                          className="text-sm input input-bordered w-full"
                           value={formik.values.newPass}
                           onChange={formik.handleChange}
                         />
@@ -147,17 +147,17 @@ const ChangePasswordModal = (props) => {
                           />
                         </div>
                         {formik.errors.newPass && formik.touched.newPass && (
-                          <small className="text-red-500 p-1 absolute">
+                          <small className="text-red-500 p-1 -bottom-5 absolute">
                             {formik.errors.newPass}
                           </small>
                         )}
                       </div>
-                      <div className="py-2 relative">
+                      <div className="form-control py-2 relative">
                         <input
                           type={isShowConfirmPass ? "text" : "password"}
                           name="confirmPass"
                           placeholder="Xác nhận mật khẩu mới"
-                          className="text-sm my-input focus:border-indigo-300"
+                          className="text-sm input input-bordered w-full"
                           value={formik.values.confirmPass}
                           onChange={formik.handleChange}
                         />
@@ -175,7 +175,7 @@ const ChangePasswordModal = (props) => {
                         </div>
                         {formik.errors.confirmPass &&
                           formik.touched.confirmPass && (
-                            <small className="text-red-500 p-1 absolute">
+                            <small className="text-red-500 p-1 -bottom-5 absolute">
                               {formik.errors.confirmPass}
                             </small>
                           )}

@@ -11,6 +11,8 @@ import Accordion from "./Accordion";
 import MultiSelect from "./MultiSelect";
 import Calendar from "./Calendar";
 import Paginator from "./Paginator";
+import NormalSelect from "./NormalSelect";
+
 export {
   Loading,
   PrivateRoute,
@@ -26,4 +28,5 @@ export {
   MultiSelect,
   Calendar,
   Paginator,
+  NormalSelect,
 };
