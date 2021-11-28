@@ -5,8 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { logOut, authSlice, departmentSlice } from "../../redux/slices";
 import toast, { Toaster } from "react-hot-toast";
 import { SidebarDetail } from "./";
-import { Loading, ConfirmLogoutModal, ChangePasswordModal } from "../";
-import userIcon from "../../assets/img/user_icon.png";
+import {
+  Loading,
+  ConfirmLogoutModal,
+  ChangePasswordModal,
+  ProfileModal,
+} from "../";
 import { Link } from "react-router-dom";
 
 const { clearState } = authSlice.actions;
@@ -15,8 +19,12 @@ const SideBar = () => {
   const { user, isFetching, isError, isSuccess, errorMessages } = useSelector(
     (state) => state.auth
   );
-  const imageUrl = user && user.imageUrl ? user.imageUrl : userIcon;
+  const imageUrl =
+    user && user.imageUrl
+      ? user.imageUrl
+      : "https://res.cloudinary.com/mrafternoon184/image/upload/v1638073308/ltwnc/user_icon_lp4u7l.png";
   const [isOpenLogoutModal, setIsOpenLogoutModal] = useState(false);
+  const [isOpenProfileModal, setIsOpenProfileModal] = useState(false);
   const [isOpenChangePasswordModal, setIsOpenChangePasswordModal] =
     useState(false);
   const dispatch = useDispatch();
@@ -45,8 +53,15 @@ const SideBar = () => {
       <aside className="w-20 relative z-0 px-2 bg-gradient-to-br from-red-600 to-indigo-600">
         <div className="mb-6">
           <div className="flex justify-center">
-            <div className="w-12 h-12 rounded-full bg-gray-50 border-2 border-white shadow-md mt-2">
-              <img src={imageUrl} alt="" className="rounded-full w-auto" />
+            <div
+              className="bg-gray-50 rounded-full border-2 border-white shadow-md mt-2 cursor-pointer"
+              onClick={() => setIsOpenProfileModal(true)}
+            >
+              <img
+                src={imageUrl}
+                alt="avt"
+                className="w-12 h-12 rounded-full"
+              />
             </div>
           </div>
 
@@ -90,6 +105,10 @@ const SideBar = () => {
       <ChangePasswordModal
         isOpen={isOpenChangePasswordModal}
         handleCancel={() => setIsOpenChangePasswordModal(false)}
+      />
+      <ProfileModal
+        isOpen={isOpenProfileModal}
+        handleCancel={() => setIsOpenProfileModal(false)}
       />
     </Fragment>
   );

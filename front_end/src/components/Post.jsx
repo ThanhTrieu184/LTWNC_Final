@@ -1,7 +1,6 @@
 import React from "react";
 import { faThumbsUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ggIcon from "../assets/img/gg.png";
 import { PostMenu } from ".";
 import { Link } from "react-router-dom";
 
@@ -11,7 +10,10 @@ const Post = () => {
       <div className="w-full flex justify-between p-3 border-b relative">
         <div className="flex items-center">
           <div className="rounded-full h-10 w-10 bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden">
-            <img src={ggIcon} alt="profilepic" />
+            <img
+              src="https://res.cloudinary.com/mrafternoon184/image/upload/v1638073308/ltwnc/user_icon_lp4u7l.png"
+              alt="profilepic"
+            />
           </div>
           <Link to="/" className="pt-1 ml-2 font-bold text-sm flex flex-col">
             Mr.Afternoon

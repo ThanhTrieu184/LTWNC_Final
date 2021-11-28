@@ -47,3 +47,7 @@
 .my-btn-gradient {
   @apply btn border-none rounded-full bg-gradient-to-br from-red-600 to-indigo-600
 }
+
+.input[disabled] {
+  @apply bg-white border-none
+}

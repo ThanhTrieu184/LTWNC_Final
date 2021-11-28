@@ -1,5 +1,4 @@
 import React from "react";
-import imageIcon from "../assets/img/image_icon.png";
 
 const InputPost = () => {
   return (
@@ -9,7 +8,11 @@ const InputPost = () => {
           placeholder="Bạn đang nghĩ gì?"
           className="input input-bordered flex-1 text-md rounded-full"
         />
-        <img src={imageIcon} alt="" className="h-12 w-12 border-red-500" />
+        <img
+          src="https://res.cloudinary.com/mrafternoon184/image/upload/v1638073290/ltwnc/image_icon_b4drt8.png"
+          alt=""
+          className="h-12 w-12 border-red-500"
+        />
         <button className="my-btn-gradient">Đăng bài</button>
       </div>
     </div>

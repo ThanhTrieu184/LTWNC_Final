@@ -5,7 +5,11 @@ import Announcement from "./Announcement";
 import Post from "./Post";
 import InputPost from "./InputPost";
 import NewAnnouncement from "./NewAnnouncement";
-import { ConfirmLogoutModal, ChangePasswordModal } from "./modals";
+import {
+  ConfirmLogoutModal,
+  ChangePasswordModal,
+  ProfileModal,
+} from "./modals";
 import PostMenu from "./PostMenu";
 import Accordion from "./Accordion";
 import MultiSelect from "./MultiSelect";
@@ -29,4 +33,5 @@ export {
   Calendar,
   Paginator,
   NormalSelect,
+  ProfileModal,
 };

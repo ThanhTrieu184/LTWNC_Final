@@ -1,6 +1,5 @@
 import React from "react";
 import { SideBar, InputPost, NewAnnouncement } from "../";
-import logo from "../../assets/img/logo.png";
 
 const PrivateLayout = ({ children }) => {
   return (
@@ -12,7 +11,7 @@ const PrivateLayout = ({ children }) => {
             Trang chủ
           </p>
           <img
-            src={logo}
+            src="https://res.cloudinary.com/mrafternoon184/image/upload/v1638073300/ltwnc/logo_whrc9h.png"
             alt="logo"
             className="h-16 w-full col-span-12 md:col-span-4"
           />

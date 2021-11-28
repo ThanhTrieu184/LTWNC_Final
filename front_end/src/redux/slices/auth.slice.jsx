@@ -111,6 +111,14 @@ export const authSlice = createSlice({
       state.isError = false;
       state.errorMessages = null;
     },
+    updateUser: (state, { payload }) => {
+      state.user.username = payload.username;
+      state.user.email = payload.email;
+      if (payload.image_url) {
+        state.user.imageUrl = payload.image_url;
+      }
+      localStorage.setItem("user", JSON.stringify(state.user));
+    },
   },
   extraReducers: {
     [loginUser.fulfilled]: (state, { payload }) =>

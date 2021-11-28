@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { UserService } from "../../services";
 import { exceptionConstants } from "../../constants";
+import { authSlice } from ".";
+const { updateUser } = authSlice.actions;
 
 const { SUCCESS, SERVER_ERROR } = exceptionConstants;
 
@@ -54,6 +56,27 @@ export const createNewUser = createAsyncThunk(
   }
 );
 
+export const updateProfile = createAsyncThunk(
+  "user/updateProfile",
+  async (credentials, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await UserService.updateProfile(credentials);
+      if (response.code === SUCCESS) {
+        dispatch(updateUser(response.data.user));
+        return response;
+      } else {
+        return rejectWithValue(response);
+      }
+    } catch (e) {
+      return rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -74,6 +97,10 @@ export const userSlice = createSlice({
       fullfilled(state, payload),
     [createNewUser.rejected]: (state, { payload }) => rejected(state, payload),
     [createNewUser.pending]: (state) => pending(state),
+    [updateProfile.fulfilled]: (state, { payload }) =>
+      fullfilled(state, payload),
+    [updateProfile.rejected]: (state, { payload }) => rejected(state, payload),
+    [updateProfile.pending]: (state) => pending(state),
   },
 });
 

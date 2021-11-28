@@ -1,7 +1,12 @@
 const { UserController } = require("../controllers/api");
 const { verifyToken, isAdmin } = require("../middlewares/authJWT");
 const { changePassword } = require("../middlewares/changePassword");
-const { addAccount, checkCreateUserRequest } = require("../middlewares/addAccount")
+const uploadMulter = require("../multer");
+
+const {
+  addAccount,
+  checkCreateUserRequest,
+} = require("../middlewares/addAccount");
 
 module.exports = (app) => {
   app.use((req, res, next) => {
@@ -19,6 +24,14 @@ module.exports = (app) => {
     [verifyToken, changePassword],
     UserController.changePass
   );
-
-  app.post("/api/users/create", [verifyToken, isAdmin, checkCreateUserRequest, addAccount], UserController.addAccount)
+  app.post(
+    "/api/users/create",
+    [verifyToken, isAdmin, checkCreateUserRequest, addAccount],
+    UserController.addAccount
+  );
+  app.post(
+    "/api/users/update",
+    [verifyToken, uploadMulter.single("image")],
+    UserController.updateProfile
+  );
 };

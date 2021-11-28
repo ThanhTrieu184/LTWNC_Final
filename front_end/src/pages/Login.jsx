@@ -1,6 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import logo from "../assets/img/logo.png";
-import ggIcon from "../assets/img/gg.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
@@ -131,7 +129,11 @@ const Login = () => {
           <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
             <div className="w-full py-6 z-20 ">
               <h1 className="my-6">
-                <img src={logo} alt="logo" className="mx-auto" />
+                <img
+                  src="https://res.cloudinary.com/mrafternoon184/image/upload/v1638073300/ltwnc/logo_whrc9h.png"
+                  alt="logo"
+                  className="mx-auto"
+                />
               </h1>
 
               <form
@@ -177,7 +179,11 @@ const Login = () => {
                     onClick={handleLoginGoogle}
                     className="flex w-full items-center justify-center space-x-4 border px-4 py-2 rounded-xl shadow-sm cursor-pointer hover:shadow"
                   >
-                    <img src={ggIcon} alt="gg icon" className="h-8 w-8" />
+                    <img
+                      src="https://res.cloudinary.com/mrafternoon184/image/upload/v1638073280/ltwnc/gg_ikkhhk.png"
+                      alt="gg icon"
+                      className="h-8 w-8"
+                    />
                     <button type="button">Đăng nhập bằng Gmail</button>
                   </span>
                 </div>

@@ -2,6 +2,7 @@ const models = require("../../models");
 const User = models.user;
 const Role = models.role;
 const bcrypt = require("bcryptjs");
+const { uploadSingleFile } = require("../upload.controller");
 
 exports.changePass = (req, res) => {
   const userId = req.userId;
@@ -26,23 +27,48 @@ exports.changePass = (req, res) => {
 
 exports.addAccount = async (req, res) => {
   const { username, email, password, departments } = req.body;
-  const departmentIds = departments.map(d => d._id)
-  const role = await Role.findOne({ role_name: "Department" })
+  const departmentIds = departments.map((d) => d._id);
+  const role = await Role.findOne({ role_name: "Department" });
   const user = new User({
     username: username,
     email: email,
     password: bcrypt.hashSync(password),
     department_id: departmentIds,
-    role_id: role._id
-  })
-  user.save().then((result) => {
-    return res.status(200).send({
-      message: "Tạo tài khoản thành công",
-      data: result,
+    role_id: role._id,
+  });
+  user
+    .save()
+    .then((result) => {
+      return res.status(200).send({
+        message: "Tạo tài khoản thành công",
+        data: result,
+      });
     })
-  }).catch((err) => {
-    return res.status(400).send({
-      message: "Tạo tài khoản thất bại",
+    .catch((err) => {
+      return res.status(400).send({
+        message: "Tạo tài khoản thất bại",
+      });
     });
-  })
-}
+};
+
+exports.updateProfile = async (req, res) => {
+  const { username, email } = req.body;
+  const file = req.file;
+  const user = { username: username, email: email };
+  if (file) {
+    let response = await uploadSingleFile(file.path);
+    user.image_url = response.url;
+  }
+  User.updateOne({ _id: req.userId }, { $set: user })
+    .then((u) => {
+      return res.status(200).send({
+        message: "Cập nhật thành công",
+        user: user,
+      });
+    })
+    .catch((err) => {
+      return res.status(400).send({
+        message: "Cập nhật thất bại",
+      });
+    });
+};

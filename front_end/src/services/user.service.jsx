@@ -11,6 +11,11 @@ class UserService {
     const response = await Repository.post(endpoint, credentials);
     return response;
   }
+  async updateProfile(credentials) {
+    const endpoint = "/users/update";
+    const response = await Repository.post(endpoint, credentials);
+    return response;
+  }
 }
 
 export default new UserService();
