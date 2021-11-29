@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { userSlice, changePassword } from "../../redux/slices";
 import { useSelector, useDispatch } from "react-redux";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const { clearUserState } = userSlice.actions;
@@ -59,7 +59,6 @@ const ChangePasswordModal = (props) => {
 
   return (
     <Fragment>
-      <Toaster />
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"

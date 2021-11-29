@@ -39,7 +39,7 @@ exports.addAccount = async (req, res) => {
   user
     .save()
     .then((result) => {
-      return res.status(200).send({
+      return res.status(201).send({
         message: "Tạo tài khoản thành công",
         data: result,
       });

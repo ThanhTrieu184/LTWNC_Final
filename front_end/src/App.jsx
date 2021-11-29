@@ -10,6 +10,7 @@ import {
   AnnouncementPage,
   AnnouncementDetail,
   CreateAnnouncement,
+  CreatePost,
 } from "./pages";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -26,6 +27,7 @@ const App = () => {
             "/announcements",
             "/announcements/:id",
             "announcements/create",
+            "/posts/create",
           ]}
           exact
         >
@@ -46,6 +48,7 @@ const App = () => {
                 path="/announcements/:id"
                 component={AnnouncementDetail}
               />
+              <PrivateRoute path="/posts/create" component={CreatePost} />
             </Switch>
           </PrivateLayout>
         </Route>

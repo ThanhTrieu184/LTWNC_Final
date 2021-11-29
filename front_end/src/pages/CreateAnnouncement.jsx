@@ -43,7 +43,9 @@ const CreateAnnouncement = () => {
                   className="label font-semibold"
                   htmlFor="announcementTitle"
                 >
-                  <span className="text-md px-1">Tên thông báo</span>
+                  <span className="font-semibold text-gray-700">
+                    Tên thông báo
+                  </span>
                 </label>
                 <input
                   id="announcementTitle"
@@ -66,7 +68,9 @@ const CreateAnnouncement = () => {
                   className="label font-semibold"
                   htmlFor="announcementContent"
                 >
-                  <span className="text-md px-1">Nội dung thông báo</span>
+                  <span className="font-semibold text-gray-700">
+                    Nội dung thông báo
+                  </span>
                 </label>
                 <textarea
                   id="announcementContent"
@@ -86,13 +90,15 @@ const CreateAnnouncement = () => {
             <div className="form-control w-1/2 space-y-8">
               <div className="form-control">
                 <label className="label font-semibold">
-                  <span className="text-md px-1">Chọn chuyên mục</span>
+                  <span className="font-semibold text-gray-700">
+                    Chọn chuyên mục
+                  </span>
                 </label>
                 <NormalSelect handleSelected={handleSelected} />
               </div>
               <div className="form-control">
                 <label className="label font-semibold">
-                  <span className="text-md px-1">Đánh dấu</span>
+                  <span className="font-semibold text-gray-700">Đánh dấu</span>
                 </label>
                 <label className="cursor-pointer label justify-start space-x-4">
                   <input

@@ -131,12 +131,12 @@ const ProfileModal = (props) => {
                             <div className=" text-gray-500 text-xs font-semibold my-1">
                               <p>{user ? user.role : ""}</p>
                             </div>
-                            <div className="form-control my-4 px-4 justify-center space-y-2">
+                            <div className="form-control my-4 justify-center space-y-2">
                               <div className="flex justify-center ">
                                 <input
                                   type="text"
                                   name="email"
-                                  className={`input input-sm w-2/3 text-center input-ghost`}
+                                  className={`input input-sm w-2/3 text-center input-ghost font-semibold`}
                                   value={formik.values.email}
                                   disabled={!isEdit}
                                   placeholder="Nhập email tại đây"
@@ -148,7 +148,7 @@ const ProfileModal = (props) => {
                                   isEdit ? "block" : "hidden"
                                 } form-control relative h-36`}
                               >
-                                <div className="mt-1 mx-auto flex justify-center items-center border-2 border-gray-300 border-dashed rounded-md h-full">
+                                <div className="mt-1 mx-4 flex justify-center items-center border-2 border-gray-300 border-dashed rounded-md h-full">
                                   <div className="form-control items-center space-y-4 text-lg ">
                                     <label className="px-2 py-1 rounded-lg shadow-sm bg-white tracking-wide cursor-pointer border hover:shadow-md focus:shadow">
                                       <span className="mt-1">Chọn ảnh</span>

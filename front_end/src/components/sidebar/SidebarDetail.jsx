@@ -35,6 +35,7 @@ const SidebarDetail = () => {
           />
           <SideBarItem
             title="Thêm bài viết mới"
+            link="/posts/create"
             iconProp={<FontAwesomeIcon icon={Icon.faFileAlt} size="xs" />}
             color="bg-yellow-500"
           />

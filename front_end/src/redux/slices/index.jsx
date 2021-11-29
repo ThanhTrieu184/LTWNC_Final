@@ -16,6 +16,7 @@ import {
   createNewUser,
   updateProfile,
 } from "./user.slice";
+import { postSlice, createNewPost } from "./post.slice";
 export {
   authSlice,
   logOut,
@@ -29,4 +30,6 @@ export {
   createNewUser,
   getDepartmentsByUser,
   updateProfile,
+  postSlice,
+  createNewPost,
 };

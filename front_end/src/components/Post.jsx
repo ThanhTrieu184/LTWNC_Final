@@ -1,7 +1,7 @@
 import React from "react";
 import { faThumbsUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { PostMenu } from ".";
+import { PostMenu, YoutubeEmbedded } from ".";
 import { Link } from "react-router-dom";
 
 const Post = () => {
@@ -28,11 +28,12 @@ const Post = () => {
         <PostMenu />
       </div>
       <div className="bg-gradient-to-br from-red-50 to-indigo-50">
-        <img
+        {/* <img
           alt="alt"
           className="object-contain w-full"
           src="https://fiveflower.vn/wp-content/uploads/2020/11/Five-Flower-Slider1.jpg"
-        />
+        /> */}
+        <YoutubeEmbedded height="360px" embedId="kYRc7PsvLLI" />
       </div>
       <div className="px-3 pb-2 border-t">
         <div className="pt-2">

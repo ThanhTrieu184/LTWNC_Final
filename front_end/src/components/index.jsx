@@ -16,7 +16,7 @@ import MultiSelect from "./MultiSelect";
 import Calendar from "./Calendar";
 import Paginator from "./Paginator";
 import NormalSelect from "./NormalSelect";
-
+import YoutubeEmbedded from "./YoutubeEmbedded";
 export {
   Loading,
   PrivateRoute,
@@ -34,4 +34,5 @@ export {
   Paginator,
   NormalSelect,
   ProfileModal,
+  YoutubeEmbedded,
 };

@@ -10,5 +10,6 @@ models.class = require("./class.model");
 models.role = require("./role.model");
 models.user = require("./user.model");
 models.token = require("./token.model");
+models.post = require("./post.model");
 
 module.exports = models;

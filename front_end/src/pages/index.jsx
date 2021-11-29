@@ -5,7 +5,7 @@ import CreateUser from "./CreateUser";
 import AnnouncementPage from "./AnnouncementPage";
 import AnnouncementDetail from "./AnnouncementDetail";
 import CreateAnnouncement from "./CreateAnnouncement";
-
+import CreatePost from "./CreatePost";
 export {
   Error,
   Home,
@@ -14,4 +14,5 @@ export {
   AnnouncementPage,
   AnnouncementDetail,
   CreateAnnouncement,
+  CreatePost,
 };

@@ -62,7 +62,10 @@ const CreateUser = () => {
           <div className=" mt-4 flex space-x-6">
             <div className="form-control space-y-8 flex-1 ">
               <div className="form-control space-y-2 relative">
-                <label className="" htmlFor="username">
+                <label
+                  className="font-semibold text-gray-700"
+                  htmlFor="username"
+                >
                   Tên đăng nhập
                 </label>
                 <input
@@ -80,7 +83,7 @@ const CreateUser = () => {
                 )}
               </div>
               <div className="form-control space-y-2 relative">
-                <label className="" htmlFor="email">
+                <label className="font-semibold text-gray-700" htmlFor="email">
                   Địa chỉ email
                 </label>
                 <input
@@ -98,7 +101,10 @@ const CreateUser = () => {
                 )}
               </div>
               <div className="form-control space-y-2 relative">
-                <label className="" htmlFor="password">
+                <label
+                  className="font-semibold text-gray-700"
+                  htmlFor="password"
+                >
                   Mật khẩu
                 </label>
                 <input
@@ -117,7 +123,10 @@ const CreateUser = () => {
               </div>
 
               <div className="form-control space-y-2 relative">
-                <label className="" htmlFor="confirmPassword">
+                <label
+                  className="font-semibold text-gray-700"
+                  htmlFor="confirmPassword"
+                >
                   Xác nhận mật khẩu
                 </label>
                 <input
@@ -138,7 +147,10 @@ const CreateUser = () => {
             </div>
 
             <div className="form-control space-y-2 flex-1">
-              <label className="" htmlFor="departments ">
+              <label
+                className="font-semibold text-gray-700"
+                htmlFor="departments "
+              >
                 Các chuyên mục phụ trách
               </label>
               <MultiSelect />

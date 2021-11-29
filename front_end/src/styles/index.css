@@ -49,5 +49,5 @@
 }
 
 .input[disabled] {
-  @apply bg-white border-none
+  @apply bg-white
 }

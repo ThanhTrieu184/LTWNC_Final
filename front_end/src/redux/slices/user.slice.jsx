@@ -4,7 +4,7 @@ import { exceptionConstants } from "../../constants";
 import { authSlice } from ".";
 const { updateUser } = authSlice.actions;
 
-const { SUCCESS, SERVER_ERROR } = exceptionConstants;
+const { SUCCESS, CREATED, SERVER_ERROR } = exceptionConstants;
 
 const initialState = {
   isFetching: false,
@@ -41,7 +41,7 @@ export const createNewUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const response = await UserService.createNewUser(credentials);
-      if (response.code === SUCCESS) {
+      if (response.code === CREATED) {
         return response;
       } else {
         return thunkAPI.rejectWithValue(response);
