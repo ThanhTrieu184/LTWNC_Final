@@ -40,7 +40,6 @@ export const getPosts = createAsyncThunk(
     try {
       const response = await PostService.getPosts(page);
       if (response.code === SUCCESS) {
-        console.log(response);
         return response;
       } else {
         return thunkAPI.rejectWithValue(response);

@@ -21,7 +21,7 @@ exports.createNewPost = async (req, res) => {
   post.save(async (err, p) => {
     let result = await Post.populate(p, {
       path: "posted_by",
-      select: "username",
+      select: ["username", "image_url"],
     });
     if (err) {
       return res.status(500).send({ message: "Tạo bài viết thất bại!" });
@@ -41,7 +41,7 @@ exports.getPosts = async (req, res) => {
     .sort({ _id: -1 })
     .skip(perPage * page - perPage)
     .limit(perPage)
-    .populate("posted_by", "username")
+    .populate("posted_by", ["username", "image_url"])
     .exec((err, posts) => {
       if (err) {
         return res.status(500).send("Có lỗi khi tải bài viết!");

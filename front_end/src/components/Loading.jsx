@@ -1,5 +1,5 @@
 import React from "react";
-import loadAnimation from "../assets/loading.json";
+import loadAnimation from "../assets/cat_loading.json";
 import { Lottie } from "@crello/react-lottie";
 
 const Loading = (props) => {

@@ -32,13 +32,13 @@ const PostTimeline = () => {
         dataLength={posts.length}
         next={() => handleLoadMore(nextPage)}
         hasMore={posts.length < count ? true : false}
-        loader={<Loading />}
+        loader={<Loading height="150px" />}
         scrollableTarget="scrollableDiv"
       >
         {posts.length > 0 ? (
           posts.map((p) => <Post key={p._id} post={p} />)
         ) : (
-          <Loading />
+          <Loading height="300px" />
         )}
       </InfiniteScroll>
     </div>

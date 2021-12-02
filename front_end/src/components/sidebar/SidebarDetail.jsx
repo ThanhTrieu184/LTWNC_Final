@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 const SidebarDetail = () => {
   const dispatch = useDispatch();
   const { departments } = useSelector((state) => state.department);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
   useEffect(() => {
     if (departments.length === 0 && isLoggedIn) {
       dispatch(getAllDepartments());
@@ -28,6 +28,7 @@ const SidebarDetail = () => {
             iconProp={<FontAwesomeIcon icon={Icon.faBuilding} size="xs" />}
           />
           <SideBarItem
+            isShow={user && user.role === "Department" ? "block" : "hidden"}
             link="/announcements/create"
             title="Thêm thông báo mới"
             iconProp={<FontAwesomeIcon icon={Icon.faNewspaper} size="xs" />}
@@ -40,6 +41,7 @@ const SidebarDetail = () => {
             color="bg-yellow-500"
           />
           <SideBarItem
+            isShow={user && user.role === "Admin" ? "block" : "hidden"}
             link="/users/create"
             title="Thêm tài khoản mới"
             iconProp={<FontAwesomeIcon icon={Icon.faUserPlus} size="xs" />}

@@ -10,9 +10,14 @@ const Post = ({ post }) => {
     <div className="rounded-lg border border-opacity-70 w-full m-4 bg-white mx-auto shadow-sm">
       <div className="w-full flex justify-between p-3 border-b relative">
         <div className="flex items-center">
-          <div className="rounded-full h-10 w-10 bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden">
+          <div className="rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
             <img
-              src="https://res.cloudinary.com/mrafternoon184/image/upload/v1638073308/ltwnc/user_icon_lp4u7l.png"
+              src={
+                post.posted_by.image_url
+                  ? post.posted_by.image_url
+                  : "https://res.cloudinary.com/mrafternoon184/image/upload/v1638073308/ltwnc/user_icon_lp4u7l.png"
+              }
+              className="rounded-full h-10 w-10"
               alt="profilepic"
             />
           </div>

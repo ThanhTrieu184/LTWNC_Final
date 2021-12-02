@@ -54,7 +54,7 @@ const CreatePost = () => {
   }, [dispatch, formik, isPostError, isPostSuccess, postReturnedMessage]);
 
   return isPostFetching ? (
-    <Loading />
+    <Loading heught="500px" />
   ) : (
     <div className="my-4 pl-8 pr-4">
       <form onSubmit={formik.handleSubmit}>
@@ -158,7 +158,7 @@ const CreatePost = () => {
                   htmlFor="videoLink"
                   className="font-semibold text-gray-700 pb-1 label"
                 >
-                  <span className="label-text">Username</span>
+                  <span className="label-text">Link Youtube</span>
                   <p
                     onClick={() => {
                       let id = formik.values.videoLink.split("=")[1];
