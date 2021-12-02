@@ -35,9 +35,7 @@ const CreatePost = () => {
         data.append("image", values.image);
         data.append("postDesc", values.postDesc);
         dispatch(createNewPost(data));
-        console.log(data);
       } else {
-        console.log(values);
         dispatch(createNewPost(values));
       }
     },
@@ -49,8 +47,11 @@ const CreatePost = () => {
     } else if (isPostSuccess) {
       toast.success(postReturnedMessage);
       dispatch(clearPostState());
+      formik.handleReset();
+      setVideoId();
+      setImageUrl();
     }
-  }, [dispatch, isPostError, isPostSuccess, postReturnedMessage]);
+  }, [dispatch, formik, isPostError, isPostSuccess, postReturnedMessage]);
 
   return isPostFetching ? (
     <Loading />

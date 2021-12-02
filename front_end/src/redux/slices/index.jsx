@@ -16,7 +16,7 @@ import {
   createNewUser,
   updateProfile,
 } from "./user.slice";
-import { postSlice, createNewPost } from "./post.slice";
+import { postSlice, createNewPost, getPosts } from "./post.slice";
 export {
   authSlice,
   logOut,
@@ -32,4 +32,5 @@ export {
   updateProfile,
   postSlice,
   createNewPost,
+  getPosts,
 };

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Announcement = ({ postedBy }) => {
   return (
-    <div className="rounded-lg bg-white text-gray-800 p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-200">
+    <div className="rounded-lg bg-gray-50 bg-opacity-20 text-gray-800 p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-200">
       <div className="flex flex-col">
         <Link to="/" className="text-md font-bold mb-2 uppercase leading-5">
           <span className="animation-underline">

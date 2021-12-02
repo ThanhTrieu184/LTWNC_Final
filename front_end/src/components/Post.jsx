@@ -3,8 +3,9 @@ import { faThumbsUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PostMenu, YoutubeEmbedded } from ".";
 import { Link } from "react-router-dom";
+import { formatDateFromNow } from "../utils/formatDate";
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <div className="rounded-lg border border-opacity-70 w-full m-4 bg-white mx-auto shadow-sm">
       <div className="w-full flex justify-between p-3 border-b relative">
@@ -16,24 +17,27 @@ const Post = () => {
             />
           </div>
           <Link to="/" className="pt-1 ml-2 font-bold text-sm flex flex-col">
-            Mr.Afternoon
+            {post.posted_by.username}
             <small className="font-thin opacity-70 flex items-center space-x-1">
-              <span>11/11/2021</span>
-              <span className="text-gray-400">
+              <span className="opacity-50">
                 <FontAwesomeIcon icon={faClock} />
               </span>
+              <span>{formatDateFromNow(post.posted_date)}</span>
             </small>
           </Link>
         </div>
         <PostMenu />
       </div>
       <div className="bg-gradient-to-br from-red-50 to-indigo-50">
-        {/* <img
-          alt="alt"
-          className="object-contain w-full"
-          src="https://fiveflower.vn/wp-content/uploads/2020/11/Five-Flower-Slider1.jpg"
-        /> */}
-        <YoutubeEmbedded height="360px" embedId="kYRc7PsvLLI" />
+        {post.post_image_url ? (
+          <img
+            alt="alt"
+            className="object-contain w-full"
+            src={post.post_image_url}
+          />
+        ) : (
+          <YoutubeEmbedded height="360px" embedId={post.post_video_id} />
+        )}
       </div>
       <div className="px-3 pb-2 border-t">
         <div className="pt-2">
@@ -45,10 +49,9 @@ const Post = () => {
         <div className="pt-1">
           <div className="mb-2 text-sm">
             <Link to="/" className="font-medium mr-2">
-              Mr.Afternoon
+              {post.posted_by.username}
             </Link>
-            Lord of the Rings is my favorite film-series. One day I'll make my
-            way to New Zealand to visit the Hobbiton set!
+            {post.post_caption}
           </div>
         </div>
         <div className="text-sm mt-4 mb-2 text-gray-400 cursor-pointer font-medium">

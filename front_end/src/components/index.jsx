@@ -17,6 +17,8 @@ import Calendar from "./Calendar";
 import Paginator from "./Paginator";
 import NormalSelect from "./NormalSelect";
 import YoutubeEmbedded from "./YoutubeEmbedded";
+import PostTimeline from "./PostTimeline";
+
 export {
   Loading,
   PrivateRoute,
@@ -35,4 +37,5 @@ export {
   NormalSelect,
   ProfileModal,
   YoutubeEmbedded,
+  PostTimeline,
 };

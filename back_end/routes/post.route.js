@@ -19,4 +19,5 @@ module.exports = (app) => {
     [verifyToken, uploadMulter.single("image"), checkCreatePostRequest],
     PostController.createNewPost
   );
+  app.get("/api/posts/:page", verifyToken, PostController.getPosts);
 };

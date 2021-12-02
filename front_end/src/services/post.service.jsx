@@ -6,8 +6,8 @@ class PostService {
     const response = await Repository.post(endpoint, info);
     return response;
   }
-  async getPosts() {
-    const endpoint = "/posts/list";
+  async getPosts(page) {
+    const endpoint = "/posts/" + page;
     const response = await Repository.get(endpoint);
     return response;
   }

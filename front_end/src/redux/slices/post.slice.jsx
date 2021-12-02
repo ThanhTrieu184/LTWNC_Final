@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { PostService } from "../../services";
 import { exceptionConstants } from "../../constants";
 
-const { CREATED, SERVER_ERROR } = exceptionConstants;
+const { SUCCESS, CREATED, SERVER_ERROR } = exceptionConstants;
 
 const initialState = {
   posts: [],
@@ -11,6 +11,7 @@ const initialState = {
   isPostSuccess: false,
   isPostError: false,
   postReturnedMessage: null,
+  count: null,
 };
 
 export const createNewPost = createAsyncThunk(
@@ -19,6 +20,27 @@ export const createNewPost = createAsyncThunk(
     try {
       const response = await PostService.createNewPost(info);
       if (response.code === CREATED) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
+export const getPosts = createAsyncThunk(
+  "post/getPosts",
+  async (page, thunkAPI) => {
+    try {
+      const response = await PostService.getPosts(page);
+      if (response.code === SUCCESS) {
+        console.log(response);
         return response;
       } else {
         return thunkAPI.rejectWithValue(response);
@@ -45,10 +67,21 @@ export const postSlice = createSlice({
     },
   },
   extraReducers: {
-    [createNewPost.fulfilled]: (state, { payload }) =>
-      fullfilled(state, payload),
+    [createNewPost.fulfilled]: (state, { payload }) => {
+      state.postReturnedMessage = payload.message;
+      state.isPostFetching = false;
+      state.isPostSuccess = true;
+      state.posts = [payload.data.post, ...state.posts];
+      state.count = state.count + 1;
+      return state;
+    },
     [createNewPost.rejected]: (state, { payload }) => rejected(state, payload),
     [createNewPost.pending]: (state) => pending(state),
+    [getPosts.fulfilled]: (state, { payload }) => {
+      state.posts = [...state.posts, ...payload.data.posts];
+      state.count = payload.data.count;
+      return state;
+    },
   },
 });
 
@@ -62,9 +95,9 @@ const pending = (state) => {
   state.isPostFetching = true;
 };
 
-const fullfilled = (state, payload) => {
-  state.postReturnedMessage = payload.message;
-  state.isPostFetching = false;
-  state.isPostSuccess = true;
-  return state;
-};
+// const fullfilled = (state, payload) => {
+//   state.postReturnedMessage = payload.message;
+//   state.isPostFetching = false;
+//   state.isPostSuccess = true;
+//   return state;
+// };
