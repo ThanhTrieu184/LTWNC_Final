@@ -11,5 +11,6 @@ models.role = require("./role.model");
 models.user = require("./user.model");
 models.token = require("./token.model");
 models.post = require("./post.model");
+models.announcement = require("./announcement.model");
 
 module.exports = models;

@@ -1,0 +1,62 @@
+const models = require("../../models");
+const moment = require("moment");
+const Announcement = models.announcement;
+
+exports.createNewAnnouncement = async (req, res) => {
+  const io = req.app.get("socketio");
+
+  const { announcementTitle, announcementContent, department, isImportant } =
+    req.body;
+  const announcement = new Announcement({
+    announcement_title: announcementTitle,
+    announcement_content: announcementContent,
+    published_date: moment().format("DD/MM/YYYY-hh:mm:ss"),
+    department_id: department._id,
+    published_by: req.userId,
+    is_important: isImportant,
+  });
+
+  announcement.save(async (err, a) => {
+    let result = await Announcement.populate(a, {
+      path: "department_id",
+      select: ["department_name"],
+    });
+    if (err) {
+      return res.status(500).send({ message: "Tạo thông báo thất bại!" });
+    }
+    io.emit("newAnnouncement", {
+      departmentName: result.department_id.department_name,
+      announcementId: result._id,
+    });
+    return res.status(201).send({
+      message: "Tạo thông báo thành công",
+      announcement: result,
+    });
+  });
+};
+
+exports.getAnnouncements = async (req, res) => {
+  const perPage = 10;
+  const page = req.params.page || 1;
+
+  Announcement.find()
+    .sort({ _id: -1 })
+    .skip(perPage * page - perPage)
+    .limit(perPage)
+    .populate("department_id", ["department_name"])
+    .exec((err, announcements) => {
+      if (err) {
+        return res.status(500).send("Có lỗi khi tải thông báo!");
+      }
+      Announcement.countDocuments((err, count) => {
+        if (err) return res.status(500).send("Có lỗi khi tải thông báo!");
+        if (page > Math.ceil(count / perPage))
+          return res.status(400).send("Vượt quá số trang hiện có!");
+        res.status(200).send({
+          message: "Tải thông báo thành công",
+          announcements: announcements,
+          count: count,
+        });
+      });
+    });
+};

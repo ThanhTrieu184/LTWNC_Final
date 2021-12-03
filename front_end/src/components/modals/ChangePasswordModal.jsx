@@ -94,7 +94,7 @@ const ChangePasswordModal = (props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-lg p-6 overflow-hidden align-middle transition-all transform bg-gradient-to-br from-red-600 to-indigo-600 shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-lg p-6 overflow-hidden align-middle transition-all transform my-bg-gradient shadow-xl rounded-2xl">
                 <div className="p-8 bg-white rounded-2xl shadow-xl">
                   <div className="text-center">
                     <h1 className="text-3xl font-bold mb-4">Đổi mật khẩu</h1>

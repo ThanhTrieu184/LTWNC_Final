@@ -99,7 +99,7 @@ const Login = () => {
       ) : (
         <section className="max-w-6xl mx-auto my-10 border shadow-lg rounded-xl flex hover:shadow-xl">
           <div className="lg:flex w-1/2 hidden relative items-center">
-            <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-600  to-indigo-600 rounded-l-lg"></div>
+            <div className="absolute inset-0 z-0 my-bg-gradient rounded-l-lg"></div>
             <div className="w-full px-12 z-10 text-center text-gray-100">
               <h1 className="text-5xl font-bold tracking-wide uppercase">
                 Cổng thông tin sinh viên

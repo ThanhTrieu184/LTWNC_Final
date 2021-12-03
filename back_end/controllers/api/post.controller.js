@@ -48,8 +48,10 @@ exports.getPosts = async (req, res) => {
       }
       Post.countDocuments((err, count) => {
         if (err) return res.status(500).send("Có lỗi khi tải bài viết!");
+        if (page > Math.ceil(count / perPage))
+          return res.status(400).send("Vượt quá số trang hiện có!");
         res.status(200).send({
-          message: "Tải thành công " + perPage + " bài viết",
+          message: "Tải bài viết thành công",
           posts: posts,
           count: count,
         });

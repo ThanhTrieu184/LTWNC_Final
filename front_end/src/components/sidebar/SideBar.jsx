@@ -50,7 +50,7 @@ const SideBar = () => {
   ) : (
     <Fragment>
       <Toaster />
-      <aside className="w-20 relative z-0 px-2 bg-gradient-to-br from-red-600 to-indigo-600">
+      <aside className="w-20 relative z-0 px-2 my-bg-gradient">
         <div className="mb-6">
           <div className="flex justify-center">
             <div

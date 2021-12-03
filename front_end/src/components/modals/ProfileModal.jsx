@@ -47,8 +47,9 @@ const ProfileModal = (props) => {
     if (isSuccess) {
       setIsEdit(false);
       dispatch(clearUserState);
+      formik.handleReset();
     }
-  }, [dispatch, isSuccess]);
+  }, [dispatch, formik, isSuccess]);
 
   return (
     <Fragment>

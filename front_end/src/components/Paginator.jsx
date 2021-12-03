@@ -45,7 +45,7 @@ const Paginator = () => {
               key={p}
               className={`${
                 p === activePage
-                  ? "bg-gradient-to-br from-red-600 to-indigo-600 text-white animate-bounce"
+                  ? "my-bg-gradient text-white animate-bounce"
                   : "bg-white"
               } w-8 md:flex bg-white justify-center items-center hidden cursor-pointer leading-5 transition duration-150 ease-in rounded-lg hover:bg-gray-50 shadow `}
             >

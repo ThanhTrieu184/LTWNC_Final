@@ -34,7 +34,12 @@ const App = () => {
           <PrivateLayout>
             <Switch>
               <PrivateRoute path="/" exact component={Home} />
-              <PrivateRoute path="/users/create" exact component={CreateUser} />
+              <PrivateRoute
+                path="/users/create"
+                exact
+                roles={["Admin"]}
+                component={CreateUser}
+              />
               <PrivateRoute
                 path="/announcements"
                 exact
@@ -43,6 +48,7 @@ const App = () => {
               <PrivateRoute
                 path="/announcements/create"
                 component={CreateAnnouncement}
+                roles={["Department"]}
               />
               <PrivateRoute
                 path="/announcements/:id"

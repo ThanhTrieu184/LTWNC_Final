@@ -18,6 +18,7 @@ import Paginator from "./Paginator";
 import NormalSelect from "./NormalSelect";
 import YoutubeEmbedded from "./YoutubeEmbedded";
 import PostTimeline from "./PostTimeline";
+import AnnouncementSection from "./AnnouncementSection";
 
 export {
   Loading,
@@ -38,4 +39,5 @@ export {
   ProfileModal,
   YoutubeEmbedded,
   PostTimeline,
+  AnnouncementSection,
 };

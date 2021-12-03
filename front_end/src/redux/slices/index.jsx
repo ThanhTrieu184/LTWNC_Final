@@ -17,6 +17,12 @@ import {
   updateProfile,
 } from "./user.slice";
 import { postSlice, createNewPost, getPosts } from "./post.slice";
+import {
+  announcementSlice,
+  createNewAnnouncement,
+  getAnnouncements,
+} from "./announcement.slice";
+
 export {
   authSlice,
   logOut,
@@ -33,4 +39,7 @@ export {
   postSlice,
   createNewPost,
   getPosts,
+  announcementSlice,
+  createNewAnnouncement,
+  getAnnouncements,
 };

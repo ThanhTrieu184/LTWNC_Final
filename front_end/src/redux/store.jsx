@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice, departmentSlice, userSlice, postSlice } from "./slices";
+import {
+  authSlice,
+  departmentSlice,
+  userSlice,
+  postSlice,
+  announcementSlice,
+} from "./slices";
 
 export const store = configureStore({
   reducer: {
@@ -7,5 +13,6 @@ export const store = configureStore({
     department: departmentSlice.reducer,
     user: userSlice.reducer,
     post: postSlice.reducer,
+    announcement: announcementSlice.reducer,
   },
 });

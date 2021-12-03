@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SideBar, InputPost, NewAnnouncement } from "../";
+import io from "socket.io-client";
+
+const socket = io("localhost:1804");
 
 const PrivateLayout = ({ children }) => {
+  const [isShowNewAnnouncement, setIsShowNewAnnouncement] = useState(false);
+  const [announcementToPass, setAnnouncementToPass] = useState();
+  useEffect(() => {
+    socket.on("newAnnouncement", (res) => {
+      setIsShowNewAnnouncement(true);
+      setAnnouncementToPass(res);
+    });
+  }, []);
   return (
     <div className="flex justify-between h-screen w-full bg-white">
       <SideBar></SideBar>
@@ -18,9 +29,16 @@ const PrivateLayout = ({ children }) => {
         </div>
         <div className="grid grid-cols-12 gap-6 border-b py-4 ml-8 mr-4">
           <InputPost />
-          <div className="col-span-12 md:col-span-4">
-            <NewAnnouncement />
-          </div>
+          {isShowNewAnnouncement ? (
+            <div
+              className="col-span-12 md:col-span-4 cursor-pointer"
+              onClick={() => setIsShowNewAnnouncement(false)}
+            >
+              <NewAnnouncement announcementToPass={announcementToPass} />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         {children}
       </div>

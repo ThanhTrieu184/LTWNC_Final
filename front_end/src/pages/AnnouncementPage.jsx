@@ -1,21 +1,17 @@
 import React, { Fragment } from "react";
 import { Announcement, Paginator } from "../components";
+import { useSelector } from "react-redux";
 
 const AnnouncementPage = () => {
+  const { announcements } = useSelector((state) => state.announcement);
   return (
     <Fragment>
       <div className="flex justify-between space-x-4 mt-1">
         <div className="w-2/3 pl-8 pr-2">
-          <Announcement postedBy="Phòng đại học"></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
-          <Announcement></Announcement>
+          {announcements.length > 0 &&
+            announcements.map((a) => (
+              <Announcement key={a._id} announcement={a} />
+            ))}
         </div>
         <div className="w-1/3 pr-4 py-4 form-control space-y-4">
           <div className="p-6 card bordered bg-white shadow">

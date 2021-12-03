@@ -3,16 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBullhorn } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const NewAnnouncement = () => {
+const NewAnnouncement = ({ announcementToPass }) => {
   return (
     <div className="flex relative items-center bg-white leading-4 rounded-xl py-4 px-2 shadow-md text-sm animate-bounce">
       <Link
-        to="/"
-        className="pl-6 pr-2 bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-indigo-700"
+        to={`/announcements/${announcementToPass?.announcementId}`}
+        className="pl-6 pr-2 bg-clip-text text-transparent my-bg-gradient"
       >
-        Mr.Afternoon vừa đăng một thông báo mới. Nhấn vào đây để xem chi tiết.
+        {announcementToPass?.departmentName} vừa đăng một thông báo mới. Nhấn
+        vào đây để xem chi tiết.
       </Link>
-      <div className="absolute -top-3 -left-3 flex bg-gradient-to-br from-red-600  to-indigo-600 text-white rounded-md p-2 justify-center items-center">
+      <div className="absolute -top-3 -left-3 flex my-bg-gradient text-white rounded-md p-2 justify-center items-center">
         <FontAwesomeIcon icon={faBullhorn} />
       </div>
     </div>

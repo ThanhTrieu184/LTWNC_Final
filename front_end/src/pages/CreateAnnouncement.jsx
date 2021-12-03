@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { NormalSelect } from "../components";
+import { NormalSelect, Loading } from "../components";
+import {
+  announcementSlice,
+  createNewAnnouncement,
+} from "../redux/slices/announcement.slice";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+
+const { clearAnnouncementState } = announcementSlice.actions;
 
 const CreateAnnouncement = () => {
+  const dispatch = useDispatch();
   const [selected, setSelected] = useState();
+  const {
+    isAnnouncementFetching,
+    isAnnouncementSuccess,
+    isAnnouncementError,
+    announcementReturnedMessage,
+  } = useSelector((state) => state.announcement);
 
   const formik = useFormik({
     initialValues: {
@@ -22,16 +37,34 @@ const CreateAnnouncement = () => {
       ),
     }),
     onSubmit: (values) => {
-      console.log(values);
-      // dispatch(createNewUser(values));
+      dispatch(createNewAnnouncement(values));
     },
   });
+
+  useEffect(() => {
+    if (isAnnouncementSuccess) {
+      toast.success(announcementReturnedMessage);
+      dispatch(clearAnnouncementState());
+      formik.handleReset();
+    } else if (isAnnouncementError) {
+      toast.error(announcementReturnedMessage);
+      dispatch(clearAnnouncementState());
+    }
+  }, [
+    announcementReturnedMessage,
+    dispatch,
+    formik,
+    isAnnouncementError,
+    isAnnouncementSuccess,
+  ]);
 
   const handleSelected = (item) => {
     setSelected(item);
     formik.setFieldValue("department", item);
   };
-  return (
+  return isAnnouncementFetching ? (
+    <Loading />
+  ) : (
     <section className="w-full my-4 pl-8 pr-4">
       <div className="p-6 bg-white rounded-md shadow-md text-gray-700">
         <h1 className="text-2xl font-bold capitalize">Tạo thông báo mới</h1>

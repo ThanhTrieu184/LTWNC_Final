@@ -14,7 +14,7 @@ const PostTimeline = () => {
     if (posts.length === 0 && count === null) {
       dispatch(getPosts(1));
     }
-  }, [count, dispatch, nextPage, posts]);
+  }, [count, dispatch, posts]);
 
   const handleLoadMore = () => {
     if (posts.length < count) {

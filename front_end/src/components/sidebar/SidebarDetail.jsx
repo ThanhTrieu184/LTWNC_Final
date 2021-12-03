@@ -27,26 +27,28 @@ const SidebarDetail = () => {
             content={departments}
             iconProp={<FontAwesomeIcon icon={Icon.faBuilding} size="xs" />}
           />
-          <SideBarItem
-            isShow={user && user.role === "Department" ? "block" : "hidden"}
-            link="/announcements/create"
-            title="Thêm thông báo mới"
-            iconProp={<FontAwesomeIcon icon={Icon.faNewspaper} size="xs" />}
-            color="bg-green-500"
-          />
+          {user && user.role === "Department" && (
+            <SideBarItem
+              link="/announcements/create"
+              title="Thêm thông báo mới"
+              iconProp={<FontAwesomeIcon icon={Icon.faNewspaper} size="xs" />}
+              color="bg-green-500"
+            />
+          )}
           <SideBarItem
             title="Thêm bài viết mới"
             link="/posts/create"
             iconProp={<FontAwesomeIcon icon={Icon.faFileAlt} size="xs" />}
             color="bg-yellow-500"
           />
-          <SideBarItem
-            isShow={user && user.role === "Admin" ? "block" : "hidden"}
-            link="/users/create"
-            title="Thêm tài khoản mới"
-            iconProp={<FontAwesomeIcon icon={Icon.faUserPlus} size="xs" />}
-            color="bg-blue-500"
-          />
+          {user && user.role === "Admin" && (
+            <SideBarItem
+              link="/users/create"
+              title="Thêm tài khoản mới"
+              iconProp={<FontAwesomeIcon icon={Icon.faUserPlus} size="xs" />}
+              color="bg-blue-500"
+            />
+          )}
         </div>
       </div>
     </aside>
