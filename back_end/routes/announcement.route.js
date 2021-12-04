@@ -1,8 +1,6 @@
 const { AnnouncementController } = require("../controllers/api");
 const { verifyToken, isDepartment } = require("../middlewares/authJWT");
-// const { checkCreatePostRequest } = require("../middlewares/postRequest");
-
-var cors = require("cors");
+const { isDepartmentAbleToUpdate } = require("../middlewares/announcementRequest");
 
 module.exports = (app) => {
   app.post(
@@ -15,4 +13,9 @@ module.exports = (app) => {
     verifyToken,
     AnnouncementController.getAnnouncements
   );
+  app.patch(
+    "/api/announcements/:announcementId/update",
+    [verifyToken, isDepartment, isDepartmentAbleToUpdate],
+    AnnouncementController.updateAnnouncement
+  )
 };
