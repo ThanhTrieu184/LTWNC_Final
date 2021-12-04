@@ -60,3 +60,29 @@ exports.getAnnouncements = async (req, res) => {
       });
     });
 };
+
+exports.updateAnnouncement = async (req, res) => {
+  const { announcementTitle, announcementContent, department, isImportant } =
+    req.body;
+  const announcement = {
+    announcement_title: announcementTitle,
+    announcement_content: announcementContent,
+    announcement_updated_at: moment().format("DD/MM/YYYY-hh:mm:ss"),
+    department_id: department._id,
+    announcement_updated_by: req.userId,
+    is_important: isImportant,
+  };
+  Announcement.updateOne({ _id: req.params.announcementId }, { $set: announcement })
+    .then((a) => {
+      return res.status(200).send({
+        message: "Cập nhật thông báo thành công",
+        announcement: announcement,
+      });
+    })
+    .catch((err) => {
+      console.log(err)
+      return res.status(500).send({
+        message: "Cập nhật thông báo thất bại",
+      });
+    });
+}
