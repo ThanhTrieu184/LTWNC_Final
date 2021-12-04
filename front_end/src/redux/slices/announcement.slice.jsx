@@ -6,6 +6,7 @@ const { SUCCESS, CREATED, SERVER_ERROR } = exceptionConstants;
 
 const initialState = {
   announcements: [],
+  homePageAnnouncements: [],
   currentAnnouncement: null,
   isAnnouncementFetching: false,
   isAnnouncementSuccess: false,
@@ -53,6 +54,25 @@ export const getAnnouncements = createAsyncThunk(
     }
   }
 );
+export const getHomePageAnnouncements = createAsyncThunk(
+  "announcement/getHomePageAnnouncements",
+  async (_, thunkAPI) => {
+    try {
+      const response = await AnnouncementService.getHomePageAnnouncements();
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
 
 export const announcementSlice = createSlice({
   name: "announcement",
@@ -79,11 +99,14 @@ export const announcementSlice = createSlice({
       rejected(state, payload),
     [createNewAnnouncement.pending]: (state) => pending(state),
     [getAnnouncements.fulfilled]: (state, { payload }) => {
-      state.announcements = [
-        ...state.announcements,
-        ...payload.data.announcements,
-      ];
+      state.announcements = [...payload.data.announcements];
       state.announcementCount = payload.data.count;
+      state.isAnnouncementFetching = false;
+      return state;
+    },
+    [getAnnouncements.pending]: (state) => pending(state),
+    [getHomePageAnnouncements.fulfilled]: (state, { payload }) => {
+      state.homePageAnnouncements = payload.data.announcements;
       return state;
     },
   },

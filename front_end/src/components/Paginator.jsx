@@ -1,17 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector, useDispatch } from "react-redux";
+import { getAnnouncements } from "../redux/slices";
 
 const Paginator = () => {
+  const dispatch = useDispatch();
+  const { announcementCount } = useSelector((state) => state.announcement);
   const [activePage, setActivePage] = useState(1);
-  const pages = [1, 2, 3, 4, 5];
+  const [pages, setPages] = useState([]);
+  // const pages = Array.from({ length: count }, (_, i) => i + 1);
+  useEffect(() => {
+    if (announcementCount !== null) {
+      setPages(
+        Array.from(
+          { length: Math.ceil(announcementCount / 10) },
+          (_, i) => i + 1
+        )
+      );
+    }
+  }, [announcementCount]);
+
   const handlePrevious = () => {
     if (activePage > 1) {
       setActivePage(activePage - 1);
+      dispatch(getAnnouncements(activePage));
     }
   };
   const handleNext = () => {
     if (activePage < pages.length) {
+      dispatch(getAnnouncements(activePage + 1));
       setActivePage(activePage + 1);
     }
   };

@@ -21,6 +21,7 @@ import {
   announcementSlice,
   createNewAnnouncement,
   getAnnouncements,
+  getHomePageAnnouncements,
 } from "./announcement.slice";
 
 export {
@@ -42,4 +43,5 @@ export {
   announcementSlice,
   createNewAnnouncement,
   getAnnouncements,
+  getHomePageAnnouncements,
 };

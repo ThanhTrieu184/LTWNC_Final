@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-const Announcement = ({ announcement }) => {
+const Announcement = ({ announcement, isShowDepartment }) => {
   return (
     <div className="rounded-lg bg-gray-50 bg-opacity-20 text-gray-800 p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-200">
       <div className="flex flex-col">
@@ -27,7 +27,7 @@ const Announcement = ({ announcement }) => {
             )}
           </small>
           <p className="text-sm">
-            {/* {announcement.department_id.department_name} */}
+            {isShowDepartment && announcement.department_id.department_name}
           </p>
           <FontAwesomeIcon
             className="p-1 text-green-600 rounded-full bg-green-50 shadow-sm"

@@ -1,17 +1,21 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
+import { Loading } from "../components";
+
 const AnnouncementDetail = () => {
   return (
     <main className="w-full mx-auto px-4">
-      <div className="h-60 w-fulll bg-gradient-to-br from-red-200 to-indigo-200 rounded-lg ml-4 my-2"></div>
-
-      <div className="-mt-40 w-2/3 card mx-auto shadow-md bg-white h-72">
-        <img
-          src="https://image.freepik.com/free-vector/bloggers-advertising-referrals-young-people-with-gadgets-loudspeakers-announcing-news-attracting-target-audience-vector-illustration-marketing-promotion-communication_74855-8244.jpg"
+      <div className="h-60 w-fulll bg-gradient-to-br from-red-50 to-indigo-50 rounded-lg ml-4 my-2">
+        {/* <img
+          src="https://images.ctfassets.net/77l22z9el0aa/3hk4Xt2gcurIwwAACqfcxh/52d16b9f41ed4c4e63d6f316dcb0379d/How-to-Announce-your-Engagement.jpg"
           alt=""
           className="w-full h-full"
-        />
+        /> */}
+      </div>
+
+      <div className="-mt-40 w-2/3 card mx-auto shadow-md h-72 bg-gradient-to-br from-indigo-100 to-red-100">
+        <Loading type="announcement" />
       </div>
 
       <article className="w-2/3 mx-auto py-8">

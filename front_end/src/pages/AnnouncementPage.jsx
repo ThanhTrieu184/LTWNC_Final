@@ -1,16 +1,32 @@
-import React, { Fragment } from "react";
-import { Announcement, Paginator } from "../components";
-import { useSelector } from "react-redux";
+import React, { Fragment, useEffect } from "react";
+import { Announcement, Loading, Paginator } from "../components";
+import { useSelector, useDispatch } from "react-redux";
+import { getAnnouncements } from "../redux/slices";
 
 const AnnouncementPage = () => {
-  const { announcements } = useSelector((state) => state.announcement);
-  return (
+  const dispatch = useDispatch();
+  const { announcements, isAnnouncementFetching } = useSelector(
+    (state) => state.announcement
+  );
+  useEffect(() => {
+    if (announcements.length === 0) {
+      dispatch(getAnnouncements(1));
+    }
+  }, [announcements, dispatch]);
+
+  return isAnnouncementFetching ? (
+    <Loading />
+  ) : (
     <Fragment>
       <div className="flex justify-between space-x-4 mt-1">
         <div className="w-2/3 pl-8 pr-2">
           {announcements.length > 0 &&
             announcements.map((a) => (
-              <Announcement key={a._id} announcement={a} />
+              <Announcement
+                key={a._id}
+                announcement={a}
+                isShowDepartment={true}
+              />
             ))}
         </div>
         <div className="w-1/3 pr-4 py-4 form-control space-y-4">

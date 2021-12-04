@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import { Announcement, Loading } from ".";
 import { useSelector, useDispatch } from "react-redux";
-import { getAnnouncements } from "../redux/slices";
+import { getHomePageAnnouncements } from "../redux/slices";
 
 const AnnouncementSection = () => {
   const dispatch = useDispatch();
-  const { announcements } = useSelector((state) => state.announcement);
+  const { homePageAnnouncements } = useSelector((state) => state.announcement);
   useEffect(() => {
-    if (announcements.length === 0) {
-      dispatch(getAnnouncements(1));
+    if (homePageAnnouncements.length === 0) {
+      dispatch(getHomePageAnnouncements());
     }
-  }, [announcements, dispatch]);
+  }, [homePageAnnouncements, dispatch]);
 
   return (
     <div className="w-1/3 hide-scroll-bar h-screen overflow-x-auto">
-      {announcements.length > 0 ? (
-        announcements.map((a) => <Announcement key={a._id} announcement={a} />)
+      {homePageAnnouncements.length > 0 ? (
+        homePageAnnouncements.map((a) => (
+          <Announcement key={a._id} announcement={a} />
+        ))
       ) : (
         <Loading height="150px" />
       )}
