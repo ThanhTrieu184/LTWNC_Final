@@ -54,6 +54,51 @@ export const getAnnouncements = createAsyncThunk(
     }
   }
 );
+export const getAnnouncementsByDepartment = createAsyncThunk(
+  "announcement/getAnnouncementsByDepartment",
+  async ({ departmentId, page }, thunkAPI) => {
+    try {
+      const response = await AnnouncementService.getAnnouncementsByDepartment(
+        departmentId,
+        page
+      );
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
+export const getAnnouncementById = createAsyncThunk(
+  "announcement/getAnnouncementById",
+  async (announcementId, thunkAPI) => {
+    try {
+      const response = await AnnouncementService.getAnnouncementById(
+        announcementId
+      );
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
 export const getHomePageAnnouncements = createAsyncThunk(
   "announcement/getHomePageAnnouncements",
   async (_, thunkAPI) => {
@@ -100,11 +145,26 @@ export const announcementSlice = createSlice({
     [createNewAnnouncement.pending]: (state) => pending(state),
     [getAnnouncements.fulfilled]: (state, { payload }) => {
       state.announcements = [...payload.data.announcements];
-      state.announcementCount = payload.data.count;
+      if (state.announcementCount !== payload.data.count)
+        state.announcementCount = payload.data.count;
       state.isAnnouncementFetching = false;
       return state;
     },
     [getAnnouncements.pending]: (state) => pending(state),
+    [getAnnouncementsByDepartment.fulfilled]: (state, { payload }) => {
+      state.announcements = [...payload.data.announcements];
+      if (state.announcementCount !== payload.data.count)
+        state.announcementCount = payload.data.count;
+      state.isAnnouncementFetching = false;
+      return state;
+    },
+    [getAnnouncementById.pending]: (state) => pending(state),
+    [getAnnouncementById.fulfilled]: (state, { payload }) => {
+      state.isAnnouncementFetching = false;
+      state.currentAnnouncement = payload.data.announcement;
+      return state;
+    },
+    [getAnnouncementsByDepartment.pending]: (state) => pending(state),
     [getHomePageAnnouncements.fulfilled]: (state, { payload }) => {
       state.homePageAnnouncements = payload.data.announcements;
       return state;

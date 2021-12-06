@@ -1,33 +1,30 @@
 import React, { Fragment, useEffect } from "react";
 import { Announcement, Loading, Paginator } from "../components";
 import { useSelector, useDispatch } from "react-redux";
-import { getAnnouncements } from "../redux/slices";
 
 const AnnouncementPage = () => {
   const dispatch = useDispatch();
   const { announcements, isAnnouncementFetching } = useSelector(
     (state) => state.announcement
   );
-  useEffect(() => {
-    if (announcements.length === 0) {
-      dispatch(getAnnouncements(1));
-    }
-  }, [announcements, dispatch]);
+  useEffect(() => {}, [announcements, dispatch]);
 
-  return isAnnouncementFetching ? (
-    <Loading />
-  ) : (
+  return (
     <Fragment>
       <div className="flex justify-between space-x-4 mt-1">
         <div className="w-2/3 pl-8 pr-2">
-          {announcements.length > 0 &&
+          {isAnnouncementFetching ? (
+            <Loading height="450px" />
+          ) : (
+            announcements.length > 0 &&
             announcements.map((a) => (
               <Announcement
                 key={a._id}
                 announcement={a}
                 isShowDepartment={true}
               />
-            ))}
+            ))
+          )}
         </div>
         <div className="w-1/3 pr-4 py-4 form-control space-y-4">
           <div className="p-6 card bordered bg-white shadow">

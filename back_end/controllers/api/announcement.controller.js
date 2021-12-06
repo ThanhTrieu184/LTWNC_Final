@@ -38,8 +38,10 @@ exports.createNewAnnouncement = async (req, res) => {
 exports.getAnnouncements = async (req, res) => {
   const perPage = 10;
   const page = req.params.page || 1;
-
-  Announcement.find()
+  const condition = {};
+  const departmentId = req.params.departmentId;
+  if (departmentId) condition.department_id = departmentId;
+  Announcement.find(condition)
     .sort({ _id: -1 })
     .skip(perPage * page - perPage)
     .limit(perPage)
@@ -48,7 +50,7 @@ exports.getAnnouncements = async (req, res) => {
       if (err) {
         return res.status(500).send("Có lỗi khi tải thông báo!");
       }
-      Announcement.countDocuments((err, count) => {
+      Announcement.countDocuments(condition, (err, count) => {
         if (err) return res.status(500).send("Có lỗi khi tải thông báo!");
         if (page > Math.ceil(count / perPage))
           return res.status(400).send("Vượt quá số trang hiện có!");
@@ -72,7 +74,10 @@ exports.updateAnnouncement = async (req, res) => {
     announcement_updated_by: req.userId,
     is_important: isImportant,
   };
-  Announcement.updateOne({ _id: req.params.announcementId }, { $set: announcement })
+  Announcement.updateOne(
+    { _id: req.params.announcementId },
+    { $set: announcement }
+  )
     .then((a) => {
       return res.status(200).send({
         message: "Cập nhật thông báo thành công",
@@ -80,9 +85,24 @@ exports.updateAnnouncement = async (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       return res.status(500).send({
         message: "Cập nhật thông báo thất bại",
       });
     });
-}
+};
+
+exports.getAnnouncementById = async (req, res) => {
+  const { announcementId } = req.params;
+  Announcement.findById(announcementId)
+    .populate("department_id", ["department_name"])
+    .exec((err, announcement) => {
+      if (err) {
+        return res.status(500).send("Có lỗi khi tải thông báo!");
+      }
+      res.status(200).send({
+        message: "Tải thông báo thành công",
+        announcement: announcement,
+      });
+    });
+};

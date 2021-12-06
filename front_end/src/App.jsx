@@ -25,7 +25,8 @@ const App = () => {
             "/",
             "/users/create",
             "/announcements",
-            "/announcements/:id",
+            "/announcements/:departmentId",
+            "/announcements/:announcementId/detail",
             "announcements/create",
             "/posts/create",
           ]}
@@ -41,17 +42,17 @@ const App = () => {
                 component={CreateUser}
               />
               <PrivateRoute
-                path="/announcements"
-                exact
-                component={AnnouncementPage}
-              />
-              <PrivateRoute
                 path="/announcements/create"
                 component={CreateAnnouncement}
                 roles={["Department"]}
               />
               <PrivateRoute
-                path="/announcements/:id"
+                path={["/announcements", "/announcements/:departmentId"]}
+                exact
+                component={AnnouncementPage}
+              />
+              <PrivateRoute
+                path="/announcements/:announcementId/detail"
                 component={AnnouncementDetail}
               />
               <PrivateRoute path="/posts/create" component={CreatePost} />

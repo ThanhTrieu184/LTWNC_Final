@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Announcement, Loading } from ".";
 import { useSelector, useDispatch } from "react-redux";
 import { getHomePageAnnouncements } from "../redux/slices";
+import { Link } from "react-router-dom";
 
 const AnnouncementSection = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,16 @@ const AnnouncementSection = () => {
 
   return (
     <div className="w-1/3 hide-scroll-bar h-screen overflow-x-auto">
+      <div className="px-4 uppercase font-semibold text-right">
+        <Link
+          to="/announcements"
+          className={`${
+            homePageAnnouncements.length > 0 ? "block" : "hidden"
+          } bg-clip-text text-transparent my-bg-gradient`}
+        >
+          xem tất cả &gt;&gt;
+        </Link>
+      </div>
       {homePageAnnouncements.length > 0 ? (
         homePageAnnouncements.map((a) => (
           <Announcement key={a._id} announcement={a} />

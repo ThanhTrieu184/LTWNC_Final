@@ -22,6 +22,8 @@ import {
   createNewAnnouncement,
   getAnnouncements,
   getHomePageAnnouncements,
+  getAnnouncementsByDepartment,
+  getAnnouncementById,
 } from "./announcement.slice";
 
 export {
@@ -44,4 +46,6 @@ export {
   createNewAnnouncement,
   getAnnouncements,
   getHomePageAnnouncements,
+  getAnnouncementsByDepartment,
+  getAnnouncementById,
 };
