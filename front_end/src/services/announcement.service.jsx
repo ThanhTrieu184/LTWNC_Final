@@ -26,6 +26,11 @@ class AnnouncementService {
     const response = await Repository.get(endpoint);
     return response;
   }
+  async updateAnnouncement(info) {
+    const endpoint = `/announcements/${info.announcementId}/update`;
+    const response = await Repository.patch(endpoint, info);
+    return response;
+  }
 }
 
 export default new AnnouncementService();

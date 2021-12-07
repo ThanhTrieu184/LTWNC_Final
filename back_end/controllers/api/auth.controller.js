@@ -49,6 +49,7 @@ exports.login = (req, res) => {
         role: user.role_id.role_name,
         accessToken: token,
         imageUrl: user.image_url,
+        departments: user.department_id,
       });
     });
 };
@@ -74,6 +75,7 @@ exports.loginGoogle = async (req, res) => {
           role: user.role_id.role_name,
           accessToken: token,
           imageUrl: user.image_url,
+          departments: user.department_id,
         });
       }
       const username = email.split("@")[0];
@@ -97,6 +99,7 @@ exports.loginGoogle = async (req, res) => {
           role: data.role_id.role_name,
           accessToken: token,
           imageUrl: data.image_url,
+          departments: user.department_id,
         });
       });
     });

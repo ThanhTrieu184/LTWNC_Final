@@ -5,12 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logOut, authSlice, departmentSlice } from "../../redux/slices";
 import toast, { Toaster } from "react-hot-toast";
 import { SidebarDetail } from "./";
-import {
-  Loading,
-  ConfirmLogoutModal,
-  ChangePasswordModal,
-  ProfileModal,
-} from "../";
+import { Loading, ConfirmModal, ChangePasswordModal, ProfileModal } from "../";
 import { Link } from "react-router-dom";
 
 const { clearState } = authSlice.actions;
@@ -97,7 +92,9 @@ const SideBar = () => {
         </div>
       </aside>
       <SidebarDetail />
-      <ConfirmLogoutModal
+      <ConfirmModal
+        title="Xác nhận đăng xuất?"
+        message="Một khi bạn nhấn vào 'Có', bạn sẽ bị đăng xuất khỏi hệ thống. Để truy cập vào hệ thống bạn cần phải đăng nhập lại."
         isOpen={isOpenLogoutModal}
         handleCancel={() => setIsOpenLogoutModal(false)}
         handleConfirm={() => handleLogout()}

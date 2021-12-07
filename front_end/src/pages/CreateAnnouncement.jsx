@@ -5,20 +5,27 @@ import { NormalSelect, Loading } from "../components";
 import {
   announcementSlice,
   createNewAnnouncement,
-} from "../redux/slices/announcement.slice";
+  getAnnouncementById,
+  updateAnnouncement,
+} from "../redux/slices";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import { useParams, useHistory } from "react-router";
 
 const { clearAnnouncementState } = announcementSlice.actions;
 
 const CreateAnnouncement = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { announcementId } = useParams();
   const [selected, setSelected] = useState();
+  const [isEdit, setIsEdit] = useState(false);
   const {
     isAnnouncementFetching,
     isAnnouncementSuccess,
     isAnnouncementError,
     announcementReturnedMessage,
+    currentAnnouncement,
   } = useSelector((state) => state.announcement);
 
   const formik = useFormik({
@@ -37,7 +44,12 @@ const CreateAnnouncement = () => {
       ),
     }),
     onSubmit: (values) => {
-      dispatch(createNewAnnouncement(values));
+      values.announcementId = announcementId;
+      if (isEdit) {
+        dispatch(updateAnnouncement(values));
+      } else {
+        dispatch(createNewAnnouncement(values));
+      }
     },
   });
 
@@ -46,6 +58,8 @@ const CreateAnnouncement = () => {
       toast.success(announcementReturnedMessage);
       dispatch(clearAnnouncementState());
       formik.handleReset();
+      setIsEdit(false);
+      history.goBack();
     } else if (isAnnouncementError) {
       toast.error(announcementReturnedMessage);
       dispatch(clearAnnouncementState());
@@ -54,9 +68,35 @@ const CreateAnnouncement = () => {
     announcementReturnedMessage,
     dispatch,
     formik,
+    history,
     isAnnouncementError,
     isAnnouncementSuccess,
   ]);
+
+  useEffect(() => {
+    if (announcementId) {
+      dispatch(getAnnouncementById(announcementId));
+    }
+  }, [announcementId, dispatch]);
+
+  useEffect(() => {
+    if (currentAnnouncement && currentAnnouncement._id === announcementId) {
+      setIsEdit(true);
+      if (formik.values.announcementTitle === "") {
+        formik.setFieldValue(
+          "announcementTitle",
+          currentAnnouncement.announcement_title
+        );
+        formik.setFieldValue(
+          "announcementContent",
+          currentAnnouncement.announcement_content
+        );
+        formik.setFieldValue("department", currentAnnouncement.department_id);
+        formik.setFieldValue("isImportant", currentAnnouncement.is_important);
+        setSelected(currentAnnouncement.department_id);
+      }
+    }
+  }, [announcementId, currentAnnouncement, formik]);
 
   const handleSelected = (item) => {
     setSelected(item);
@@ -127,7 +167,10 @@ const CreateAnnouncement = () => {
                     Chọn chuyên mục
                   </span>
                 </label>
-                <NormalSelect handleSelected={handleSelected} />
+                <NormalSelect
+                  handleSelected={handleSelected}
+                  selectedItem={selected}
+                />
               </div>
               <div className="form-control">
                 <label className="label font-semibold">
@@ -138,7 +181,7 @@ const CreateAnnouncement = () => {
                     type="checkbox"
                     className="checkbox"
                     name="isImportant"
-                    value={formik.values.isImportant}
+                    checked={formik.values.isImportant}
                     onChange={formik.handleChange}
                   />
                   <span className="label-text">Thông báo quan trọng</span>
@@ -148,7 +191,7 @@ const CreateAnnouncement = () => {
           </div>
           <div className="mt-20">
             <button type="submit" className="w-full my-btn-gradient">
-              <span>Tạo</span>
+              <span>{isEdit ? "Cập nhật" : "Tạo"}</span>
             </button>
           </div>
         </form>

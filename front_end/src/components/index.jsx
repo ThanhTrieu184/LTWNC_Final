@@ -5,11 +5,7 @@ import Announcement from "./Announcement";
 import Post from "./Post";
 import InputPost from "./InputPost";
 import NewAnnouncement from "./NewAnnouncement";
-import {
-  ConfirmLogoutModal,
-  ChangePasswordModal,
-  ProfileModal,
-} from "./modals";
+import { ConfirmModal, ChangePasswordModal, ProfileModal } from "./modals";
 import PostMenu from "./PostMenu";
 import Accordion from "./Accordion";
 import MultiSelect from "./MultiSelect";
@@ -19,7 +15,7 @@ import NormalSelect from "./NormalSelect";
 import YoutubeEmbedded from "./YoutubeEmbedded";
 import PostTimeline from "./PostTimeline";
 import AnnouncementSection from "./AnnouncementSection";
-
+import AnnouncementMenu from "./AnnouncementMenu";
 export {
   Loading,
   PrivateRoute,
@@ -28,7 +24,7 @@ export {
   Post,
   InputPost,
   NewAnnouncement,
-  ConfirmLogoutModal,
+  ConfirmModal,
   PostMenu,
   Accordion,
   ChangePasswordModal,
@@ -40,4 +36,5 @@ export {
   YoutubeEmbedded,
   PostTimeline,
   AnnouncementSection,
+  AnnouncementMenu,
 };

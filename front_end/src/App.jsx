@@ -27,6 +27,7 @@ const App = () => {
             "/announcements",
             "/announcements/:departmentId",
             "/announcements/:announcementId/detail",
+            "/announcements/:announcementId/edit",
             "announcements/create",
             "/posts/create",
           ]}
@@ -54,6 +55,10 @@ const App = () => {
               <PrivateRoute
                 path="/announcements/:announcementId/detail"
                 component={AnnouncementDetail}
+              />
+              <PrivateRoute
+                path="/announcements/:announcementId/edit"
+                component={CreateAnnouncement}
               />
               <PrivateRoute path="/posts/create" component={CreatePost} />
             </Switch>

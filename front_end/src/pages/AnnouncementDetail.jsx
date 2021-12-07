@@ -21,7 +21,7 @@ const AnnouncementDetail = () => {
 
   return (
     <main className="w-full mx-auto px-4 py-2 shadow-md">
-      <div className="h-60 w-fulll bg-gradient-to-br from-red-50 to-indigo-50 rounded-t-lg ml-4 mt-2"></div>
+      <div className="h-60 w-fulll bg-gradient-to-br from-red-50 to-indigo-50 rounded-t-lg ml-4 mt-2 border"></div>
       <div className="border border-t-0 rounded-b-lg ml-4">
         <div className="-mt-40 w-2/3 card mx-auto shadow-md h-72 bg-gradient-to-br from-indigo-100 to-red-100">
           <Loading type="announcement" />

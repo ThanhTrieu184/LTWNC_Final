@@ -1,5 +1,5 @@
 import ChangePasswordModal from "./ChangePasswordModal";
-import ConfirmLogoutModal from "./ConfirmLogoutModal";
+import ConfirmModal from "./ConfirmModal";
 import ProfileModal from "./ProfileModal";
 
-export { ConfirmLogoutModal, ChangePasswordModal, ProfileModal };
+export { ConfirmModal, ChangePasswordModal, ProfileModal };

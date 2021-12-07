@@ -1,15 +1,24 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faUser, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import * as Icon from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { ConfirmModal } from ".";
 
-const PostMenu = () => {
+const AnnouncementMenu = ({ announcementId }) => {
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
+
+  const handleDeleteAnnouncement = () => {
+    setIsOpenConfirmModal(false);
+    // dispatch(deleteAnnouncement());
+  };
+
   return (
     <Fragment>
       <Menu as="div" className="inline-block text-left ">
         <div>
           <Menu.Button className="flex justify-center items-center px-1">
-            <FontAwesomeIcon icon={faEllipsisH} />
+            <FontAwesomeIcon icon={Icon.faEllipsisV} />
           </Menu.Button>
         </div>
         <Transition
@@ -21,56 +30,65 @@ const PostMenu = () => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute z-20 right-2 top-12 bg-white rounded-lg shadow-lg ring-1 ring-indigo-900 ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute z-20 right-0 top-6 bg-white rounded-lg shadow-lg focus:outline-none">
             <Menu.Item>
               {({ active }) => (
-                <button
+                <Link
+                  to={`/announcements/${announcementId}/edit`}
                   className={`${
                     active ? "bg-gray-50" : ""
                   } group flex rounded-md items-center w-full px-4 py-2 text-sm`}
                 >
                   {active ? (
                     <FontAwesomeIcon
-                      icon={faPen}
+                      icon={Icon.faPen}
                       className="mr-2 text-gray-800"
                     />
                   ) : (
                     <FontAwesomeIcon
-                      icon={faPen}
+                      icon={Icon.faPen}
                       className="mr-2 text-gray-600"
                     />
                   )}
-                  Sửa bài viết
-                </button>
+                  Sửa thông báo
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <button
+                  onClick={() => setIsOpenConfirmModal(true)}
                   className={`${
                     active ? "bg-gray-50" : ""
                   } group flex rounded-md items-center w-full px-4 py-2 text-sm`}
                 >
                   {active ? (
                     <FontAwesomeIcon
-                      icon={faUser}
+                      icon={Icon.faTrash}
                       className="mr-2 text-gray-800"
                     />
                   ) : (
                     <FontAwesomeIcon
-                      icon={faUser}
+                      icon={Icon.faTrash}
                       className="mr-2 text-gray-600"
                     />
                   )}
-                  Xem trang cá nhân
+                  Xóa thông báo
                 </button>
               )}
             </Menu.Item>
           </Menu.Items>
         </Transition>
       </Menu>
+      <ConfirmModal
+        title="Bạn có chắc muốn xóa thông báo này?"
+        message="Một khi nhấn vào xác nhận, bạn sẽ không thể khôi phục lại thông báo mà bạn đã xóa."
+        isOpen={isOpenConfirmModal}
+        handleCancel={() => setIsOpenConfirmModal(false)}
+        handleConfirm={() => handleDeleteAnnouncement()}
+      />
     </Fragment>
   );
 };
 
-export default PostMenu;
+export default AnnouncementMenu;

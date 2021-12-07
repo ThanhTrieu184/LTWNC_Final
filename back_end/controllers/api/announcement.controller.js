@@ -79,6 +79,7 @@ exports.updateAnnouncement = async (req, res) => {
     { $set: announcement }
   )
     .then((a) => {
+      announcement._id = req.params.announcementId;
       return res.status(200).send({
         message: "Cập nhật thông báo thành công",
         announcement: announcement,

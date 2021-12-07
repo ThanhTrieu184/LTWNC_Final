@@ -35,6 +35,26 @@ export const createNewAnnouncement = createAsyncThunk(
   }
 );
 
+export const updateAnnouncement = createAsyncThunk(
+  "announcement/updateAnnouncement",
+  async (info, thunkAPI) => {
+    try {
+      const response = await AnnouncementService.updateAnnouncement(info);
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
 export const getAnnouncements = createAsyncThunk(
   "announcement/getAnnouncements",
   async (page, thunkAPI) => {
@@ -169,6 +189,22 @@ export const announcementSlice = createSlice({
       state.homePageAnnouncements = payload.data.announcements;
       return state;
     },
+    [updateAnnouncement.fulfilled]: (state, { payload }) => {
+      state.announcementReturnedMessage = payload.message;
+      state.isAnnouncementFetching = false;
+      state.isAnnouncementSuccess = true;
+      state.homePageAnnouncements = state.homePageAnnouncements.map((a) =>
+        a._id === payload.data.announcement._id
+          ? (a = payload.data.announcement)
+          : a
+      );
+      state.announcementsCount = state.announcementsCount - 1;
+      state.currentAnnouncement = null;
+      return state;
+    },
+    [updateAnnouncement.rejected]: (state, { payload }) =>
+      rejected(state, payload),
+    [updateAnnouncement.pending]: (state) => pending(state),
   },
 });
 

@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 const ConfirmLogoutModal = (props) => {
-  const { isOpen, handleCancel, handleConfirm } = props;
+  const { isOpen, handleCancel, handleConfirm, title, message } = props;
 
   return (
     <Fragment>
@@ -47,13 +47,10 @@ const ConfirmLogoutModal = (props) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 text-center"
                 >
-                  Xác nhận đăng xuất?
+                  {title}
                 </Dialog.Title>
                 <div className="my-6">
-                  <p className="text-sm text-gray-500">
-                    Một khi bạn nhấn vào "Có", bạn sẽ bị đăng xuất khỏi hệ
-                    thống. Để truy cập vào hệ thống bạn cần phải đăng nhập lại.
-                  </p>
+                  <p className="text-sm text-gray-500">{message}</p>
                 </div>
 
                 <div className="mt-4 flex justify-center space-x-6">

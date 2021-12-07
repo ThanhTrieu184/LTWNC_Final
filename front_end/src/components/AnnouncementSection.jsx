@@ -15,7 +15,14 @@ const AnnouncementSection = () => {
 
   return (
     <div className="w-1/3 hide-scroll-bar h-screen overflow-x-auto">
-      <div className="px-4 uppercase font-semibold text-right">
+      {homePageAnnouncements.length > 0 ? (
+        homePageAnnouncements.map((a) => (
+          <Announcement key={a._id} announcement={a} />
+        ))
+      ) : (
+        <Loading height="150px" />
+      )}
+      <div className="p-4 uppercase font-semibold text-right">
         <Link
           to="/announcements"
           className={`${
@@ -25,13 +32,6 @@ const AnnouncementSection = () => {
           xem tất cả &gt;&gt;
         </Link>
       </div>
-      {homePageAnnouncements.length > 0 ? (
-        homePageAnnouncements.map((a) => (
-          <Announcement key={a._id} announcement={a} />
-        ))
-      ) : (
-        <Loading height="150px" />
-      )}
     </div>
   );
 };

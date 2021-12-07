@@ -8,15 +8,20 @@ import { getDepartmentsByUser } from "../redux/slices";
 const NormalSelect = (props) => {
   const dispatch = useDispatch();
   const { departmentsOfUser } = useSelector((state) => state.department);
+  const { handleSelected, selectedItem } = props;
+  const [selected, setSelected] = useState();
 
   useEffect(() => {
     if (departmentsOfUser.length === 0) {
       dispatch(getDepartmentsByUser());
     }
   }, [departmentsOfUser, dispatch]);
+  useEffect(() => {
+    if (selectedItem) {
+      setSelected(selectedItem);
+    }
+  }, [selectedItem]);
 
-  const { handleSelected } = props;
-  const [selected, setSelected] = useState();
   const handleOnChange = (item) => {
     setSelected(item);
     handleSelected(item);
