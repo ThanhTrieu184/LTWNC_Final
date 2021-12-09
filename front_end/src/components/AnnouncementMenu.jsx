@@ -4,13 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { ConfirmModal } from ".";
+import { deleteAnnouncement } from "../redux/slices";
+import { useDispatch } from "react-redux";
 
-const AnnouncementMenu = ({ announcementId }) => {
+const AnnouncementMenu = ({ announcementId, departmentId }) => {
   const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
+  const dispatch = useDispatch();
 
   const handleDeleteAnnouncement = () => {
     setIsOpenConfirmModal(false);
-    // dispatch(deleteAnnouncement());
+    dispatch(deleteAnnouncement({ announcementId, departmentId }));
   };
 
   return (

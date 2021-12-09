@@ -139,6 +139,26 @@ export const getHomePageAnnouncements = createAsyncThunk(
   }
 );
 
+export const deleteAnnouncement = createAsyncThunk(
+  "announcement/deleteAnnouncement",
+  async (values, thunkAPI) => {
+    try {
+      const response = await AnnouncementService.deleteAnnouncement(values);
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
 export const announcementSlice = createSlice({
   name: "announcement",
   initialState,
@@ -156,6 +176,10 @@ export const announcementSlice = createSlice({
       state.isAnnouncementFetching = false;
       state.isAnnouncementSuccess = true;
       state.announcements = [payload.data.announcement, ...state.announcements];
+      state.homePageAnnouncements = [
+        payload.data.announcement,
+        ...state.homePageAnnouncements,
+      ];
       state.announcementsCount = state.announcementsCount + 1;
       state.currentAnnouncement = payload.data.announcement;
       return state;
@@ -205,6 +229,19 @@ export const announcementSlice = createSlice({
     [updateAnnouncement.rejected]: (state, { payload }) =>
       rejected(state, payload),
     [updateAnnouncement.pending]: (state) => pending(state),
+    [deleteAnnouncement.pending]: (state) => pending(state),
+    [deleteAnnouncement.fulfilled]: (state, { payload }) => {
+      state.isAnnouncementFetching = false;
+      state.homePageAnnouncements = state.homePageAnnouncements.filter(
+        (a) => a._id !== payload.data.deletedAnnouncement._id
+      );
+      state.announcements = state.announcements.filter(
+        (a) => a._id !== payload.data.deletedAnnouncement._id
+      );
+      return state;
+    },
+    [deleteAnnouncement.rejected]: (state, { payload }) =>
+      rejected(state, payload),
   },
 });
 

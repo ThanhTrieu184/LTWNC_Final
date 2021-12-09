@@ -59,7 +59,7 @@ const CreateAnnouncement = () => {
       dispatch(clearAnnouncementState());
       formik.handleReset();
       setIsEdit(false);
-      history.goBack();
+      history.push("/announcements");
     } else if (isAnnouncementError) {
       toast.error(announcementReturnedMessage);
       dispatch(clearAnnouncementState());

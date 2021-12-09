@@ -22,7 +22,10 @@ const Announcement = ({ announcement, isShowDepartment }) => {
           </Link>
           {user.departments.length > 0 &&
             user.departments.includes(announcement.department_id._id) && (
-              <AnnouncementMenu announcementId={announcement._id} />
+              <AnnouncementMenu
+                announcementId={announcement._id}
+                departmentId={announcement.department_id._id}
+              />
             )}
         </div>
         <p className="opacity-70 pb-4 truncate font-thin">

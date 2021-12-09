@@ -7,7 +7,7 @@ const NewAnnouncement = ({ announcementToPass }) => {
   return (
     <div className="flex relative items-center bg-white leading-4 rounded-xl py-4 px-2 shadow-md text-sm animate-bounce">
       <Link
-        to={`/announcements/${announcementToPass?.announcementId}`}
+        to={`/announcements/${announcementToPass?.announcementId}/detail`}
         className="pl-6 pr-2 bg-clip-text text-transparent my-bg-gradient"
       >
         {announcementToPass?.departmentName} vừa đăng một thông báo mới. Nhấn

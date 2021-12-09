@@ -2,6 +2,7 @@ const { AnnouncementController } = require("../controllers/api");
 const { verifyToken, isDepartment } = require("../middlewares/authJWT");
 const {
   isDepartmentAbleToUpdate,
+  isDepartmentAbleToDelete,
 } = require("../middlewares/announcementRequest");
 
 module.exports = (app) => {
@@ -29,5 +30,10 @@ module.exports = (app) => {
     "/api/announcements/:departmentId/:page",
     verifyToken,
     AnnouncementController.getAnnouncements
+  );
+  app.delete(
+    "/api/announcements",
+    [verifyToken, isDepartment, isDepartmentAbleToDelete],
+    AnnouncementController.deleteAnnouncement
   );
 };

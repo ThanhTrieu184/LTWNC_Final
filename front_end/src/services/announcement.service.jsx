@@ -31,6 +31,11 @@ class AnnouncementService {
     const response = await Repository.patch(endpoint, info);
     return response;
   }
+  async deleteAnnouncement(values) {
+    const endpoint = `/announcements`;
+    const response = await Repository.delete(endpoint, values);
+    return response;
+  }
 }
 
 export default new AnnouncementService();

@@ -25,6 +25,7 @@ import {
   getAnnouncementsByDepartment,
   getAnnouncementById,
   updateAnnouncement,
+  deleteAnnouncement,
 } from "./announcement.slice";
 
 export {
@@ -50,4 +51,5 @@ export {
   getAnnouncementsByDepartment,
   getAnnouncementById,
   updateAnnouncement,
+  deleteAnnouncement,
 };

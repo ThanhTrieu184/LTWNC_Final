@@ -107,3 +107,21 @@ exports.getAnnouncementById = async (req, res) => {
       });
     });
 };
+
+exports.deleteAnnouncement = async (req, res) => {
+  const { announcementId } = req.body;
+  Announcement.findByIdAndDelete(announcementId, (err, announcement) => {
+    if (err) {
+      return res.status(500).send({ message: "Có lỗi khi xóa thông báo!" });
+    }
+    if (announcement) {
+      return res.status(200).send({
+        message: "Xóa thông báo thành công",
+        deletedAnnouncement: announcement,
+      });
+    }
+    res.status(404).send({
+      message: "Không tìm thấy thông báo!",
+    });
+  });
+};
