@@ -16,7 +16,15 @@ import {
   createNewUser,
   updateProfile,
 } from "./user.slice";
-import { postSlice, createNewPost, getPosts } from "./post.slice";
+import {
+  postSlice,
+  createNewPost,
+  getPosts,
+  getPostById,
+  updatePost,
+  deletePost,
+  getProfilePosts,
+} from "./post.slice";
 import {
   announcementSlice,
   createNewAnnouncement,
@@ -44,6 +52,10 @@ export {
   postSlice,
   createNewPost,
   getPosts,
+  getPostById,
+  updatePost,
+  deletePost,
+  getProfilePosts,
   announcementSlice,
   createNewAnnouncement,
   getAnnouncements,

@@ -12,6 +12,10 @@ const checkCreatePostRequest = (req, res, next) => {
   next();
 };
 
+// const isPostBelongToUser = () => {
+//   const {postId}
+// }
+
 module.exports = {
   checkCreatePostRequest,
 };

@@ -7,6 +7,9 @@ const { SUCCESS, CREATED, SERVER_ERROR } = exceptionConstants;
 const initialState = {
   posts: [],
   currentPost: null,
+  profilePosts: [],
+  profileCount: null,
+  profileId: null,
   isPostFetching: false,
   isPostSuccess: false,
   isPostError: false,
@@ -54,6 +57,89 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+export const getProfilePosts = createAsyncThunk(
+  "post/getProfilePosts",
+  async (data, thunkAPI) => {
+    try {
+      const response = await PostService.getProfilePosts(
+        data.userId,
+        data.page
+      );
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
+export const getPostById = createAsyncThunk(
+  "post/getPostById",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await PostService.getPostById(postId);
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
+export const updatePost = createAsyncThunk(
+  "post/updatePost",
+  async (data, thunkAPI) => {
+    try {
+      const response = await PostService.updatePost(data.postId, data.values);
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "post/deletePost",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await PostService.deletePost(postId);
+      if (response.code === SUCCESS) {
+        return response;
+      } else {
+        return thunkAPI.rejectWithValue(response);
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue({
+        code: SERVER_ERROR,
+        message: "Server Error",
+        data: null,
+      });
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: "post",
   initialState,
@@ -63,6 +149,8 @@ export const postSlice = createSlice({
       state.isPostSuccess = false;
       state.isPostError = false;
       state.postReturnedMessage = null;
+      state.profilePosts = [];
+      state.profileCount = [];
     },
   },
   extraReducers: {
@@ -79,8 +167,52 @@ export const postSlice = createSlice({
     [getPosts.fulfilled]: (state, { payload }) => {
       state.posts = [...state.posts, ...payload.data.posts];
       state.count = payload.data.count;
+      state.isPostFetching = false;
       return state;
     },
+    [getPosts.rejected]: (state, { payload }) => rejected(state, payload),
+    [getPosts.pending]: (state) => pending(state),
+    [getProfilePosts.fulfilled]: (state, { payload }) => {
+      state.profilePosts = payload.data.posts;
+      state.profileCount = payload.data.count;
+      state.profileId = payload.data.userId;
+      state.isPostFetching = false;
+      return state;
+    },
+    [getProfilePosts.rejected]: (state, { payload }) =>
+      rejected(state, payload),
+    [getProfilePosts.pending]: (state) => pending(state),
+    [getPostById.fulfilled]: (state, { payload }) => {
+      state.isPostFetching = false;
+      state.currentPost = payload.data.post;
+      return state;
+    },
+    [getPostById.rejected]: (state, { payload }) => rejected(state, payload),
+    [getPostById.pending]: (state) => pending(state),
+    [updatePost.fulfilled]: (state, { payload }) => {
+      state.postReturnedMessage = payload.message;
+      state.isPostFetching = false;
+      state.isPostSuccess = true;
+      state.currentPost = null;
+      return state;
+    },
+    [updatePost.rejected]: (state, { payload }) => rejected(state, payload),
+    [updatePost.pending]: (state) => pending(state),
+    [deletePost.fulfilled]: (state, { payload }) => {
+      state.postReturnedMessage = payload.message;
+      state.isPostFetching = false;
+      state.isPostSuccess = true;
+      state.posts = state.posts.filter(
+        (p) => p._id !== payload.data.deletedPost._id
+      );
+      state.profilePosts = state.profilePosts.filter(
+        (p) => p._id !== payload.data.deletedPost._id
+      );
+
+      return state;
+    },
+    [deletePost.rejected]: (state, { payload }) => rejected(state, payload),
+    [deletePost.pending]: (state) => pending(state),
   },
 });
 

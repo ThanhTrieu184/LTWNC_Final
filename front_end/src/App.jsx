@@ -11,6 +11,7 @@ import {
   AnnouncementDetail,
   CreateAnnouncement,
   CreatePost,
+  Profile,
 } from "./pages";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -30,6 +31,8 @@ const App = () => {
             "/announcements/:announcementId/edit",
             "announcements/create",
             "/posts/create",
+            "/posts/:postId/edit",
+            "/users/:userId/profile",
           ]}
           exact
         >
@@ -41,6 +44,11 @@ const App = () => {
                 exact
                 roles={["Admin"]}
                 component={CreateUser}
+              />
+              <PrivateRoute
+                path="/users/:userId/profile"
+                exact
+                component={Profile}
               />
               <PrivateRoute
                 path="/announcements/create"
@@ -60,7 +68,12 @@ const App = () => {
                 path="/announcements/:announcementId/edit"
                 component={CreateAnnouncement}
               />
-              <PrivateRoute path="/posts/create" component={CreatePost} />
+              <PrivateRoute path="/posts/create" exact component={CreatePost} />
+              <PrivateRoute
+                path="/posts/:postId/edit"
+                exact
+                component={CreatePost}
+              />
             </Switch>
           </PrivateLayout>
         </Route>

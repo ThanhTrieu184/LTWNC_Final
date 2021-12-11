@@ -6,6 +6,8 @@ import AnnouncementPage from "./AnnouncementPage";
 import AnnouncementDetail from "./AnnouncementDetail";
 import CreateAnnouncement from "./CreateAnnouncement";
 import CreatePost from "./CreatePost";
+import Profile from "./Profile";
+
 export {
   Error,
   Home,
@@ -15,4 +17,5 @@ export {
   AnnouncementDetail,
   CreateAnnouncement,
   CreatePost,
+  Profile,
 };

@@ -66,6 +66,7 @@ exports.getAnnouncements = async (req, res) => {
 exports.updateAnnouncement = async (req, res) => {
   const { announcementTitle, announcementContent, department, isImportant } =
     req.body;
+  const { announcementId } = req.params;
   const announcement = {
     announcement_title: announcementTitle,
     announcement_content: announcementContent,
@@ -74,12 +75,9 @@ exports.updateAnnouncement = async (req, res) => {
     announcement_updated_by: req.userId,
     is_important: isImportant,
   };
-  Announcement.updateOne(
-    { _id: req.params.announcementId },
-    { $set: announcement }
-  )
+  Announcement.updateOne({ _id: announcementId }, { $set: announcement })
     .then((a) => {
-      announcement._id = req.params.announcementId;
+      announcement._id = announcementId;
       return res.status(200).send({
         message: "Cập nhật thông báo thành công",
         announcement: announcement,

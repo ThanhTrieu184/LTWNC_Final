@@ -21,7 +21,10 @@ const Post = ({ post }) => {
               alt="profilepic"
             />
           </div>
-          <Link to="/" className="pt-1 ml-2 font-bold text-sm flex flex-col">
+          <Link
+            to={`/users/${post.posted_by._id}/profile`}
+            className="pt-1 ml-2 font-bold text-sm flex flex-col"
+          >
             {post.posted_by.username}
             <small className="font-thin opacity-70 flex items-center space-x-1">
               <span className="opacity-50">
@@ -31,7 +34,7 @@ const Post = ({ post }) => {
             </small>
           </Link>
         </div>
-        <PostMenu />
+        <PostMenu post={post} />
       </div>
       <div className="bg-gradient-to-br from-red-50 to-indigo-50">
         {post.post_image_url ? (
@@ -53,7 +56,10 @@ const Post = ({ post }) => {
         </div>
         <div className="pt-1">
           <div className="mb-2 text-sm">
-            <Link to="/" className="font-medium mr-2">
+            <Link
+              to={`/users/${post.posted_by._id}/profile`}
+              className="font-medium mr-2"
+            >
               {post.posted_by.username}
             </Link>
             {post.post_caption}

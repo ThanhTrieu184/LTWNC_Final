@@ -10,4 +10,20 @@ module.exports = (app) => {
     PostController.createNewPost
   );
   app.get("/api/posts/:page", verifyToken, PostController.getPosts);
+  app.get(
+    "/api/posts/:userId/profile/:page",
+    verifyToken,
+    PostController.getPosts
+  );
+  app.get("/api/posts/:postId/detail", verifyToken, PostController.getPostById);
+  app.patch(
+    "/api/posts/:postId/edit",
+    [verifyToken, uploadMulter.single("image")],
+    PostController.updatePost
+  );
+  app.delete(
+    "/api/posts/:postId/delete",
+    verifyToken,
+    PostController.deletePost
+  );
 };

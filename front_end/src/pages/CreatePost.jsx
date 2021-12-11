@@ -4,18 +4,33 @@ import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Loading, YoutubeEmbedded } from "../components";
-import { postSlice, createNewPost } from "../redux/slices";
+import {
+  postSlice,
+  createNewPost,
+  getPostById,
+  updatePost,
+} from "../redux/slices";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { useParams } from "react-router";
+import { useHistory } from "react-router-dom";
 
 const { clearPostState } = postSlice.actions;
 
 const CreatePost = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const { isPostFetching, isPostSuccess, isPostError, postReturnedMessage } =
-    useSelector((state) => state.post);
+  const { postId } = useParams();
+  const {
+    isPostFetching,
+    isPostSuccess,
+    isPostError,
+    postReturnedMessage,
+    currentPost,
+  } = useSelector((state) => state.post);
   const [imgUrl, setImageUrl] = useState();
   const [videoId, setVideoId] = useState();
+  const [isEdit, setIsEdit] = useState(false);
   const formik = useFormik({
     initialValues: {
       postDesc: "",
@@ -34,9 +49,13 @@ const CreatePost = () => {
         const data = new FormData();
         data.append("image", values.image);
         data.append("postDesc", values.postDesc);
-        dispatch(createNewPost(data));
+        isEdit
+          ? dispatch(updatePost({ postId, values: data }))
+          : dispatch(createNewPost(data));
       } else {
-        dispatch(createNewPost(values));
+        isEdit
+          ? dispatch(updatePost({ postId, values }))
+          : dispatch(createNewPost(values));
       }
     },
   });
@@ -50,8 +69,43 @@ const CreatePost = () => {
       formik.handleReset();
       setVideoId();
       setImageUrl();
+      setIsEdit(false);
+      history.push("/");
     }
-  }, [dispatch, formik, isPostError, isPostSuccess, postReturnedMessage]);
+  }, [
+    dispatch,
+    formik,
+    history,
+    isPostError,
+    isPostSuccess,
+    postReturnedMessage,
+  ]);
+  useEffect(() => {
+    if (postId) {
+      dispatch(getPostById(postId));
+      setIsEdit(true);
+    }
+  }, [dispatch, postId]);
+
+  useEffect(() => {
+    if (
+      currentPost &&
+      currentPost?._id === postId &&
+      formik.values === formik.initialValues
+    ) {
+      formik.setFieldValue("postDesc", currentPost.post_caption);
+      if (currentPost.post_image_url) {
+        setImageUrl(currentPost.post_image_url);
+        formik.setFieldValue("image", currentPost.post_image_url);
+      } else {
+        setVideoId(currentPost?.post_video_id);
+        formik.setFieldValue(
+          "videoLink",
+          `https://www.youtube.com/watch?v=${currentPost?.post_video_id}`
+        );
+      }
+    }
+  }, [currentPost, formik, postId]);
 
   return isPostFetching ? (
     <Loading heught="500px" />
@@ -112,7 +166,9 @@ const CreatePost = () => {
                 } space-x-8 items-center`}
               >
                 <span className="mx-2">
-                  {formik.values.image ? formik.values.image.name : ""}
+                  {formik.values.image?.name
+                    ? formik.values.image.name
+                    : "Old picture"}
                 </span>
                 <span
                   onClick={() => {
@@ -190,7 +246,7 @@ const CreatePost = () => {
                 </div>
               </div>
               <button type="submit" className="mt-6 w-full my-btn-gradient">
-                Đăng bài viết
+                {isEdit ? "Cập nhật" : "Đăng bài viết"}
               </button>
             </div>
           </div>

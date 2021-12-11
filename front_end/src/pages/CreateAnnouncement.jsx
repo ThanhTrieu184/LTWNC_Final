@@ -45,11 +45,9 @@ const CreateAnnouncement = () => {
     }),
     onSubmit: (values) => {
       values.announcementId = announcementId;
-      if (isEdit) {
-        dispatch(updateAnnouncement(values));
-      } else {
-        dispatch(createNewAnnouncement(values));
-      }
+      isEdit
+        ? dispatch(updateAnnouncement(values))
+        : dispatch(createNewAnnouncement(values));
     },
   });
 
@@ -82,7 +80,7 @@ const CreateAnnouncement = () => {
   useEffect(() => {
     if (currentAnnouncement && currentAnnouncement._id === announcementId) {
       setIsEdit(true);
-      if (formik.values.announcementTitle === "") {
+      if (formik.values === formik.initialValues) {
         formik.setFieldValue(
           "announcementTitle",
           currentAnnouncement.announcement_title
