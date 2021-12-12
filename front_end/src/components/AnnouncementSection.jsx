@@ -16,7 +16,7 @@ const AnnouncementSection = () => {
   }, [homePageAnnouncements, dispatch]);
 
   return (
-    <div className="w-1/3 hide-scroll-bar h-screen overflow-x-auto">
+    <div className="w-full lg:w-1/3 hide-scroll-bar h-screen overflow-x-auto">
       {homePageAnnouncements.length > 0 && !isAnnouncementFetching ? (
         homePageAnnouncements.map((a) => (
           <Announcement key={a._id} announcement={a} />

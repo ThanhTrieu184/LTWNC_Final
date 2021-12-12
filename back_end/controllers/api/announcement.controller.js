@@ -10,7 +10,7 @@ exports.createNewAnnouncement = async (req, res) => {
   const announcement = new Announcement({
     announcement_title: announcementTitle,
     announcement_content: announcementContent,
-    published_date: moment().format("DD/MM/YYYY-hh:mm:ss"),
+    published_date: moment().format("DD/MM/YYYY-HH:mm:ss"),
     department_id: department._id,
     published_by: req.userId,
     is_important: isImportant,
@@ -70,7 +70,7 @@ exports.updateAnnouncement = async (req, res) => {
   const announcement = {
     announcement_title: announcementTitle,
     announcement_content: announcementContent,
-    announcement_updated_at: moment().format("DD/MM/YYYY-hh:mm:ss"),
+    announcement_updated_at: moment().format("DD/MM/YYYY-HH:mm:ss"),
     department_id: department._id,
     announcement_updated_by: req.userId,
     is_important: isImportant,

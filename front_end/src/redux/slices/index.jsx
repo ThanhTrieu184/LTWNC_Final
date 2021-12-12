@@ -35,6 +35,13 @@ import {
   updateAnnouncement,
   deleteAnnouncement,
 } from "./announcement.slice";
+import {
+  commentSlice,
+  getComments,
+  updateComment,
+  deleteComment,
+  createNewComment,
+} from "./comment.slice";
 
 export {
   authSlice,
@@ -64,4 +71,9 @@ export {
   getAnnouncementById,
   updateAnnouncement,
   deleteAnnouncement,
+  commentSlice,
+  getComments,
+  updateComment,
+  deleteComment,
+  createNewComment,
 };

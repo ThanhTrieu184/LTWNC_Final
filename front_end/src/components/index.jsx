@@ -16,6 +16,8 @@ import YoutubeEmbedded from "./YoutubeEmbedded";
 import PostTimeline from "./PostTimeline";
 import AnnouncementSection from "./AnnouncementSection";
 import AnnouncementMenu from "./AnnouncementMenu";
+import CommentSection from "./CommentSection";
+import Comment from "./Comment";
 export {
   Loading,
   PrivateRoute,
@@ -37,4 +39,6 @@ export {
   PostTimeline,
   AnnouncementSection,
   AnnouncementMenu,
+  CommentSection,
+  Comment,
 };

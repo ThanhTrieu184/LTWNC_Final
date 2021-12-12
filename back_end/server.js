@@ -19,7 +19,6 @@ app.use(
     extended: true,
   })
 );
-
 const corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
@@ -33,6 +32,7 @@ require("./routes/user.route")(app);
 require("./routes/department.route")(app);
 require("./routes/post.route")(app);
 require("./routes/announcement.route")(app);
+require("./routes/comment.route")(app);
 
 server.listen(PORT, () =>
   console.log(`Server is running on  http://localhost:${PORT}`)

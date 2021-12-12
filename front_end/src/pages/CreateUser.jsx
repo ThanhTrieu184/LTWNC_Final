@@ -10,7 +10,6 @@ const { clearChoosedItem } = departmentSlice.actions;
 const CreateUser = () => {
   const { choosedItems } = useSelector((state) => state.department);
   const { isFetching, isSuccess } = useSelector((state) => state.user);
-  // const [imgUrl, setImageUrl] = useState();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -59,7 +58,7 @@ const CreateUser = () => {
       <div className="p-6 bg-white rounded-md shadow-md text-gray-700">
         <h1 className="text-2xl font-bold capitalize">Tạo phòng ban mới</h1>
         <form onSubmit={formik.handleSubmit}>
-          <div className=" mt-4 flex space-x-6">
+          <div className="mt-4 flex lg:space-x-6 flex-col lg:flex-row">
             <div className="form-control space-y-8 flex-1 ">
               <div className="form-control space-y-2 relative">
                 <label
@@ -160,45 +159,6 @@ const CreateUser = () => {
                 </small>
               )}
             </div>
-
-            {/* <div className="form-control space-y-2 relative h-72">
-              <label>Hình ảnh</label>
-              <div className="mt-1 flex justify-center items-center bg-indigo-50 bg-opacity-10 p-6 border-2 border-gray-300 border-dashed rounded-md h-full">
-                <div className="form-control items-center space-y-4 text-lg ">
-                  {imgUrl ? (
-                    <img
-                      src={imgUrl}
-                      className="h-24 w-28 border-4 border-gray-100 shadow-sm"
-                      alt=""
-                    />
-                  ) : (
-                    <FontAwesomeIcon icon={Icon.faImages} size="3x" />
-                  )}
-
-                  <label className="relative px-2 py-1 rounded-lg shadow-sm bg-white tracking-wide cursor-pointer border hover:shadow-md focus:shadow">
-                    <span className="mt-1">Chọn ảnh</span>
-                    <input
-                      id="image"
-                      name="image"
-                      accept=".png,.jpg,.gif"
-                      type="file"
-                      className="mt-2 hidden"
-                      onChange={(event) => {
-                        if (event.target.files[0]) {
-                          formik.setFieldValue("image", event.target.files[0]);
-                          setImageUrl(
-                            URL.createObjectURL(event.target.files[0])
-                          );
-                        }
-                      }}
-                    />
-                  </label>
-                  <span className="absolute bottom-7">
-                    {formik.values.image ? formik.values.image.name : ""}
-                  </span>
-                </div>
-              </div>
-            </div> */}
           </div>
           <div className="mt-20">
             <button type="submit" className="w-full my-btn-gradient">

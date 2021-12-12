@@ -254,10 +254,3 @@ const rejected = (state, payload) => {
 const pending = (state) => {
   state.isAnnouncementFetching = true;
 };
-
-// const fullfilled = (state, payload) => {
-//   state.postReturnedMessage = payload.message;
-//   state.isPostFetching = false;
-//   state.isPostSuccess = true;
-//   return state;
-// };

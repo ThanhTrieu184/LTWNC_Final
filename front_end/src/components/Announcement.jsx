@@ -35,7 +35,7 @@ const Announcement = ({ announcement, isShowDepartment }) => {
       <div className="pt-4 flex justify-between items-center z-10">
         <div className="flex space-x-2 items-center text-gray-600">
           <small className="">
-            {moment(announcement.published_date, "DD/MM/YYYY-hh:mm:ss").format(
+            {moment(announcement.published_date, "DD/MM/YYYY-HH:mm:ss").format(
               "DD/MM/YYYY"
             )}
           </small>

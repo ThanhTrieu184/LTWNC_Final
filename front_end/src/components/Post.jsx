@@ -1,7 +1,7 @@
 import React from "react";
 import { faThumbsUp, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { PostMenu, YoutubeEmbedded } from ".";
+import { CommentSection, PostMenu, YoutubeEmbedded } from ".";
 import { Link } from "react-router-dom";
 import { formatDateFromNow } from "../utils/formatDate";
 
@@ -65,21 +65,7 @@ const Post = ({ post }) => {
             {post.post_caption}
           </div>
         </div>
-        <div className="text-sm mt-4 mb-2 text-gray-400 cursor-pointer font-medium">
-          View all 14 comments
-        </div>
-        <div className="mb-2">
-          <div className="mb-2 text-sm">
-            <span className="font-medium mr-2">Mr.Manh</span> Dude! How cool! I
-            went to New Zealand last summer and had a blast taking the tour! So
-            much to see! Make sure you bring a good camera when you go!
-          </div>
-          <div className="mb-2 text-sm">
-            <span className="font-medium mr-2">Mr.Hieu</span> Dude! How cool! I
-            went to New Zealand last summer and had a blast taking the tour! So
-            much to see! Make sure you bring a good camera when you go!
-          </div>
-        </div>
+        <CommentSection postId={post._id} />
       </div>
     </div>
   );

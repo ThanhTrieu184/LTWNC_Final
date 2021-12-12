@@ -9,7 +9,7 @@ exports.createNewPost = async (req, res) => {
   const post = new Post({
     post_caption: postDesc,
     posted_by: req.userId,
-    posted_date: moment().format("DD/MM/YYYY-hh:mm:ss"),
+    posted_date: moment().format("DD/MM/YYYY-HH:mm:ss"),
   });
   if (file) {
     let response = await uploadSingleFile(file.path);
