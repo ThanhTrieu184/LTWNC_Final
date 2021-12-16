@@ -51,9 +51,12 @@ exports.getAnnouncements = async (req, res) => {
         return res.status(500).send("Có lỗi khi tải thông báo!");
       }
       Announcement.countDocuments(condition, (err, count) => {
-        if (err) return res.status(500).send("Có lỗi khi tải thông báo!");
+        if (err)
+          return res.status(500).send({ message: "Có lỗi khi tải thông báo!" });
         if (page > Math.ceil(count / perPage))
-          return res.status(400).send("Vượt quá số trang hiện có!");
+          return res
+            .status(400)
+            .send({ message: "Vượt quá số trang hiện có!" });
         res.status(200).send({
           message: "Tải thông báo thành công",
           announcements: announcements,
@@ -75,12 +78,17 @@ exports.updateAnnouncement = async (req, res) => {
     announcement_updated_by: req.userId,
     is_important: isImportant,
   };
-  Announcement.updateOne({ _id: announcementId }, { $set: announcement })
+  Announcement.findByIdAndUpdate(
+    announcementId,
+    { $set: announcement },
+    { returnOriginal: false }
+  )
+    .populate("department_id", ["department_name"])
+    .exec()
     .then((a) => {
-      announcement._id = announcementId;
       return res.status(200).send({
         message: "Cập nhật thông báo thành công",
-        announcement: announcement,
+        announcement: a,
       });
     })
     .catch((err) => {

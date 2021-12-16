@@ -34,7 +34,7 @@ const PostMenu = ({ post }) => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute z-20 right-2 top-12 bg-white rounded-lg shadow-lg ring-1 ring-indigo-900 ring-opacity-5 focus:outline-none">
-            {user.id === post.posted_by._id && (
+            {user.id === post.posted_by?._id && (
               <Menu.Item>
                 {({ active }) => (
                   <Link
@@ -59,7 +59,7 @@ const PostMenu = ({ post }) => {
                 )}
               </Menu.Item>
             )}
-            {user.id === post.posted_by._id && (
+            {user.id === post.posted_by?._id && (
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -87,7 +87,7 @@ const PostMenu = ({ post }) => {
             <Menu.Item>
               {({ active }) => (
                 <Link
-                  to={`/users/${post.posted_by._id}/profile`}
+                  to={`/users/${post.posted_by?._id}/profile`}
                   className={`${
                     active ? "bg-gray-50" : ""
                   } group flex rounded-md items-center w-full px-4 py-2 text-sm`}

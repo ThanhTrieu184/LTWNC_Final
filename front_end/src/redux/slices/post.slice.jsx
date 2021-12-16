@@ -149,8 +149,6 @@ export const postSlice = createSlice({
       state.isPostSuccess = false;
       state.isPostError = false;
       state.postReturnedMessage = null;
-      state.profilePosts = [];
-      state.profileCount = [];
     },
   },
   extraReducers: {
@@ -193,6 +191,9 @@ export const postSlice = createSlice({
       state.postReturnedMessage = payload.message;
       state.isPostFetching = false;
       state.isPostSuccess = true;
+      state.posts = state.posts.map((p) =>
+        p._id === payload.data.post._id ? (p = payload.data.post) : p
+      );
       state.currentPost = null;
       return state;
     },

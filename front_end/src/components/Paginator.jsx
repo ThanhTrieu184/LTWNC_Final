@@ -13,7 +13,7 @@ const Paginator = () => {
   const { announcementCount, isAnnouncementFetching } = useSelector(
     (state) => state.announcement
   );
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState();
   const [pages, setPages] = useState([]);
   const [pageList, setPageList] = useState([]);
   const { departmentId } = useParams();
@@ -29,6 +29,10 @@ const Paginator = () => {
   }, [announcementCount, dispatch]);
 
   useEffect(() => {
+    setActivePage(1);
+  }, [departmentId]);
+
+  useEffect(() => {
     if (!activePage) {
       setActivePage(1);
       departmentId
@@ -42,9 +46,6 @@ const Paginator = () => {
         : dispatch(getAnnouncements(activePage));
     }
   }, [activePage, departmentId, dispatch]);
-  useEffect(() => {
-    setActivePage(1);
-  }, [departmentId]);
 
   useEffect(() => {
     if (activePage === pageList[6]) {
@@ -137,7 +138,7 @@ const Paginator = () => {
         <div
           onClick={() => handleNext()}
           className={`${
-            activePage === pages.length
+            activePage === pages.length || pages.length === 0
               ? "text-gray-300 cursor-not-allowed"
               : "hover:bg-gray-50 cursor-pointer"
           } h-8 w-8 ml-1 flex justify-center items-center rounded-lg bg-white shadow `}
@@ -147,7 +148,7 @@ const Paginator = () => {
         <div
           onClick={() => handleLast()}
           className={`${
-            activePage === pages.length
+            activePage === pages.length || pages.length === 0
               ? "text-gray-300 cursor-not-allowed"
               : "hover:bg-gray-50 cursor-pointer"
           } h-8 w-8 mr-1 flex justify-center items-center rounded-lg bg-white shadow`}

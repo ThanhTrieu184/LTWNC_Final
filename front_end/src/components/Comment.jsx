@@ -14,11 +14,11 @@ const Comment = (props) => {
       <div className="flex justify-between items-center group hover:bg-gray-50 p-2 hover:bg-opacity-70 rounded-md">
         <div className="w-11/12">
           <span className="font-medium mr-2">
-            {comment.commented_by.username}
+            {comment.commented_by?.username}
           </span>
           <span className="">{comment.comment_content}</span>
         </div>
-        {user.id === comment.commented_by._id && (
+        {user.id === comment.commented_by?._id && (
           <div className="hidden space-x-4 text-gray-400 group-hover:flex justify-center">
             <FontAwesomeIcon
               onClick={() => handleEditComment(comment)}

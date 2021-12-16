@@ -21,8 +21,8 @@ const ProfileModal = (props) => {
   let completeButtonRef = useRef(null);
   const formik = useFormik({
     initialValues: {
-      username: user ? user.username : "",
-      email: user && user.email ? user.email : "",
+      username: "",
+      email: "",
       image: null,
     },
     validationSchema: Yup.object({
@@ -42,12 +42,18 @@ const ProfileModal = (props) => {
       dispatch(updateProfile(data));
     },
   });
+  useState(() => {
+    if (user) {
+      formik.setFieldValue("username", user.username);
+      formik.setFieldValue("email", user.email ? user.email : "");
+    }
+  }, [user]);
 
   useEffect(() => {
     if (isSuccess) {
       setIsEdit(false);
       dispatch(clearUserState);
-      formik.handleReset();
+      formik.setFieldValue("image", null);
     }
   }, [dispatch, formik, isSuccess]);
 

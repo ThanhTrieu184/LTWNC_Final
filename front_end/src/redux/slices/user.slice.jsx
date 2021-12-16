@@ -97,8 +97,13 @@ export const userSlice = createSlice({
       fullfilled(state, payload),
     [createNewUser.rejected]: (state, { payload }) => rejected(state, payload),
     [createNewUser.pending]: (state) => pending(state),
-    [updateProfile.fulfilled]: (state, { payload }) =>
-      fullfilled(state, payload),
+    [updateProfile.fulfilled]: (state, { payload }) => {
+      state.returnedMessage = payload.message;
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.user = payload.data.user;
+      return state;
+    },
     [updateProfile.rejected]: (state, { payload }) => rejected(state, payload),
     [updateProfile.pending]: (state) => pending(state),
   },

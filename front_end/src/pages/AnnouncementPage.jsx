@@ -1,31 +1,50 @@
 import React, { Fragment, useEffect } from "react";
 import { Announcement, Loading, Paginator } from "../components";
 import { useSelector, useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { announcementSlice } from "../redux/slices";
+
+const { clearAnnouncementState } = announcementSlice.actions;
 
 const AnnouncementPage = () => {
   const dispatch = useDispatch();
-  const { announcements, isAnnouncementFetching } = useSelector(
-    (state) => state.announcement
-  );
-  useEffect(() => {}, [announcements, dispatch]);
+  const {
+    announcements,
+    isAnnouncementError,
+    announcementReturnedMessage,
+    isAnnouncementFetching,
+  } = useSelector((state) => state.announcement);
+
+  useEffect(() => {
+    if (isAnnouncementError) {
+      toast.error(announcementReturnedMessage);
+      dispatch(clearAnnouncementState());
+    }
+  }, [
+    announcementReturnedMessage,
+    announcements,
+    dispatch,
+    isAnnouncementError,
+  ]);
 
   return (
     <Fragment>
       <div className="flex justify-between space-x-4 mt-1">
-        <div className="w-2/3 pl-8 pr-2">
-          {isAnnouncementFetching ? (
-            <Loading height="450px" />
-          ) : (
-            announcements.length > 0 &&
-            announcements.map((a) => (
-              <Announcement
-                key={a._id}
-                announcement={a}
-                isShowDepartment={true}
-              />
-            ))
-          )}
-        </div>
+        {isAnnouncementFetching ? (
+          <Loading height="450px" />
+        ) : (
+          <div className="w-2/3 pl-8 pr-2">
+            {announcements.length > 0 &&
+              announcements.map((a) => (
+                <Announcement
+                  key={a._id}
+                  announcement={a}
+                  isShowDepartment={true}
+                />
+              ))}
+          </div>
+        )}
+
         <div className="w-1/3 pr-4 py-4 form-control space-y-4">
           <div className="p-6 card bordered bg-white shadow">
             <div className="form-control">

@@ -176,10 +176,6 @@ export const announcementSlice = createSlice({
       state.isAnnouncementFetching = false;
       state.isAnnouncementSuccess = true;
       state.announcements = [payload.data.announcement, ...state.announcements];
-      state.homePageAnnouncements = [
-        payload.data.announcement,
-        ...state.homePageAnnouncements,
-      ];
       state.announcementsCount = state.announcementsCount + 1;
       state.currentAnnouncement = payload.data.announcement;
       return state;
@@ -202,13 +198,20 @@ export const announcementSlice = createSlice({
       state.isAnnouncementFetching = false;
       return state;
     },
+    [getAnnouncementsByDepartment.rejected]: (state, { payload }) => {
+      state.isAnnouncementFetching = false;
+      state.isAnnouncementError = true;
+      state.announcementReturnedMessage = payload.message;
+      state.announcements = [];
+      state.announcementCount = 0;
+    },
+    [getAnnouncementsByDepartment.pending]: (state) => pending(state),
     [getAnnouncementById.pending]: (state) => pending(state),
     [getAnnouncementById.fulfilled]: (state, { payload }) => {
       state.isAnnouncementFetching = false;
       state.currentAnnouncement = payload.data.announcement;
       return state;
     },
-    [getAnnouncementsByDepartment.pending]: (state) => pending(state),
     [getHomePageAnnouncements.fulfilled]: (state, { payload }) => {
       state.homePageAnnouncements = payload.data.announcements;
       return state;

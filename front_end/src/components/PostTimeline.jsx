@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Post } from ".";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts, getProfilePosts } from "../redux/slices";
+import { getPosts, getProfilePosts, postSlice } from "../redux/slices";
 import { Loading } from ".";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router";
+import toast from "react-hot-toast";
+
+const { clearPostState } = postSlice.actions;
 
 const PostTimeline = () => {
   const dispatch = useDispatch();
@@ -16,6 +19,9 @@ const PostTimeline = () => {
     profileCount,
     profileId,
     isPostFetching,
+    isPostError,
+    isPostSuccess,
+    postReturnedMessage,
   } = useSelector((state) => state.post);
   const [nextPage, setNextPage] = useState(2);
 
@@ -34,6 +40,18 @@ const PostTimeline = () => {
     }
   }, [count, dispatch, posts, profileCount, profileId, profilePosts, userId]);
 
+  useEffect(() => {
+    if (isPostError) {
+      toast.error(postReturnedMessage);
+      dispatch(clearPostState());
+    } else {
+      if (isPostSuccess) {
+        toast.success(postReturnedMessage);
+        dispatch(clearPostState());
+      }
+    }
+  }, [dispatch, isPostError, isPostSuccess, postReturnedMessage]);
+
   const handleLoadMore = () => {
     if (userId) {
       if (profilePosts.length < profileCount) {
@@ -47,7 +65,6 @@ const PostTimeline = () => {
       }
     }
   };
-
   return (
     <div
       id="scrollableDiv"

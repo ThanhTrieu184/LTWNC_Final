@@ -47,12 +47,15 @@ exports.getPosts = async (req, res) => {
     .populate("posted_by", ["_id", "username", "image_url"])
     .exec((err, posts) => {
       if (err) {
-        return res.status(500).send("Có lỗi khi tải bài viết!");
+        return res.status(500).send({ message: "Có lỗi khi tải bài viết!" });
       }
       Post.countDocuments(cons, (err, count) => {
-        if (err) return res.status(500).send("Có lỗi khi tải bài viết!");
+        if (err)
+          return res.status(500).send({ message: "Có lỗi khi tải bài viết!" });
         if (page > Math.ceil(count / perPage))
-          return res.status(400).send("Vượt quá số trang hiện có!");
+          return res
+            .status(400)
+            .send({ message: "Vượt quá số trang hiện có!" });
         res.status(200).send({
           message: "Tải bài viết thành công",
           posts: posts,

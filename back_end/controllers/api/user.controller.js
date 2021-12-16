@@ -59,14 +59,14 @@ exports.updateProfile = async (req, res) => {
     let response = await uploadSingleFile(file.path);
     user.image_url = response.url;
   }
-  User.updateOne({ _id: req.userId }, { $set: user })
+  User.findByIdAndUpdate(req.userId, { $set: user }, { returnOriginal: false })
     .then((u) => {
       return res.status(200).send({
         message: "Cập nhật thành công",
-        user: user,
+        user: u,
       });
     })
-    .catch((err) => {
+    .catch(() => {
       return res.status(400).send({
         message: "Cập nhật thất bại",
       });

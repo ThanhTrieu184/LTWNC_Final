@@ -13,7 +13,7 @@ const Post = ({ post }) => {
           <div className="rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
             <img
               src={
-                post.posted_by.image_url
+                post.posted_by?.image_url
                   ? post.posted_by.image_url
                   : "https://res.cloudinary.com/mrafternoon184/image/upload/v1638073308/ltwnc/user_icon_lp4u7l.png"
               }
@@ -22,10 +22,10 @@ const Post = ({ post }) => {
             />
           </div>
           <Link
-            to={`/users/${post.posted_by._id}/profile`}
+            to={`/users/${post.posted_by?._id}/profile`}
             className="pt-1 ml-2 font-bold text-sm flex flex-col"
           >
-            {post.posted_by.username}
+            {post.posted_by?.username}
             <small className="font-thin opacity-70 flex items-center space-x-1">
               <span className="opacity-50">
                 <FontAwesomeIcon icon={faClock} />
@@ -57,10 +57,10 @@ const Post = ({ post }) => {
         <div className="pt-1">
           <div className="mb-2 text-sm">
             <Link
-              to={`/users/${post.posted_by._id}/profile`}
+              to={`/users/${post.posted_by?._id}/profile`}
               className="font-medium mr-2"
             >
-              {post.posted_by.username}
+              {post.posted_by?.username}
             </Link>
             {post.post_caption}
           </div>

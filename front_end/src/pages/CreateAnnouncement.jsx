@@ -42,6 +42,7 @@ const CreateAnnouncement = () => {
       announcementContent: Yup.string().required(
         "Vui lòng nhập vào trường này!"
       ),
+      department: Yup.object().required("Vui lòng nhập vào trường này!"),
     }),
     onSubmit: (values) => {
       values.announcementId = announcementId;
@@ -150,10 +151,10 @@ const CreateAnnouncement = () => {
                   value={formik.values.announcementContent}
                   onChange={formik.handleChange}
                 ></textarea>
-                {formik.errors.announcementTitle &&
-                  formik.touched.announcementTitle && (
+                {formik.errors.announcementContent &&
+                  formik.touched.announcementContent && (
                     <small className="text-red-500 p-1 -bottom-7 absolute">
-                      {formik.errors.announcementTitle}
+                      {formik.errors.announcementContent}
                     </small>
                   )}
               </div>
@@ -161,7 +162,7 @@ const CreateAnnouncement = () => {
             <div className="form-control w-1/2 space-y-8">
               <div className="form-control">
                 <label className="label font-semibold">
-                  <span className="font-semibold text-gray-700">
+                  <span className="font-semibold text-gray-700 relative">
                     Chọn chuyên mục
                   </span>
                 </label>

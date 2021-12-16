@@ -99,7 +99,7 @@ exports.loginGoogle = async (req, res) => {
           role: data.role_id.role_name,
           accessToken: token,
           imageUrl: data.image_url,
-          departments: user.department_id,
+          departments: data.department_id,
         });
       });
     });
@@ -124,11 +124,22 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.verifyUser = (req, res) => {
+exports.verifyUser = async (req, res) => {
   if (req.userId) {
-    return res.status(200).send({ message: "Người dùng hợp lệ." });
+    User.findById(req.userId)
+      .then((user) => {
+        if (user) {
+          return res.status(200).send({ message: "Người dùng hợp lệ." });
+        } else {
+          return res.status(401).send({ message: "Người dùng không hợp lệ." });
+        }
+      })
+      .catch(() => {
+        return res.status(401).send({ message: "Người dùng không hợp lệ." });
+      });
+  } else {
+    return res.status(401).send({ message: "Người dùng không hợp lệ." });
   }
-  return res.status(401).send({ message: "Người dùng không hợp lệ." });
 };
 
 const generateToken = (id) => {
