@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 const SidebarDetail = () => {
   const dispatch = useDispatch();
   const { departments } = useSelector((state) => state.department);
+  const { isOpenMenu } = useSelector((state) => state.responsive);
   const { isLoggedIn, user } = useSelector((state) => state.auth);
   useEffect(() => {
     if (departments.length === 0 && isLoggedIn) {
@@ -18,7 +19,9 @@ const SidebarDetail = () => {
 
   return (
     <aside
-      className={`w-64 relative px-4 border-r hidden lg:block bg-gradient-to-br from-red-50 to-indigo-50 overflow-y-auto hide-scroll-bar`}
+      className={`w-64 relative px-4 border-r ${
+        isOpenMenu ? "block" : "hidden"
+      } lg:block bg-gradient-to-br from-red-50 to-indigo-50 overflow-y-auto hide-scroll-bar`}
     >
       <div className="mb-6">
         <div className="flex flex-col gap-4 mt-6">

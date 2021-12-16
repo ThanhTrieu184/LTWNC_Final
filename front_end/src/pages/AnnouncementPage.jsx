@@ -29,11 +29,11 @@ const AnnouncementPage = () => {
 
   return (
     <Fragment>
-      <div className="flex justify-between space-x-4 mt-1">
+      <div className="flex flex-col md:flex-row justify-between md:space-x-4 mt-1">
         {isAnnouncementFetching ? (
           <Loading height="450px" />
         ) : (
-          <div className="w-2/3 pl-8 pr-2">
+          <div className="w-full md:w-2/3 pl-8 pr-2">
             {announcements.length > 0 &&
               announcements.map((a) => (
                 <Announcement
@@ -45,7 +45,7 @@ const AnnouncementPage = () => {
           </div>
         )}
 
-        <div className="w-1/3 pr-4 py-4 form-control space-y-4">
+        <div className="w-full md:w-1/3 pl-10 md:pl-0 pr-4 py-4 form-control space-y-4">
           <div className="p-6 card bordered bg-white shadow">
             <div className="form-control">
               <label className="cursor-pointer label justify-start space-x-2">

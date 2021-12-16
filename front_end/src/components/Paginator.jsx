@@ -83,7 +83,7 @@ const Paginator = () => {
     <div
       className={`${
         isAnnouncementFetching ? "hidden" : "flex"
-      } flex-col items-center my-4 w-2/3`}
+      } flex-col items-center my-4 w-full md:w-2/3`}
     >
       <div className="flex text-gray-800 space-x-4">
         <div

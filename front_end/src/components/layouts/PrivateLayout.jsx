@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SideBar, InputPost, NewAnnouncement } from "../";
 import io from "socket.io-client";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const socket = io("localhost:1804");
 
@@ -10,6 +11,8 @@ const PrivateLayout = ({ children }) => {
   const [currentLocation, setCurrentLocation] = useState("/");
   const [isShowNewAnnouncement, setIsShowNewAnnouncement] = useState(false);
   const [announcementToPass, setAnnouncementToPass] = useState();
+  const { isOpenMenu } = useSelector((state) => state.responsive);
+
   const [navigateText, setNavigateText] = useState("");
   useEffect(() => {
     socket.on("newAnnouncement", (res) => {
@@ -17,6 +20,7 @@ const PrivateLayout = ({ children }) => {
       setAnnouncementToPass(res);
     });
   }, []);
+  // useEffect()
   useEffect(() => {
     setCurrentLocation(location.pathname.split("/")[1]);
     switch (currentLocation) {
@@ -37,7 +41,11 @@ const PrivateLayout = ({ children }) => {
   return (
     <div className="flex justify-between h-screen w-full bg-white">
       <SideBar></SideBar>
-      <div className="flex flex-col flex-1 overflow-y-auto hide-scroll-bar">
+      <div
+        className={`flex flex-col flex-1 overflow-y-auto hide-scroll-bar ${
+          isOpenMenu && "invisible"
+        }`}
+      >
         <div className="grid grid-cols-12 gap-6 p-4">
           <p className="text-4xl col-span-12 md:col-span-8 hidden md:block font-semiBold uppercase pl-4 bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-indigo-700">
             {navigateText}

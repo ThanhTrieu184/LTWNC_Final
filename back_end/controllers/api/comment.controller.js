@@ -3,6 +3,7 @@ const moment = require("moment");
 const Comment = models.comment;
 
 exports.createNewComment = async (req, res) => {
+  const io = req.app.get("socketio");
   const { commentContent, postId } = req.body;
   const cmt = new Comment({
     comment_content: commentContent,
@@ -21,6 +22,7 @@ exports.createNewComment = async (req, res) => {
         .status(500)
         .send({ message: "Thêm bình luận không thành công!" });
     }
+    io.emit("newComment", { comment: result });
     return res.status(201).send({
       message: "Thêm bình luận thành công",
       comment: result,
@@ -50,6 +52,7 @@ exports.getComments = async (req, res) => {
 
 exports.updateComment = async (req, res) => {
   const { commentId, commentContent } = req.body;
+  const io = req.app.get("socketio");
   const cmt = {
     comment_content: commentContent,
   };
@@ -58,6 +61,7 @@ exports.updateComment = async (req, res) => {
     .populate("commented_by", ["username"])
     .exec()
     .then((c) => {
+      io.emit("updateComment", { comment: c });
       return res
         .status(200)
         .send({ message: "Cập nhật bình luận thành công", comment: c });
@@ -71,11 +75,13 @@ exports.updateComment = async (req, res) => {
 
 exports.deleteComment = async (req, res) => {
   const { commentId } = req.params;
+  const io = req.app.get("socketio");
   Comment.findByIdAndDelete(commentId, (err, cmt) => {
     if (err) {
       return res.status(500).send({ message: "Có lỗi khi xóa bình luận!" });
     }
     if (cmt) {
+      io.emit("deleteComment", { deletedComment: cmt });
       return res.status(200).send({
         message: "Xóa bình luận thành công",
         deletedComment: cmt,

@@ -54,7 +54,7 @@ const Announcement = ({ announcement, isShowDepartment }) => {
           )}
         </div>
         <Link to={`/announcements/${announcement._id}/detail`}>
-          <button className="my-btn-gradient">Xem chi tiết</button>
+          <button className="my-btn-gradient mx-2">Xem chi tiết</button>
         </Link>
       </div>
     </div>

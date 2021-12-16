@@ -4,8 +4,10 @@ import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { CommentService } from "../services";
 import { exceptionConstants } from "../constants";
 import { ConfirmModal, Comment } from ".";
+import io from "socket.io-client";
 
 const { SUCCESS, CREATED } = exceptionConstants;
+const socket = io("localhost:1804");
 
 const CommentSection = ({ postId }) => {
   const [isEntering, setIsEntering] = useState(false);
@@ -25,10 +27,6 @@ const CommentSection = ({ postId }) => {
         });
 
         if (res.code === SUCCESS) {
-          const updatedCmts = cmts.filter(
-            (c) => c._id !== res.data.comment._id
-          );
-          setCmts([...updatedCmts, res.data.comment]);
           setCurrentCmt();
         }
       } else {
@@ -52,6 +50,7 @@ const CommentSection = ({ postId }) => {
       if (res.code === SUCCESS) {
         setCmts(cmts.filter((c) => c._id !== res.data.deletedComment._id));
         setCurrentCmt();
+        setCmt("");
       }
     }
   };
@@ -71,6 +70,16 @@ const CommentSection = ({ postId }) => {
     if (firstLoad) {
       fetchComment(postId);
     }
+    socket.on("newComment", (res) => {
+      setCmts([...cmts, res.comment]);
+    });
+    socket.on("updateComment", (res) => {
+      const updatedCmts = cmts.filter((c) => c._id !== res.comment._id);
+      setCmts([...updatedCmts, res.comment]);
+    });
+    socket.on("deleteComment", (res) => {
+      setCmts(cmts.filter((c) => c._id !== res.deletedComment._id));
+    });
   }, [cmts, firstLoad, postId]);
 
   return (
