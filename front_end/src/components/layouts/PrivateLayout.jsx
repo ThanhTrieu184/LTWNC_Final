@@ -43,7 +43,7 @@ const PrivateLayout = ({ children }) => {
       <SideBar></SideBar>
       <div
         className={`flex flex-col flex-1 overflow-y-auto hide-scroll-bar ${
-          isOpenMenu && "invisible"
+          isOpenMenu && "invisible lg:visible"
         }`}
       >
         <div className="grid grid-cols-12 gap-6 p-4">
