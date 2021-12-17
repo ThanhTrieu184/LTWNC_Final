@@ -176,6 +176,10 @@ export const announcementSlice = createSlice({
       state.isAnnouncementFetching = false;
       state.isAnnouncementSuccess = true;
       state.announcements = [payload.data.announcement, ...state.announcements];
+      state.homePageAnnouncements =
+        state.homePageAnnouncements.length > 0
+          ? [payload.data.announcement, ...state.homePageAnnouncements]
+          : [];
       state.announcementsCount = state.announcementsCount + 1;
       state.currentAnnouncement = payload.data.announcement;
       return state;
