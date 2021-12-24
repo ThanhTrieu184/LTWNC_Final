@@ -14,6 +14,7 @@ const AnnouncementPage = () => {
     announcementReturnedMessage,
     isAnnouncementFetching,
   } = useSelector((state) => state.announcement);
+  const { userTheme } = useSelector((state) => state.responsive);
 
   useEffect(() => {
     if (isAnnouncementError) {
@@ -33,7 +34,7 @@ const AnnouncementPage = () => {
         {isAnnouncementFetching ? (
           <Loading height="450px" />
         ) : (
-          <div className="w-full md:w-2/3 pl-8 pr-2">
+          <div className="w-full md:w-2/3 pl-2 lg:pl-8 pr-2">
             {announcements.length > 0 &&
               announcements.map((a) => (
                 <Announcement
@@ -45,40 +46,92 @@ const AnnouncementPage = () => {
           </div>
         )}
 
-        <div className="w-full md:w-1/3 pl-10 md:pl-0 pr-4 py-4 form-control space-y-4">
-          <div className="p-6 card bordered bg-white shadow">
+        <div className="w-full md:w-1/3 md:pl-0 p-4 form-control space-y-4">
+          <div
+            className={`p-6 card ${
+              userTheme === "light"
+                ? "bg-white bordered"
+                : "bg-gray-800 text-yellow-50"
+            } shadow`}
+          >
             <div className="form-control">
               <label className="cursor-pointer label justify-start space-x-2">
-                <input type="checkbox" className="checkbox" />
-                <span className="label-text">Thông báo quan trọng</span>
+                <input type="checkbox" className="checkbox border-yellow-50" />
+                <span
+                  className={`label-text ${
+                    userTheme !== "light" && "text-yellow-50"
+                  }`}
+                >
+                  Thông báo quan trọng
+                </span>
               </label>
               <label className="cursor-pointer label justify-start space-x-2">
-                <input type="checkbox" className="checkbox" />
-                <span className="label-text">Thông báo mới</span>
+                <input type="checkbox" className="checkbox border-yellow-50" />
+                <span
+                  className={`label-text ${
+                    userTheme !== "light" && "text-yellow-50"
+                  }`}
+                >
+                  Thông báo mới
+                </span>
               </label>
             </div>
           </div>
-          <div className="p-6 card bordered bg-white shadow">
+          <div
+            className={`p-6 card ${
+              userTheme === "light"
+                ? "bg-white bordered"
+                : "bg-gray-800 text-yellow-50"
+            } shadow`}
+          >
             <div className="form-control">
               <label className="cursor-pointer label justify-start space-x-2">
-                <input type="radio" name="opt" className="radio" value="" />
-                <span className="label-text">Đã xem</span>
+                <input
+                  type="radio"
+                  name="opt"
+                  className="radio border-yellow-50"
+                  value=""
+                />
+                <span
+                  className={`label-text ${
+                    userTheme !== "light" && "text-yellow-50"
+                  }`}
+                >
+                  Đã xem
+                </span>
               </label>
             </div>
             <div className="form-control">
               <label className="cursor-pointer label justify-start space-x-2">
-                <input type="radio" name="opt" className="radio" value="" />
-                <span className="label-text">Chưa xem</span>
+                <input
+                  type="radio"
+                  name="opt"
+                  className="radio border-yellow-50"
+                  value=""
+                />
+                <span
+                  className={`label-text ${
+                    userTheme !== "light" && "text-yellow-50"
+                  }`}
+                >
+                  Chưa xem
+                </span>
               </label>
               <label className="cursor-pointer label justify-start space-x-2">
                 <input
                   type="radio"
                   name="opt"
                   defaultChecked
-                  className="radio"
+                  className="radio border-yellow-50"
                   value=""
                 />
-                <span className="label-text">Tất cả</span>
+                <span
+                  className={`label-text ${
+                    userTheme !== "light" && "text-yellow-50"
+                  }`}
+                >
+                  Tất cả
+                </span>
               </label>
             </div>
           </div>

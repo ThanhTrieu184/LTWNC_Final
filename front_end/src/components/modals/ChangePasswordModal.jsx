@@ -17,6 +17,7 @@ const ChangePasswordModal = (props) => {
   const { isSuccess, isError, returnedMessage } = useSelector(
     (state) => state.user
   );
+  const { userTheme } = useSelector((state) => state.responsive);
   const { isOpen, handleCancel } = props;
   const [isShowOldPass, setIsShowOldPass] = useState(false);
   const [isShowNewPass, setIsShowNewPass] = useState(false);
@@ -95,10 +96,22 @@ const ChangePasswordModal = (props) => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-lg p-6 overflow-hidden align-middle transition-all transform my-bg-gradient shadow-xl rounded-2xl">
-                <div className="p-8 bg-white rounded-2xl shadow-xl">
+                <div
+                  className={`p-8 ${
+                    userTheme === "light"
+                      ? "bg-white"
+                      : "bg-gray-800 text-yellow-50"
+                  } rounded-2xl shadow-xl`}
+                >
                   <div className="text-center">
                     <h1 className="text-3xl font-bold mb-4">Đổi mật khẩu</h1>
-                    <p className="px-4 text-sm mb-8 font-thin text-gray-700 tracking-wide">
+                    <p
+                      className={`px-4 text-sm mb-8 font-thin ${
+                        userTheme === "light"
+                          ? "text-gray-700"
+                          : "text-yellow-50"
+                      } tracking-wide`}
+                    >
                       Đổi mật khẩu thường xuyên để giữ tài khoản của bạn luôn
                       được an toàn nhé!
                     </p>
@@ -110,7 +123,9 @@ const ChangePasswordModal = (props) => {
                           name="oldPass"
                           type={isShowOldPass ? "text" : "password"}
                           placeholder="Mật khẩu cũ"
-                          className="text-sm input input-bordered w-full"
+                          className={`text-sm input input-bordered w-full ${
+                            userTheme !== "light" && "bg-gray-700"
+                          }`}
                           value={formik.values.oldPass}
                           onChange={formik.handleChange}
                         />
@@ -133,7 +148,9 @@ const ChangePasswordModal = (props) => {
                           type={isShowNewPass ? "text" : "password"}
                           name="newPass"
                           placeholder="Mật khẩu mới"
-                          className="text-sm input input-bordered w-full"
+                          className={`text-sm input input-bordered w-full ${
+                            userTheme !== "light" && "bg-gray-700"
+                          }`}
                           value={formik.values.newPass}
                           onChange={formik.handleChange}
                         />
@@ -156,7 +173,9 @@ const ChangePasswordModal = (props) => {
                           type={isShowConfirmPass ? "text" : "password"}
                           name="confirmPass"
                           placeholder="Xác nhận mật khẩu mới"
-                          className="text-sm input input-bordered w-full"
+                          className={`text-sm input input-bordered w-full ${
+                            userTheme !== "light" && "bg-gray-700"
+                          }`}
                           value={formik.values.confirmPass}
                           onChange={formik.handleChange}
                         />

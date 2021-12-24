@@ -25,8 +25,8 @@ const returnSuccess = (res) => {
 
 const returnFailure = (err) => {
   return {
-    code: err.response.status,
-    message: err.response.data.message,
+    code: err.response?.status,
+    message: err.response?.data.message || "Server Error",
     data: null,
   };
 };

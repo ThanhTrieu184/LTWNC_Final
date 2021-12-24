@@ -1,10 +1,11 @@
 import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { useSelector } from "react-redux";
 
 const ConfirmLogoutModal = (props) => {
   const { isOpen, handleCancel, handleConfirm, title, message } = props;
-
+  const { userTheme } = useSelector((state) => state.responsive);
   return (
     <Fragment>
       <Transition appear show={isOpen} as={Fragment}>
@@ -42,15 +43,27 @@ const ConfirmLogoutModal = (props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div
+                className={`inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform ${
+                  userTheme === "light"
+                    ? "bg-white"
+                    : "bg-gray-900 text-yellow-50"
+                } shadow-xl rounded-2xl`}
+              >
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 text-center"
+                  className="text-lg font-medium leading-6 text-center"
                 >
                   {title}
                 </Dialog.Title>
                 <div className="my-6">
-                  <p className="text-sm text-gray-500">{message}</p>
+                  <p
+                    className={`text-sm ${
+                      userTheme === "light" && "text-gray-500"
+                    }`}
+                  >
+                    {message}
+                  </p>
                 </div>
 
                 <div className="mt-4 flex justify-center space-x-6">

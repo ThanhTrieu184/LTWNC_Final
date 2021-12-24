@@ -91,12 +91,12 @@ const initAdmin = (role_id) => {
       const newAdmins = [
         {
           username: "Admin1",
-          password: bcrypt.hashSync("123456", 10),
+          password: bcrypt.hashSync(config.ADMIN_DEFAULT_PASS, 10),
           role_id: role_id,
         },
         {
           username: "Admin2",
-          password: bcrypt.hashSync("123456", 10),
+          password: bcrypt.hashSync(config.ADMIN_DEFAULT_PASS, 10),
           role_id: role_id,
         },
       ];

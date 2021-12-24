@@ -7,13 +7,15 @@ const { openMenu } = responsiveSlice.actions;
 
 const SideBarItem = (props) => {
   const dispatch = useDispatch();
-  const { isOpenMenu } = useSelector((state) => state.responsive);
+  const { isOpenMenu, userTheme } = useSelector((state) => state.responsive);
   const { title, iconProp, color, link } = props;
   return (
     <Link
       to={link ? link : "/"}
       onClick={() => isOpenMenu && dispatch(openMenu(false))}
-      className={`p-3 space-x-2 flex items-center bg-white rounded-md justify-start shadow-md cursor-pointer transform hover:scale-110 duration-200`}
+      className={`${
+        userTheme === "light" ? "bg-white" : "bg-gray-700 text-yellow-50"
+      } p-3 space-x-2 flex items-center rounded-md justify-start shadow-md cursor-pointer transform hover:scale-110 duration-500`}
     >
       <div
         className={`${color} rounded p-2 w-7 flex flex-col items-center text-white`}

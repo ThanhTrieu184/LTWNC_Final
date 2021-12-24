@@ -4,13 +4,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CommentSection, PostMenu, YoutubeEmbedded } from ".";
 import { Link } from "react-router-dom";
 import { formatDateFromNow } from "../utils/formatDate";
+import { useSelector } from "react-redux";
 
 const Post = ({ post }) => {
+  const { userTheme } = useSelector((state) => state.responsive);
+
   return (
-    <div className="rounded-lg border border-opacity-70 w-full m-4 bg-white mx-auto shadow-sm">
-      <div className="w-full flex justify-between p-3 border-b relative">
+    <div
+      className={`rounded-lg border border-opacity-70 w-full m-4 ${
+        userTheme === "light"
+          ? "bg-white"
+          : "bg-gray-800 border-gray-700 text-yellow-50"
+      }  mx-auto shadow-sm transition duration-500`}
+    >
+      <div
+        className={`w-full flex justify-between p-3 border-b ${
+          userTheme !== "light" && "border-gray-700"
+        } relative`}
+      >
         <div className="flex items-center">
-          <div className="rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
+          <div
+            className={`rounded-full border bg-gray-50 flex items-center justify-center overflow-hidden`}
+          >
             <img
               src={
                 post.posted_by?.image_url
@@ -47,7 +62,11 @@ const Post = ({ post }) => {
           <YoutubeEmbedded height="360px" embedId={post.post_video_id} />
         )}
       </div>
-      <div className="px-3 pb-2 border-t">
+      <div
+        className={`px-3 pb-2 border-t ${
+          userTheme !== "light" && "border-gray-700"
+        }`}
+      >
         <div className="pt-2">
           <i className="far fa-heart cursor-pointer"></i>
           <span className="text-sm text-blue-400 font-medium">

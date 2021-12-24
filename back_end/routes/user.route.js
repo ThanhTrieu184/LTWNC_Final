@@ -6,6 +6,7 @@ const uploadMulter = require("../multer");
 const {
   addAccount,
   checkCreateUserRequest,
+  updateAccount,
 } = require("../middlewares/addAccount");
 
 module.exports = (app) => {
@@ -21,7 +22,7 @@ module.exports = (app) => {
   );
   app.post(
     "/api/users/update",
-    [verifyToken, uploadMulter.single("image")],
+    [verifyToken, updateAccount, uploadMulter.single("image")],
     UserController.updateProfile
   );
 };

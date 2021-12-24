@@ -36,7 +36,7 @@ import {
   deleteAnnouncement,
 } from "./announcement.slice";
 import { responsiveSlice } from "./responsive.slice";
-
+import { commentSlice } from "./comment.slice";
 export {
   authSlice,
   logOut,
@@ -66,4 +66,5 @@ export {
   updateAnnouncement,
   deleteAnnouncement,
   responsiveSlice,
+  commentSlice,
 };

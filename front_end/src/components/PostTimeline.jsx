@@ -68,7 +68,7 @@ const PostTimeline = () => {
   return (
     <div
       id="scrollableDiv"
-      className="w-full lg:w-2/3 hide-scroll-bar h-screen overflow-x-auto pl-8"
+      className="w-full lg:w-2/3 hide-scroll-bar h-screen overflow-x-auto px-2 lg:pl-8"
     >
       <InfiniteScroll
         dataLength={userId ? profilePosts.length : posts.length}

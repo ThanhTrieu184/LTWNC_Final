@@ -5,15 +5,18 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getAnnouncements,
   getAnnouncementsByDepartment,
+  announcementSlice,
 } from "../redux/slices";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+
+const { setLocation } = announcementSlice.actions;
 
 const Paginator = () => {
   const dispatch = useDispatch();
-  const { announcementCount, isAnnouncementFetching } = useSelector(
-    (state) => state.announcement
-  );
-  const [activePage, setActivePage] = useState();
+  const location = useLocation();
+  const { announcementCount, isAnnouncementFetching, currentLocation } =
+    useSelector((state) => state.announcement);
+  const [activePage, setActivePage] = useState(1);
   const [pages, setPages] = useState([]);
   const [pageList, setPageList] = useState([]);
   const { departmentId } = useParams();
@@ -29,15 +32,14 @@ const Paginator = () => {
   }, [announcementCount, dispatch]);
 
   useEffect(() => {
-    setActivePage(1);
-  }, [departmentId]);
-
-  useEffect(() => {
-    if (!activePage) {
-      setActivePage(1);
+    if (location.pathname !== currentLocation) {
+      if (activePage !== 1) {
+        setActivePage(1);
+      }
       departmentId
         ? dispatch(getAnnouncementsByDepartment({ departmentId, page: 1 }))
         : dispatch(getAnnouncements(1));
+      dispatch(setLocation(location.pathname));
     } else {
       departmentId
         ? dispatch(
@@ -45,7 +47,8 @@ const Paginator = () => {
           )
         : dispatch(getAnnouncements(activePage));
     }
-  }, [activePage, departmentId, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activePage, dispatch, location]);
 
   useEffect(() => {
     if (activePage === pageList[6]) {

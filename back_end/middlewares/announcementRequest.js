@@ -1,10 +1,12 @@
 const models = require("../models");
 const User = models.user;
+const Announcement = models.announcement;
 
 const isDepartmentAbleToUpdate = (req, res, next) => {
-  const { department } = req.body;
-  User.findById(req.userId).then((user) => {
-    if (user.department_id.includes(department._id)) {
+  const { announcementId } = req.body;
+
+  Announcement.findById(announcementId).then((a) => {
+    if (a.published_by.toString() === req.userId) {
       next();
     } else {
       return res.status(401).send({

@@ -10,6 +10,7 @@ const NormalSelect = (props) => {
   const { departmentsOfUser } = useSelector((state) => state.department);
   const { handleSelected, selectedItem } = props;
   const [selected, setSelected] = useState();
+  const { userTheme } = useSelector((state) => state.responsive);
 
   useEffect(() => {
     if (departmentsOfUser.length === 0) {
@@ -30,7 +31,11 @@ const NormalSelect = (props) => {
     <div className="m-1">
       <Listbox value={selected} onChange={(item) => handleOnChange(item)}>
         <div className="relative mt-1">
-          <Listbox.Button className="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded-lg border">
+          <Listbox.Button
+            className={`relative w-full py-3 pl-3 pr-10 text-left ${
+              userTheme === "light" ? "bg-white" : "bg-gray-700"
+            } rounded-lg border`}
+          >
             <span className="block truncate">
               {selected
                 ? selected.department_name
@@ -46,7 +51,11 @@ const NormalSelect = (props) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute w-full max-h-52 py-1 mt-1 border overflow-auto hide-scroll-bar text-base bg-white rounded-md shadow-md">
+            <Listbox.Options
+              className={`absolute w-full max-h-52 py-1 mt-1 border overflow-auto hide-scroll-bar text-base ${
+                userTheme === "light" ? "bg-white" : "bg-gray-700"
+              } rounded-md shadow-md`}
+            >
               {departmentsOfUser.map((item) => (
                 <Listbox.Option
                   key={item._id}

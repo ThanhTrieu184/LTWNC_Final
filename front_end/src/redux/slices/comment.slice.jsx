@@ -103,6 +103,12 @@ export const commentSlice = createSlice({
       state.isCommentError = false;
       state.commentReturnedMessage = null;
     },
+    enableLoading: (state) => {
+      state.isCommentFetching = true;
+    },
+    disableLoading: (state) => {
+      state.isCommentFetching = false;
+    },
   },
   extraReducers: {
     [createNewComment.fulfilled]: (state, { payload }) => {

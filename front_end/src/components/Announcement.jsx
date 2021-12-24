@@ -7,9 +7,15 @@ import { useSelector } from "react-redux";
 
 const Announcement = ({ announcement, isShowDepartment }) => {
   const { user } = useSelector((state) => state.auth);
-
+  const { userTheme } = useSelector((state) => state.responsive);
   return (
-    <div className="rounded-lg bg-gray-50 bg-opacity-20 text-gray-800 p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-200">
+    <div
+      className={`rounded-lg ${
+        userTheme === "light"
+          ? "bg-gray-50 text-gray-800 bg-opacity-20"
+          : "bg-gray-800 text-yellow-50"
+      } p-4 m-4 flex flex-col shadow hover:shadow-md transform hover:scale-105 transition duration-500`}
+    >
       <div className="flex flex-col relative">
         <div className="flex justify-between">
           <Link
@@ -21,7 +27,7 @@ const Announcement = ({ announcement, isShowDepartment }) => {
             </span>
           </Link>
           {user.departments.length > 0 &&
-            user.departments.includes(announcement.department_id._id) && (
+            user.id === announcement.published_by && (
               <AnnouncementMenu
                 announcementId={announcement._id}
                 departmentId={announcement.department_id._id}

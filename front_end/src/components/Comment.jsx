@@ -8,10 +8,15 @@ const Comment = (props) => {
   const { comment, handleEditComment, setIsShowDeleteModal, setCurrentCmt } =
     props;
   const { user } = useSelector((state) => state.auth);
+  const { userTheme } = useSelector((state) => state.responsive);
 
   return (
     <div className="text-sm" key={comment._id}>
-      <div className="flex justify-between items-center group hover:bg-gray-50 p-2 hover:bg-opacity-70 rounded-md">
+      <div
+        className={`flex justify-between items-center group ${
+          userTheme === "light" ? "hover:bg-gray-50" : "hover:bg-gray-700"
+        }  p-2 hover:bg-opacity-70 rounded-md`}
+      >
         <div className="w-11/12">
           <span className="font-medium mr-2">
             {comment.commented_by?.username}

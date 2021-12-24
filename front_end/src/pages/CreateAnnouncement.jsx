@@ -27,6 +27,7 @@ const CreateAnnouncement = () => {
     announcementReturnedMessage,
     currentAnnouncement,
   } = useSelector((state) => state.announcement);
+  const { userTheme } = useSelector((state) => state.responsive);
 
   const formik = useFormik({
     initialValues: {
@@ -104,26 +105,33 @@ const CreateAnnouncement = () => {
   return isAnnouncementFetching ? (
     <Loading />
   ) : (
-    <section className="w-full my-4 pl-8 pr-4">
-      <div className="p-6 bg-white rounded-md shadow-md text-gray-700">
+    <section className="w-full my-4 pl-4 lg:pl-8 pr-4">
+      <div
+        className={`p-6 ${
+          userTheme === "light"
+            ? "bg-white text-gray-700"
+            : "bg-gray-800 text-yellow-50"
+        }  rounded-md shadow-md`}
+      >
         <h1 className="text-2xl font-bold capitalize">Tạo thông báo mới</h1>
         <form onSubmit={formik.handleSubmit}>
-          <div className="flex mt-8 space-x-4">
-            <div className="form-control space-y-8 w-1/2">
+          <div className="flex flex-col lg:flex-row mt-8 space-y-8 lg:space-y-0 lg:space-x-4">
+            <div className="form-control space-y-8 w-full lg:w-1/2">
               <div className="form-control space-y-2 relative">
                 <label
                   className="label font-semibold"
                   htmlFor="announcementTitle"
                 >
-                  <span className="font-semibold text-gray-700">
-                    Tên thông báo
-                  </span>
+                  <span className="font-semibold">Tên thông báo</span>
                 </label>
                 <input
                   id="announcementTitle"
                   name="announcementTitle"
                   type="text"
-                  className="input input-bordered focus:border-indigo-300"
+                  className={`input input-bordered focus:border-indigo-300 ${
+                    userTheme === "light" ? "bg-white" : "bg-gray-700"
+                  }`}
+                  placeholder="Nhập tên thông báo tại đây"
                   value={formik.values.announcementTitle}
                   onChange={formik.handleChange}
                 />
@@ -135,21 +143,22 @@ const CreateAnnouncement = () => {
                   )}
               </div>
 
-              <div className="form-control relative">
+              <div className="form-control relative w-full">
                 <label
                   className="label font-semibold"
                   htmlFor="announcementContent"
                 >
-                  <span className="font-semibold text-gray-700">
-                    Nội dung thông báo
-                  </span>
+                  <span className="font-semibold">Nội dung thông báo</span>
                 </label>
                 <textarea
                   id="announcementContent"
                   name="announcementContent"
-                  className="textarea h-36 textarea-bordered"
+                  className={`textarea h-36 textarea-bordered ${
+                    userTheme === "light" ? "bg-white" : "bg-gray-700"
+                  }`}
                   value={formik.values.announcementContent}
                   onChange={formik.handleChange}
+                  placeholder="Nhập nội dung thông báo tại đây"
                 ></textarea>
                 {formik.errors.announcementContent &&
                   formik.touched.announcementContent && (
@@ -159,10 +168,10 @@ const CreateAnnouncement = () => {
                   )}
               </div>
             </div>
-            <div className="form-control w-1/2 space-y-8">
+            <div className="form-control w-full lg:w-1/2 space-y-8">
               <div className="form-control">
                 <label className="label font-semibold">
-                  <span className="font-semibold text-gray-700 relative">
+                  <span className="font-semibold relative">
                     Chọn chuyên mục
                   </span>
                 </label>
@@ -171,19 +180,25 @@ const CreateAnnouncement = () => {
                   selectedItem={selected}
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control w-full lg:w-1/2">
                 <label className="label font-semibold">
-                  <span className="font-semibold text-gray-700">Đánh dấu</span>
+                  <span className="font-semibold">Đánh dấu</span>
                 </label>
                 <label className="cursor-pointer label justify-start space-x-4">
                   <input
                     type="checkbox"
-                    className="checkbox"
+                    className="checkbox border-yellow-50"
                     name="isImportant"
                     checked={formik.values.isImportant}
                     onChange={formik.handleChange}
                   />
-                  <span className="label-text">Thông báo quan trọng</span>
+                  <span
+                    className={`label-text ${
+                      userTheme !== "light" && "text-yellow-50"
+                    }`}
+                  >
+                    Thông báo quan trọng
+                  </span>
                 </label>
               </div>
             </div>

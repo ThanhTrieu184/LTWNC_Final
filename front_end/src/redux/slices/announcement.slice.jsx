@@ -13,6 +13,7 @@ const initialState = {
   isAnnouncementError: false,
   announcementReturnedMessage: null,
   announcementCount: null,
+  currentLocation: null,
 };
 
 export const createNewAnnouncement = createAsyncThunk(
@@ -168,6 +169,9 @@ export const announcementSlice = createSlice({
       state.isAnnouncementSuccess = false;
       state.isAnnouncementError = false;
       state.announcementReturnedMessage = null;
+    },
+    setLocation: (state, { payload }) => {
+      state.currentLocation = payload;
     },
   },
   extraReducers: {

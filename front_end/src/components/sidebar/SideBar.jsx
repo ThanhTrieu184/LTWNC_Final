@@ -15,13 +15,13 @@ import { Link } from "react-router-dom";
 
 const { clearState } = authSlice.actions;
 const { clearDepartmentState } = departmentSlice.actions;
-const { openMenu } = responsiveSlice.actions;
+const { openMenu, setUserTheme } = responsiveSlice.actions;
 
 const SideBar = () => {
   const { user, isFetching, isError, isSuccess, errorMessages } = useSelector(
     (state) => state.auth
   );
-  const { isOpenMenu } = useSelector((state) => state.responsive);
+  const { isOpenMenu, userTheme } = useSelector((state) => state.responsive);
   const imageUrl =
     user && user.imageUrl
       ? user.imageUrl
@@ -53,7 +53,11 @@ const SideBar = () => {
   ) : (
     <Fragment>
       <Toaster />
-      <aside className="w-20 relative z-0 px-2 my-bg-gradient">
+      <aside
+        className={`w-20 relative z-0 px-2 my-bg-gradient md:block ${
+          isOpenMenu ? "block" : "hidden"
+        }`}
+      >
         <div className="mb-6">
           <div className="flex justify-center">
             <div
@@ -76,12 +80,6 @@ const SideBar = () => {
               >
                 <FontAwesomeIcon icon={Icon.faBars}></FontAwesomeIcon>
               </li>
-              <li
-                onClick={() => setIsOpenChangePasswordModal(true)}
-                className={` mb-3 p-2 rounded-md flex items-center justify-center bg-pink-500 cursor-pointer`}
-              >
-                <FontAwesomeIcon icon={Icon.faKey}></FontAwesomeIcon>
-              </li>
               <Link to="/">
                 <li
                   onClick={() => isOpenMenu && dispatch(openMenu(false))}
@@ -90,6 +88,26 @@ const SideBar = () => {
                   <FontAwesomeIcon icon={Icon.faHome}></FontAwesomeIcon>
                 </li>
               </Link>
+              <li
+                onClick={() => setIsOpenChangePasswordModal(true)}
+                className={` mb-3 p-2 rounded-md flex items-center justify-center bg-pink-500 cursor-pointer`}
+              >
+                <FontAwesomeIcon icon={Icon.faKey}></FontAwesomeIcon>
+              </li>
+              <li
+                onClick={() =>
+                  userTheme === "light"
+                    ? dispatch(setUserTheme({ theme: "dark" }))
+                    : dispatch(setUserTheme({ theme: "light" }))
+                }
+                className={`mb-3 p-2 rounded-md flex items-center justify-center ${
+                  userTheme === "light" ? "bg-yellow-500" : "bg-gray-600"
+                } cursor-pointer transition duration-500`}
+              >
+                <FontAwesomeIcon
+                  icon={userTheme === "light" ? Icon.faSun : Icon.faMoon}
+                ></FontAwesomeIcon>
+              </li>
 
               <li
                 onClick={() => setIsOpenLogoutModal(true)}

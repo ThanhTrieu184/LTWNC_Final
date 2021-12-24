@@ -14,6 +14,7 @@ const { clearUserState } = userSlice.actions;
 const ProfileModal = (props) => {
   const dispatch = useDispatch();
   const { isFetching, isSuccess } = useSelector((state) => state.user);
+  const { userTheme } = useSelector((state) => state.responsive);
   const { user } = useSelector((state) => state.auth);
   const { isOpen, handleCancel } = props;
   const [isEdit, setIsEdit] = useState(false);
@@ -95,7 +96,9 @@ const ProfileModal = (props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-lg overflow-hidden align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div
+                className={`inline-block w-full max-w-lg overflow-hidden align-middle transition-all transform shadow-xl rounded-2xl`}
+              >
                 {isFetching ? (
                   <Loading />
                 ) : (
@@ -108,7 +111,11 @@ const ProfileModal = (props) => {
                         } text-gray-600 cursor-pointer absolute top-4 right-4`}
                         onClick={() => setIsEdit(true)}
                       />
-                      <div className="bg-white shadow-xl rounded-lg py-3">
+                      <div
+                        className={`${
+                          userTheme === "light" ? "bg-white" : "bg-gray-800"
+                        } shadow-xl rounded-lg py-3`}
+                      >
                         <div className=" p-2">
                           <img
                             className="w-32 h-32 rounded-full mx-auto border"
@@ -128,7 +135,7 @@ const ProfileModal = (props) => {
                               <input
                                 type="text"
                                 name="username"
-                                className="input input-ghost input-sm text-xl font-medium text-center w-2/3"
+                                className={`input input-ghost input-sm text-xl font-medium text-center w-2/3`}
                                 value={formik.values.username}
                                 placeholder="Nhập tên đăng nhập tại đây"
                                 onChange={formik.handleChange}
@@ -143,7 +150,7 @@ const ProfileModal = (props) => {
                                 <input
                                   type="text"
                                   name="email"
-                                  className={`input input-sm w-2/3 text-center input-ghost font-semibold`}
+                                  className={`input input-sm w-2/3 text-center input-ghost font-semibold `}
                                   value={formik.values.email}
                                   disabled={!isEdit}
                                   placeholder="Nhập email tại đây"
@@ -180,7 +187,12 @@ const ProfileModal = (props) => {
                                         }}
                                       />
                                     </label>
-                                    <span className="mx-2">
+                                    <span
+                                      className={`mx-2 ${
+                                        userTheme !== "light" &&
+                                        "text-yellow-50"
+                                      }`}
+                                    >
                                       {formik.values.image
                                         ? formik.values.image.name
                                         : ""}

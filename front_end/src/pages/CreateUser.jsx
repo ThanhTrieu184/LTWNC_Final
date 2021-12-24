@@ -10,6 +10,7 @@ const { clearChoosedItem } = departmentSlice.actions;
 const CreateUser = () => {
   const { choosedItems } = useSelector((state) => state.department);
   const { isFetching, isSuccess } = useSelector((state) => state.user);
+  const { userTheme } = useSelector((state) => state.responsive);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -54,26 +55,32 @@ const CreateUser = () => {
   return isFetching ? (
     <Loading />
   ) : (
-    <section className="w-full my-4 pl-8 pr-4">
-      <div className="p-6 bg-white rounded-md shadow-md text-gray-700">
+    <section className="w-full my-4 px-4 lg:pl-8">
+      <div
+        className={`p-6 ${
+          userTheme === "light"
+            ? "bg-white text-gray-700"
+            : "bg-gray-800 text-yellow-50"
+        } rounded-md shadow-md transition duration-500`}
+      >
         <h1 className="text-2xl font-bold capitalize">Tạo phòng ban mới</h1>
         <form onSubmit={formik.handleSubmit}>
-          <div className="mt-4 flex lg:space-x-6 flex-col lg:flex-row">
+          <div className="mt-4 flex lg:space-x-6 flex-col lg:flex-row space-y-8 lg:space-y-0">
             <div className="form-control space-y-8 flex-1 ">
               <div className="form-control space-y-2 relative">
-                <label
-                  className="font-semibold text-gray-700"
-                  htmlFor="username"
-                >
+                <label className="font-semibold" htmlFor="username">
                   Tên đăng nhập
                 </label>
                 <input
                   id="username"
                   name="username"
                   type="text"
-                  className="input input-bordered"
+                  className={`input input-bordered ${
+                    userTheme !== "light" && "bg-gray-700"
+                  }`}
                   value={formik.values.username}
                   onChange={formik.handleChange}
+                  placeholder="Nhập tên đăng nhập tại đây"
                 />
                 {formik.errors.username && formik.touched.username && (
                   <small className="text-red-500 p-1 -bottom-7 absolute">
@@ -82,16 +89,19 @@ const CreateUser = () => {
                 )}
               </div>
               <div className="form-control space-y-2 relative">
-                <label className="font-semibold text-gray-700" htmlFor="email">
+                <label className="font-semibold" htmlFor="email">
                   Địa chỉ email
                 </label>
                 <input
                   id="email"
                   name="email"
                   type="email"
-                  className="input input-bordered"
+                  className={`input input-bordered ${
+                    userTheme !== "light" && "bg-gray-700"
+                  }`}
                   value={formik.values.email}
                   onChange={formik.handleChange}
+                  placeholder="Nhập email tại đây"
                 />
                 {formik.errors.email && formik.touched.email && (
                   <small className="text-red-500 p-1 -bottom-7 absolute">
@@ -100,19 +110,19 @@ const CreateUser = () => {
                 )}
               </div>
               <div className="form-control space-y-2 relative">
-                <label
-                  className="font-semibold text-gray-700"
-                  htmlFor="password"
-                >
+                <label className="font-semibold" htmlFor="password">
                   Mật khẩu
                 </label>
                 <input
                   id="password"
                   name="password"
                   type="password"
-                  className="input input-bordered"
+                  className={`input input-bordered ${
+                    userTheme !== "light" && "bg-gray-700"
+                  }`}
                   value={formik.values.password}
                   onChange={formik.handleChange}
+                  placeholder="Nhập mật khẩu tại đây"
                 />
                 {formik.errors.password && formik.touched.password && (
                   <small className="text-red-500 p-1 -bottom-7 absolute">
@@ -122,19 +132,19 @@ const CreateUser = () => {
               </div>
 
               <div className="form-control space-y-2 relative">
-                <label
-                  className="font-semibold text-gray-700"
-                  htmlFor="confirmPassword"
-                >
+                <label className="font-semibold" htmlFor="confirmPassword">
                   Xác nhận mật khẩu
                 </label>
                 <input
                   id="confirmPassword"
                   type="password"
-                  className="input input-bordered"
+                  className={`input input-bordered ${
+                    userTheme !== "light" && "bg-gray-700"
+                  }`}
                   name="confirmPassword"
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}
+                  placeholder="Xác nhận lại mật khẩu tại đây"
                 />
                 {formik.errors.confirmPassword &&
                   formik.touched.confirmPassword && (
@@ -146,10 +156,7 @@ const CreateUser = () => {
             </div>
 
             <div className="form-control space-y-2 flex-1">
-              <label
-                className="font-semibold text-gray-700"
-                htmlFor="departments "
-              >
+              <label className="font-semibold" htmlFor="departments ">
                 Các chuyên mục phụ trách
               </label>
               <MultiSelect />

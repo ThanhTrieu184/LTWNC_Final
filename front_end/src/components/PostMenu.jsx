@@ -11,6 +11,7 @@ const PostMenu = ({ post }) => {
   const dispatch = useDispatch();
   const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const { userTheme } = useSelector((state) => state.responsive);
   const handleDeletePost = () => {
     setIsOpenConfirmModal(false);
     dispatch(deletePost(post._id));
@@ -33,14 +34,18 @@ const PostMenu = ({ post }) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute z-20 right-2 top-12 bg-white rounded-lg shadow-lg ring-1 ring-indigo-900 ring-opacity-5 focus:outline-none">
+          <Menu.Items
+            className={`absolute z-20 right-2 top-12 ${
+              userTheme === "light" ? "bg-white" : "bg-gray-700"
+            } rounded-lg shadow-lg ring-1 ring-indigo-900 ring-opacity-5 focus:outline-none`}
+          >
             {user.id === post.posted_by?._id && (
               <Menu.Item>
                 {({ active }) => (
                   <Link
                     to={`/posts/${post._id}/edit`}
                     className={`${
-                      active ? "bg-gray-50" : ""
+                      active && "bg-gray-100"
                     } group flex rounded-md items-center w-full px-4 py-2 text-sm`}
                   >
                     {active ? (
@@ -54,7 +59,11 @@ const PostMenu = ({ post }) => {
                         className="mr-2 text-gray-600"
                       />
                     )}
-                    Sửa bài viết
+                    <span
+                      className={`${userTheme !== "light" && "text-gray-400"}`}
+                    >
+                      Sửa bài viết
+                    </span>
                   </Link>
                 )}
               </Menu.Item>
@@ -65,7 +74,7 @@ const PostMenu = ({ post }) => {
                   <button
                     onClick={() => setIsOpenConfirmModal(true)}
                     className={`${
-                      active ? "bg-gray-50" : ""
+                      active && "bg-gray-100"
                     } group flex rounded-md items-center w-full px-4 py-2 text-sm`}
                   >
                     {active ? (
@@ -79,7 +88,11 @@ const PostMenu = ({ post }) => {
                         className="mr-2 text-gray-600"
                       />
                     )}
-                    Xóa bài viết
+                    <span
+                      className={`${userTheme !== "light" && "text-gray-400"}`}
+                    >
+                      Xóa bài viết
+                    </span>
                   </button>
                 )}
               </Menu.Item>
@@ -89,8 +102,8 @@ const PostMenu = ({ post }) => {
                 <Link
                   to={`/users/${post.posted_by?._id}/profile`}
                   className={`${
-                    active ? "bg-gray-50" : ""
-                  } group flex rounded-md items-center w-full px-4 py-2 text-sm`}
+                    active && "bg-gray-100"
+                  } group flex rounded-md items-center w-full px-4 py-2 text-sm `}
                 >
                   {active ? (
                     <FontAwesomeIcon
@@ -103,7 +116,11 @@ const PostMenu = ({ post }) => {
                       className="mr-2 text-gray-600"
                     />
                   )}
-                  Xem trang cá nhân
+                  <span
+                    className={`${userTheme !== "light" && "text-gray-400"}`}
+                  >
+                    Xem trang cá nhân
+                  </span>
                 </Link>
               )}
             </Menu.Item>

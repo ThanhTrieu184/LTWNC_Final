@@ -6,6 +6,7 @@ import {
   postSlice,
   announcementSlice,
   responsiveSlice,
+  commentSlice,
 } from "./slices";
 
 export const store = configureStore({
@@ -16,5 +17,6 @@ export const store = configureStore({
     post: postSlice.reducer,
     announcement: announcementSlice.reducer,
     responsive: responsiveSlice.reducer,
+    comment: commentSlice.reducer,
   },
 });

@@ -39,6 +39,7 @@ const Login = () => {
   const { isFetching, isSuccess, isError, errorMessages, user } = useSelector(
     (state) => state.auth
   );
+  const { userTheme } = useSelector((state) => state.responsive);
 
   useEffect(() => {
     if (user) {
@@ -97,7 +98,11 @@ const Login = () => {
       {isFetching || isSuccess ? (
         <Loading height="500px" width="500px" />
       ) : (
-        <section className="max-w-6xl mx-auto my-10 border shadow-lg rounded-xl flex hover:shadow-xl">
+        <section
+          className={`max-w-6xl mx-auto ${
+            userTheme !== "light" && "border-gray-700"
+          } border shadow-lg rounded-xl flex hover:shadow-xl `}
+        >
           <div className="lg:flex w-1/2 hidden relative items-center">
             <div className="absolute inset-0 z-0 my-bg-gradient rounded-l-lg"></div>
             <div className="w-full px-12 z-10 text-center text-gray-100">
@@ -126,13 +131,17 @@ const Login = () => {
               </a>
             </div>
           </div>
-          <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
+          <div
+            className={`lg:w-1/2 w-full flex items-center justify-center text-center rounded-xl md:px-16 px-0 z-0 ${
+              userTheme !== "light" && "bg-gray-800"
+            }`}
+          >
             <div className="w-full py-6 z-20 ">
               <h1 className="my-6">
                 <img
                   src="https://res.cloudinary.com/mrafternoon184/image/upload/v1638073300/ltwnc/logo_whrc9h.png"
                   alt="logo"
-                  className="mx-auto"
+                  className="mx-auto px-4"
                 />
               </h1>
 
@@ -146,7 +155,9 @@ const Login = () => {
                     name="username"
                     id="username"
                     placeholder="Tên đăng nhập"
-                    className={`text-lg w-full input input-lg input-bordered`}
+                    className={`text-lg w-full input input-lg input-bordered ${
+                      userTheme !== "light" && "bg-gray-700"
+                    }`}
                     value={formik.values.username}
                     onChange={formik.handleChange}
                   />
@@ -158,7 +169,9 @@ const Login = () => {
                 </div>
                 <div className="form-control py-4 relative">
                   <input
-                    className={`text-lg w-full input input-lg input-bordered`}
+                    className={`text-lg w-full input input-lg input-bordered ${
+                      userTheme !== "light" && "bg-gray-700"
+                    }`}
                     type="password"
                     name="password"
                     id="password"

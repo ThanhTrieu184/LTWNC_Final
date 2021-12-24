@@ -16,8 +16,27 @@ const addAccount = (req, res, next) => {
       });
     }
     next();
-  })
-}
+  });
+};
+
+const updateAccount = (req, res, next) => {
+  const { username } = req.body;
+  User.findOne({ username: username })
+    .then((user) => {
+      if (user && user.id !== req.userId) {
+        return res.status(401).send({
+          message: "Tên đăng nhập đã tồn tại",
+        });
+      }
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).send({
+        message: "Server error",
+      });
+    });
+};
 
 const checkCreateUserRequest = [
   body("username", "Tên đăng nhập không được để trống").not().isEmpty(),
@@ -40,5 +59,6 @@ const checkCreateUserRequest = [
 
 module.exports = {
   addAccount,
-  checkCreateUserRequest
+  checkCreateUserRequest,
+  updateAccount,
 };
