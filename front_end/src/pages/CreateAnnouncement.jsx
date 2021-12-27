@@ -187,7 +187,9 @@ const CreateAnnouncement = () => {
                 <label className="cursor-pointer label justify-start space-x-4">
                   <input
                     type="checkbox"
-                    className="checkbox border-yellow-50"
+                    className={`checkbox ${
+                      userTheme !== "light" && "border-yellow-50"
+                    }`}
                     name="isImportant"
                     checked={formik.values.isImportant}
                     onChange={formik.handleChange}

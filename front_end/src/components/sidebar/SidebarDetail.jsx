@@ -46,14 +46,20 @@ const SidebarDetail = () => {
             title="Thêm bài viết mới"
             link="/posts/create"
             iconProp={<FontAwesomeIcon icon={Icon.faFileAlt} size="xs" />}
-            color="bg-yellow-500"
+            color="bg-orange-500"
+          />
+          <SideBarItem
+            title="Xem trang cá nhân"
+            link={`/users/${user?.id}/profile`}
+            iconProp={<FontAwesomeIcon icon={Icon.faUserAlt} size="xs" />}
+            color="bg-teal-500"
           />
           {user && user.role === "Admin" && (
             <SideBarItem
               link="/users/create"
               title="Thêm tài khoản mới"
               iconProp={<FontAwesomeIcon icon={Icon.faUserPlus} size="xs" />}
-              color="bg-blue-500"
+              color="bg-lime-500"
             />
           )}
         </div>

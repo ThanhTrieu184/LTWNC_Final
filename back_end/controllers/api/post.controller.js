@@ -14,7 +14,7 @@ exports.createNewPost = async (req, res) => {
   if (file) {
     let response = await uploadSingleFile(file.path);
     post.post_image_url = response.url;
-  } else {
+  } else if (videoLink) {
     post.post_video_id = videoLink.split("=")[1];
   }
   post.save(async (err, p) => {
@@ -96,9 +96,12 @@ exports.updatePost = async (req, res) => {
   } else if (typeof image === "string") {
     post.post_image_url = image;
     post.post_video_id = "";
-  } else {
+  } else if (videoLink) {
     post.post_image_url = "";
     post.post_video_id = videoLink.split("=")[1];
+  } else {
+    post.post_image_url = "";
+    post.post_video_id = "";
   }
   Post.findByIdAndUpdate(postId, { $set: post }, { returnOriginal: false })
     .populate("posted_by", ["_id", "username", "image_url"])
@@ -108,7 +111,7 @@ exports.updatePost = async (req, res) => {
         .status(200)
         .send({ message: "Cập nhật bài viết thành công", post: p });
     })
-    .catch((err) => {
+    .catch(() => {
       return res.status(500).send({ message: "Có lỗi khi cập nhật bài viết!" });
     });
 };

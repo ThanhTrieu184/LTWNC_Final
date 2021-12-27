@@ -8,7 +8,11 @@ const http = require("http");
 const server = http.createServer(app);
 const cors = require("cors");
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://ltwnc-final.netlify.app"],
+  origin: [
+    "http://localhost:3000",
+    "https://ltwnc-final.netlify.app",
+    "https://laptrinhwebnangcao-final.netlify.app",
+  ],
   credentials: true,
   optionSuccessStatus: 200,
 };

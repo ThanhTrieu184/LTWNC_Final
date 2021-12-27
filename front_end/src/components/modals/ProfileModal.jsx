@@ -200,7 +200,27 @@ const ProfileModal = (props) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="">
+                              <div className="flex space-x-4 justify-center">
+                                <button
+                                  type="button"
+                                  className="w-32 btn rounded-full mt-8"
+                                  onClick={() => {
+                                    handleCancel();
+                                    setIsEdit(false);
+                                    if (user) {
+                                      formik.setFieldValue(
+                                        "username",
+                                        user.username
+                                      );
+                                      formik.setFieldValue(
+                                        "email",
+                                        user.email ? user.email : ""
+                                      );
+                                    }
+                                  }}
+                                >
+                                  Hủy
+                                </button>
                                 <button
                                   type="submit"
                                   className={`${

@@ -8,7 +8,6 @@ import * as Icon from "@fortawesome/free-solid-svg-icons";
 import { userSlice, changePassword } from "../../redux/slices";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
 
 const { clearUserState } = userSlice.actions;
 
@@ -95,7 +94,7 @@ const ChangePasswordModal = (props) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-lg p-6 overflow-hidden align-middle transition-all transform my-bg-gradient shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-md lg:max-w-lg p-6 overflow-hidden align-middle transition-all transform my-bg-gradient shadow-xl rounded-2xl">
                 <div
                   className={`p-8 ${
                     userTheme === "light"
@@ -199,13 +198,20 @@ const ChangePasswordModal = (props) => {
                           )}
                       </div>
                     </div>
-                    <div className="text-center mt-8">
-                      <button type="submit" className="w-64 my-btn-gradient">
+                    <div className="text-center flex justify-center space-x-4 mt-8">
+                      <button
+                        type="button"
+                        className="w-32 btn rounded-full"
+                        onClick={handleCancel}
+                      >
+                        Hủy
+                      </button>
+                      <button type="submit" className="w-32 my-btn-gradient">
                         Cập nhật
                       </button>
-                      <p className="mt-4 text-sm">
+                      {/* <p className="mt-4 text-sm">
                         <Link to="/">Quên mật khẩu?</Link>
-                      </p>
+                      </p> */}
                     </div>
                   </form>
                 </div>

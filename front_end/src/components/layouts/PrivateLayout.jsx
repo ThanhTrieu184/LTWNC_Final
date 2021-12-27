@@ -45,7 +45,7 @@ const PrivateLayout = ({ children }) => {
 
   return (
     <div
-      className={`flex justify-between h-screen w-full transition duration-500 ${
+      className={`flex justify-between h-screen w-full transition duration-200 ${
         userTheme === "light" ? "bg-white" : "bg-gray-900"
       }`}
     >

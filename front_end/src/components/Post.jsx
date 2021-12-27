@@ -1,5 +1,5 @@
 import React from "react";
-import { faThumbsUp, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CommentSection, PostMenu, YoutubeEmbedded } from ".";
 import { Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 const Post = ({ post }) => {
   const { userTheme } = useSelector((state) => state.responsive);
-
   return (
     <div
       className={`rounded-lg border border-opacity-70 w-full m-4 ${
@@ -59,7 +58,9 @@ const Post = ({ post }) => {
             src={post.post_image_url}
           />
         ) : (
-          <YoutubeEmbedded height="360px" embedId={post.post_video_id} />
+          post.post_video_id && (
+            <YoutubeEmbedded height="360px" embedId={post.post_video_id} />
+          )
         )}
       </div>
       <div
@@ -68,12 +69,11 @@ const Post = ({ post }) => {
         }`}
       >
         <div className="pt-2">
-          <i className="far fa-heart cursor-pointer"></i>
-          <span className="text-sm text-blue-400 font-medium">
-            <FontAwesomeIcon icon={faThumbsUp} /> 12 likes
+          <span className="text-sm text-red-400 font-medium">
+            <FontAwesomeIcon icon={faHeart} /> 0 lượt thích
           </span>
         </div>
-        <div className="pt-1">
+        <div className="pt-2 pb-4">
           <div className="mb-2 text-sm">
             <Link
               to={`/users/${post.posted_by?._id}/profile`}

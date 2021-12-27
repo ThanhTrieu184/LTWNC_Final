@@ -40,10 +40,6 @@ const CreatePost = () => {
     },
     validationSchema: Yup.object({
       postDesc: Yup.string().required("Vui lòng nhập vào trường này!"),
-      videoLink: Yup.string().when("image", {
-        is: (image) => image === null,
-        then: Yup.string().required("Vui lòng thêm link video hoặc thêm ảnh!"),
-      }),
     }),
     onSubmit: (values) => {
       if (formik.values.image) {
@@ -98,7 +94,7 @@ const CreatePost = () => {
       if (currentPost.post_image_url) {
         setImageUrl(currentPost.post_image_url);
         formik.setFieldValue("image", currentPost.post_image_url);
-      } else {
+      } else if (currentPost?.post_video_id) {
         setVideoId(currentPost?.post_video_id);
         formik.setFieldValue(
           "videoLink",
@@ -230,7 +226,7 @@ const CreatePost = () => {
                     id="postDesc"
                     name="postDesc"
                     className={`textarea h-24 textarea-bordered w-full ${
-                      userTheme !== "light" && "bg-gray-700"
+                      userTheme !== "light" && "bg-gray-700 text-yellow-50"
                     }`}
                     value={formik.values.postDesc}
                     onChange={formik.handleChange}
@@ -271,7 +267,7 @@ const CreatePost = () => {
                   <input
                     id="videoLink"
                     className={`input input-bordered w-full ${
-                      userTheme !== "light" && "bg-gray-700"
+                      userTheme !== "light" && "bg-gray-700 text-yellow-50"
                     }`}
                     type="text"
                     value={formik.values.videoLink}

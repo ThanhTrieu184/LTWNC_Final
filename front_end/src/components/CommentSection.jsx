@@ -79,9 +79,9 @@ const CommentSection = ({ postId }) => {
 
   useEffect(() => {
     const fetchComment = async (postId) => {
+      setFirstLoad(false);
       const res = await CommentService.getComments(postId);
       setCmts(res.data?.comments);
-      setFirstLoad(false);
     };
     if (firstLoad) {
       fetchComment(postId);

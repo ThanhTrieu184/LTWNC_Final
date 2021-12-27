@@ -83,7 +83,7 @@ const SideBar = () => {
               <Link to="/">
                 <li
                   onClick={() => isOpenMenu && dispatch(openMenu(false))}
-                  className={` mb-3 p-2 rounded-md flex items-center justify-center bg-purple-500 cursor-pointer`}
+                  className={` mb-3 p-2 rounded-md flex items-center justify-center bg-blue-500 cursor-pointer`}
                 >
                   <FontAwesomeIcon icon={Icon.faHome}></FontAwesomeIcon>
                 </li>

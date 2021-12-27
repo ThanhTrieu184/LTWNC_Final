@@ -158,6 +158,10 @@ export const postSlice = createSlice({
       state.isPostSuccess = true;
       state.posts = [payload.data.post, ...state.posts];
       state.count = state.count + 1;
+      if (payload.data.post.posted_by._id === state.profileId) {
+        state.profilePosts = [payload.data.post, ...state.profilePosts];
+        state.profileCount = state.profileCount + 1;
+      }
       return state;
     },
     [createNewPost.rejected]: (state, { payload }) => rejected(state, payload),
@@ -171,7 +175,11 @@ export const postSlice = createSlice({
     [getPosts.rejected]: (state, { payload }) => rejected(state, payload),
     [getPosts.pending]: (state) => pending(state),
     [getProfilePosts.fulfilled]: (state, { payload }) => {
-      state.profilePosts = payload.data.posts;
+      if (payload.data.userId !== state.profileId) {
+        state.profilePosts = payload.data.posts;
+      } else {
+        state.profilePosts = [...state.profilePosts, ...payload.data.posts];
+      }
       state.profileCount = payload.data.count;
       state.profileId = payload.data.userId;
       state.isPostFetching = false;
@@ -206,10 +214,17 @@ export const postSlice = createSlice({
       state.posts = state.posts.filter(
         (p) => p._id !== payload.data.deletedPost._id
       );
-      state.profilePosts = state.profilePosts.filter(
-        (p) => p._id !== payload.data.deletedPost._id
-      );
-
+      if (
+        state.profilePosts
+          .map((p) => p._id)
+          .includes(payload.data.deletedPost._id)
+      ) {
+        state.profilePosts = state.profilePosts.filter(
+          (p) => p._id !== payload.data.deletedPost._id
+        );
+        state.profileCount = state.profileCount - 1;
+      }
+      state.count = state.count - 1;
       return state;
     },
     [deletePost.rejected]: (state, { payload }) => rejected(state, payload),
@@ -226,10 +241,3 @@ const rejected = (state, payload) => {
 const pending = (state) => {
   state.isPostFetching = true;
 };
-
-// const fullfilled = (state, payload) => {
-//   state.postReturnedMessage = payload.message;
-//   state.isPostFetching = false;
-//   state.isPostSuccess = true;
-//   return state;
-// };

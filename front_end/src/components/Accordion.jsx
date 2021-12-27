@@ -37,7 +37,7 @@ const Accordion = (props) => {
                 <SideBarItem
                   title={c.department_name}
                   iconProp={iconProp}
-                  color="bg-indigo-500"
+                  color="bg-rose-500"
                   link={`/announcements/${c._id}`}
                 />
               </div>
